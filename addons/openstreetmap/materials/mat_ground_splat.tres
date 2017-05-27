@@ -1,0 +1,76 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=1]
+
+[ext_resource path="res://addons/openstreetmap/textures/MarekGrassDehydrated0001.jpg" type="Texture" id=1]
+[ext_resource path="res://addons/openstreetmap/textures/600px-MarekGrasMoos0001.jpg" type="Texture" id=2]
+[ext_resource path="res://addons/openstreetmap/textures/MarekFootway0005.jpg" type="Texture" id=3]
+[ext_resource path="res://addons/openstreetmap/textures/water1.jpg" type="Texture" id=4]
+
+[sub_resource type="MaterialShader" id=1]
+
+_code = {
+"fragment": "uniform texture splatmap;
+uniform texture dirt;
+uniform texture rock;
+uniform texture grass;
+uniform texture water;
+
+uniform float blur     = 0.05;
+uniform float grassres = 1;
+uniform float rockres  = 1;
+uniform float dirtres  = 1;
+uniform float waterres = 1;
+uniform vec2 water_movement = vec2(0, 0);
+
+color splat = 0.25*(tex(splatmap,UV+vec2(blur, blur))+tex(splatmap,UV+vec2(-blur, blur))+tex(splatmap,UV+vec2(blur, -blur))+tex(splatmap,UV+vec2(-blur, -blur)));
+
+vec3 result;
+vec3 grasscol;
+vec3 rockcol;
+vec3 dirtcol;
+vec3 watercol;
+
+float grassval = splat.g;
+float rockval = splat.r;
+float waterval = splat.b;
+float dirtval = max(0, 1-grassval-rockval-waterval);
+
+dirtcol = tex(dirt,UV*dirtres).rgb * dirtval;
+grasscol = tex(grass,UV*grassres).rgb * grassval;
+rockcol = tex(rock,UV*rockres).rgb * rockval;
+watercol = tex(water,UV*waterres+TIME*water_movement).rgb * waterval;
+
+result = grasscol+rockcol+dirtcol+watercol;
+
+DIFFUSE = result;
+",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[resource]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = false
+flags/colarray_is_srgb = false
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 5.1848e-43
+shader/shader = SubResource( 1 )
+shader_param/dirt = ExtResource( 1 )
+shader_param/rock = ExtResource( 3 )
+shader_param/grass = ExtResource( 2 )
+shader_param/water = ExtResource( 4 )
+shader_param/blur = 0.0
+shader_param/grassres = 100.0
+shader_param/rockres = 100.0
+shader_param/dirtres = 100.0
+shader_param/waterres = 50.0
+shader_param/water_movement = Vector2( 0.05, 0.05 )
+

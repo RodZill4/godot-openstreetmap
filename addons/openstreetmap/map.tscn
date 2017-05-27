@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://addons/openstreetmap/scripts/map.gd" type="Script" id=1]
+
+[node name="Map" type="Spatial"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script/script = ExtResource( 1 )
+tile_model = "res://tile3d.tscn"
+size = 1
+
+

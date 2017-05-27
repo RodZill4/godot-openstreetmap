@@ -1,0 +1,124 @@
+[gd_scene load_steps=4 format=1]
+
+[sub_resource type="FixedMaterial" id=1]
+
+flags/visible = true
+flags/double_sided = true
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = true
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 2.82963e+20
+fixed_flags/use_alpha = false
+fixed_flags/use_color_array = false
+fixed_flags/use_point_size = false
+fixed_flags/discard_alpha = false
+fixed_flags/use_xy_normalmap = false
+params/diffuse = Color( 0, 0.64, 0.0049868, 1 )
+params/specular = Color( 0.0698832, 0.169449, 0.0224846, 1 )
+params/emission = Color( 0, 0, 0, 1 )
+params/specular_exp = 50.0
+params/detail_mix = 1.0
+params/normal_depth = 1
+params/shader = 0
+params/shader_param = 0.5
+params/glow = 0
+params/point_size = 1.0
+uv_xform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+textures/diffuse_tc = 0
+textures/detail_tc = 0
+textures/specular_tc = 0
+textures/emission_tc = 0
+textures/specular_exp_tc = 0
+textures/glow_tc = 0
+textures/normal_tc = 0
+textures/shade_param_tc = 0
+
+[sub_resource type="FixedMaterial" id=2]
+
+flags/visible = true
+flags/double_sided = true
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = true
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 0.0
+fixed_flags/use_alpha = false
+fixed_flags/use_color_array = false
+fixed_flags/use_point_size = false
+fixed_flags/discard_alpha = false
+fixed_flags/use_xy_normalmap = false
+params/diffuse = Color( 0.300599, 0.0987625, 0.0262902, 1 )
+params/specular = Color( 0.0366195, 0.00943549, 0.00208759, 1 )
+params/emission = Color( 0, 0, 0, 1 )
+params/specular_exp = 50.0
+params/detail_mix = 1.0
+params/normal_depth = 1
+params/shader = 0
+params/shader_param = 0.5
+params/glow = 0
+params/point_size = 1.0
+uv_xform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+textures/diffuse_tc = 0
+textures/detail_tc = 0
+textures/specular_tc = 0
+textures/emission_tc = 0
+textures/specular_exp_tc = 0
+textures/glow_tc = 0
+textures/normal_tc = 0
+textures/shade_param_tc = 0
+
+[sub_resource type="Mesh" id=3]
+
+surfaces/0 = {
+"alphasort": false,
+"arrays": [ Vector3Array( -0.0125098, 1.85391, -0.359054, 0.718406, 1.97472, 0.309714, -0.116655, 1.97183, 0.563695, 1.15956, 2.29795, 0.70268, 1.30783, 2.16217, -0.0828912, -1.1623, 2.19492, -0.182324, 1.48148, 2.87558, 0.0856625, -0.896382, 2.24776, 0.545393, -1.21478, 2.6442, 0.298665, 1.45197, 2.53958, -0.612592, 0.410542, 2.15368, -1.2888, 0.933147, 2.6396, -1.26226, 0.928181, 2.65117, 1.00458, -0.0700023, 2.23689, 1.1632, 0.272474, 2.71627, 1.33743, -0.770296, 2.68968, 1.02609, -1.1771, 2.62618, -0.544746, -0.464513, 2.24059, -1.34822, -0.719921, 2.66615, -1.25929, 0.354318, 2.91765, -1.46263, 1.11253, 2.97895, 0.551613, 0.0245255, 3.21065, 0.841442, -0.243608, 3.0665, -1.29773, 0.339911, 3.30212, -0.831537, 1.08001, 3.03714, -0.822175, 0.475804, 3.40281, -0.0822865, -0.422628, 3.35531, -0.628, -1.02272, 3.07706, -0.642733, -0.81958, 3.14563, 0.523567, 0.711139, 1.93091, -0.503136 ), Vector3Array( -0.099, -0.99, -0.089, 0.233, -0.942, 0.236, -0.117, -0.951, 0.28, 0.676, -0.495, 0.543, 0.73, -0.682, 0.013, -0.761, -0.644, -0.058, 0.902, 0.404, 0.153, -0.596, -0.682, 0.42, -0.956, 0.081, 0.276, 0.91, -0.165, -0.379, 0.207, -0.672, -0.71, 0.606, -0.033, -0.795, 0.562, 0.103, 0.82, -0.102, -0.634, 0.764, 0.165, 0.173, 0.97, -0.596, 0.095, 0.795, -0.944, -0.036, -0.325, -0.349, -0.548, -0.759, -0.623, 0.092, -0.776, 0.162, 0.39, -0.906, 0.567, 0.687, 0.454, -0.016, 0.865, 0.5, -0.222, 0.629, -0.745, 0.159, 0.929, -0.334, 0.596, 0.699, -0.394, 0.194, 0.979, 0.063, -0.225, 0.957, -0.183, -0.728, 0.621, -0.287, -0.521, 0.782, 0.34, 0.312, -0.925, -0.212 ), null, null, null, null, null, null, IntArray( 0, 2, 1, 3, 4, 1, 0, 5, 2, 3, 6, 4, 5, 8, 7, 9, 11, 10, 3, 12, 6, 13, 15, 14, 5, 16, 8, 17, 19, 18, 14, 21, 20, 19, 23, 22, 6, 25, 24, 25, 23, 24, 24, 23, 19, 23, 25, 26, 23, 26, 22, 22, 26, 27, 26, 25, 28, 26, 28, 27, 28, 25, 21, 21, 25, 20, 20, 25, 6, 9, 6, 24, 9, 24, 11, 11, 24, 19, 19, 22, 18, 18, 22, 27, 16, 27, 8, 8, 27, 28, 15, 28, 21, 15, 21, 14, 12, 14, 20, 12, 20, 6, 11, 19, 10, 10, 19, 17, 18, 27, 16, 18, 16, 17, 17, 16, 5, 8, 28, 15, 8, 15, 7, 7, 15, 13, 14, 12, 13, 13, 12, 3, 6, 9, 4, 29, 9, 10, 29, 10, 0, 0, 10, 17, 0, 17, 5, 5, 7, 2, 2, 7, 13, 4, 9, 29, 4, 29, 1, 1, 29, 0, 2, 13, 1, 1, 13, 3 ) ],
+"material": SubResource( 1 ),
+"morph_arrays": [  ],
+"name": "Material_001",
+"primitive": 4
+}
+surfaces/1 = {
+"alphasort": false,
+"arrays": [ Vector3Array( -0.779666, 2.3136, -0.485262, -0.57678, 1.83953, -0.0474772, -0.451874, 1.88653, -0.10711, -0.821031, 2.2267, -0.550996, -0.473802, 1.73134, -0.137776, -0.531724, 2.40988, 0.264036, -0.534069, 2.35603, 0.345061, -0.0518279, 1.6491, -0.150725, -0.050065, 1.48685, -0.144198, -0.450115, 1.85446, 0.0151632, -0.0960253, 1.54697, 0.0532498, -0.0398077, 1.65743, 0.0433553, 1.05483, 2.22644, -0.401394, 0.555889, 1.86745, -0.398111, 1.04859, 2.223, -0.304805, 0.395577, 2.30456, -0.793371, 0.557225, 1.73873, -0.468029, 0.411829, 1.83255, -0.438942, 0.415276, 2.35488, -0.713361, 0.272771, 2.21208, 0.0764177, 0.417156, 1.7944, -0.30008, 0.514531, 1.7068, -0.307983, 0.386994, 2.29219, 0.757752, 0.139542, 1.64875, 0.388234, 0.224288, 1.69738, 0.338014, 0.119781, 1.50576, -0.0322083, 0.268702, -0.00678635, -0.229681, 0.22978, 0.00678635, 0.268617, 0.301102, 2.27975, 0.0135435, 0.353004, 2.34716, 0.684039, 0.117486, 1.74251, 0.341596, -0.259234, 0.0199323, 0.227872, -0.22978, -0.00678635, -0.268617 ), Vector3Array( -0.219, 0.92, -0.325, -0.877, -0.264, 0.398, 0.593, 0.7, -0.398, -0.542, 0.012, -0.84, -0.41, -0.703, -0.579, -0.013, 0.991, -0.133, -0.044, 0.534, 0.843, -0.184, 0.657, -0.731, -0.47, -0.348, -0.81, 0.318, 0, 0.947, -0.552, -0.367, 0.746, -0.015, 0.884, 0.467, 0.695, 0.577, -0.429, 0.261, 0.964, 0.04, 0.577, 0.499, 0.646, -0.205, 0.532, -0.822, 0.383, -0.624, -0.68, -0.755, 0.184, -0.628, 0.028, 0.991, 0.13, -0.317, -0.298, 0.899, -0.695, 0.209, 0.686, 0.596, -0.633, 0.492, 0.425, 0.268, 0.864, -0.336, -0.591, 0.731, 0.946, -0.256, -0.197, 0.86, -0.364, 0.357, 0.682, -0.52, -0.513, 0.592, -0.486, 0.641, -0.272, 0.192, 0.942, 0.088, 0.989, 0.121, -0.641, 0.759, -0.105, -0.61, -0.521, 0.593, -0.5, -0.548, -0.669 ), null, null, null, null, null, null, IntArray( 0, 2, 1, 3, 1, 4, 5, 1, 2, 5, 6, 1, 4, 8, 7, 9, 11, 10, 1, 10, 4, 2, 7, 9, 12, 14, 13, 15, 17, 16, 18, 13, 17, 17, 7, 8, 19, 21, 20, 22, 24, 23, 9, 5, 2, 6, 9, 1, 21, 16, 8, 16, 14, 12, 3, 2, 0, 17, 8, 16, 0, 1, 3, 4, 10, 8, 9, 7, 11, 2, 4, 7, 1, 9, 10, 15, 13, 18, 14, 21, 13, 12, 13, 16, 25, 20, 21, 18, 17, 15, 8, 25, 21, 20, 7, 17, 8, 26, 25, 25, 26, 27, 20, 28, 19, 13, 19, 28, 28, 17, 13, 25, 23, 24, 11, 23, 10, 22, 30, 29, 30, 11, 24, 24, 11, 25, 29, 30, 24, 29, 24, 22, 31, 25, 27, 8, 31, 32, 31, 26, 32, 6, 5, 9, 21, 14, 16, 4, 2, 3, 16, 13, 15, 11, 20, 25, 11, 7, 20, 32, 26, 8, 17, 28, 20, 21, 19, 13, 10, 23, 25, 30, 23, 11, 23, 30, 22, 10, 25, 31, 10, 31, 8, 27, 26, 31 ) ],
+"material": SubResource( 2 ),
+"morph_arrays": [  ],
+"name": "Material",
+"primitive": 4
+}
+custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+
+[node name="Tree" type="Spatial"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+mesh/mesh = SubResource( 3 )
+mesh/skeleton = NodePath("..")
+material/0 = null
+material/1 = null
+
+
