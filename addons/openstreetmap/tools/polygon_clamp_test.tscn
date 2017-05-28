@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://addons/openstreetmap/tools/polygon_clamp_test.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 156.336, 242.406 )
+
+[node name="Node2D" type="Node2D"]
+
+transform/pos = Vector2( 12.4047, 3.01468 )
+
+[node name="polygon" type="Polygon2D" parent="."]
+
+transform/pos = Vector2( -6.24839, 38.9876 )
+transform/scale = Vector2( 1.10473, 1.07481 )
+polygon = Vector2Array( 23.5751, 126.431, -17.7538, 498.073, 512.192, 819.428, 746.528, 373.449, 486.491, 676.466, 464.864, 242.832, 553.553, 234.418, 539.406, 448.038, 794.908, 300.415, 661.865, 682.682, 861.429, 232.042, 592.32, 339.263, 717.803, 17.5989, 539.406, 44.0157, 497.074, 208.733, 442.142, 60.8134 )
+uv = Vector2Array(  )
+color = Color( 1, 1, 1, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+script/script = ExtResource( 1 )
+show_polygons = true
+
+[node name="rect" type="CollisionShape2D" parent="polygon"]
+
+transform/pos = Vector2( 560.377, 381.459 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = -1
+
+

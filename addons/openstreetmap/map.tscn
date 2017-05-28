@@ -6,7 +6,7 @@
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script/script = ExtResource( 1 )
-tile_model = "res://tile3d.tscn"
+tile_model = "res://addons/openstreetmap/tile3d.tscn"
 size = 1
 
 

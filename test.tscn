@@ -68,8 +68,6 @@ environment = SubResource( 1 )
 
 [node name="Map" parent="." instance=ExtResource( 4 )]
 
-tile_model = "res://addons/openstreetmap/tile3d.tscn"
-
 [node name="Ground" type="Area" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )

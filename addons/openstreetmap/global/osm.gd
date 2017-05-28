@@ -4,7 +4,7 @@ const ZOOM = 16
 const TILE_SIZE = 256 * 156412.0 / (1 << ZOOM)
 
 const TWM_ID      = 7938
-const TWM_VERSION = 1
+const TWM_VERSION = 2
 
 func _ready():
 	print(TILE_SIZE)
@@ -22,7 +22,7 @@ func tile2pos(x, y):
 	var lon_deg = x * 360.0 / n - 180.0
 	var lat_rad = atan(sinh(PI * (1.0 - 2.0 * y / n)))
 	var lat_deg = lat_rad * 180.0 / PI
-	return Vector2(lon_deg, lat_deg)
+	return Vector2(lat_deg, lon_deg)
 
 func gen_twm(in_file, out_file, x, y):
 	var parser = XMLParser.new()

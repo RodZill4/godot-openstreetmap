@@ -155,6 +155,7 @@ func load_twm(twm_file_name, osm_file_name):
 	var flatroofs_vertices = []
 	var flatroofs_colors = []
 	var roof_angle = house_roof_angle*PI/180
+	var roof_texture_stretch = 1/cos(roof_angle)
 	var roofs_vertices = []
 	var roofs_colors = []
 	var roofs_normals = []
@@ -178,7 +179,7 @@ func load_twm(twm_file_name, osm_file_name):
 		hue = 6*(hue - floor(hue))
 		var color = hsv2rgb(hue, 0.1, 1)
 		var roofs = null
-		if height < 4: roofs = geometry.create_skeleton(polygon)
+		if height < 4: roofs = geometry.create_straight_skeleton(polygon)
 		var roof_indexes = [ ]
 		var flat_roofs = (roofs == null)
 		if !flat_roofs:
@@ -208,7 +209,7 @@ func load_twm(twm_file_name, osm_file_name):
 					var v = (a - center).dot(v_axis)
 					roofs_vertices.append(Vector3(a.x, building_level_height*height+tan(roof_angle)*v, a.y))
 					roofs_normals.append(normal)
-					roofs_uvs.append(0.25*Vector2(u, -v))
+					roofs_uvs.append(Vector2(u, -v*roof_texture_stretch))
 					roofs_colors.append(color)
 		generate_walls(polygon, color, building_level_height*height, 0.5, height, 0.25, walls_vertices, walls_colors, walls_normals, walls_uvs, walls_uv2s)
 	var grasslands_vertices = []
@@ -262,7 +263,7 @@ func load_twm(twm_file_name, osm_file_name):
 		add_horizontal_triangles(mesh_grounds, grasslands_vertices, null, preload("res://addons/openstreetmap/materials/mat_grass.tres"))
 		add_horizontal_triangles(mesh_grounds, water_vertices, null, preload("res://addons/openstreetmap/materials/mat_water.tres"))
 	add_horizontal_triangles(mesh_grounds, flatroofs_vertices, flatroofs_colors, building_roof_material)
-	add_primitive(mesh_grounds, Mesh.PRIMITIVE_TRIANGLES, roofs_vertices, roofs_normals, roofs_colors, roofs_uvs, null, house_roof_material)
+	add_primitive(mesh_buildings, Mesh.PRIMITIVE_TRIANGLES, roofs_vertices, roofs_normals, roofs_colors, roofs_uvs, null, house_roof_material)
 	add_primitive(mesh_buildings, Mesh.PRIMITIVE_TRIANGLE_STRIP, walls_vertices, walls_normals, walls_colors, walls_uvs, walls_uv2s, building_wall_material)
 	load_objects(file, trees, "res://addons/openstreetmap/objects/tree.tscn", "tree")
 	load_objects(file, traffic_lights, "res://addons/openstreetmap/objects/traffic_light.tscn", "traffic_light")

@@ -7,7 +7,8 @@ func _ready():
 	pass
 
 func _draw():
-	var skeleton = preload("res://global/geometry.gd").create_skeleton(get_polygon(), self)
+	var geometry = preload("res://addons/openstreetmap/global/geometry.gd")
+	var skeleton = geometry.create_straight_skeleton(get_polygon(), self)
 	if show_polygons:
 		for p in skeleton:
 			draw_colored_polygon(p, Color(randf(), randf(), randf()))

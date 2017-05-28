@@ -1,14 +1,11 @@
 extends Node
 
-func _ready():
-	pass
-
-func fix_polygon(polygon):
+static func fix_polygon(polygon):
 	if (polygon[0]-polygon[polygon.size()-1]).length() < 0.5:
 		polygon.remove(polygon.size()-1)
 	return polygon
 
-func polygon_has_problems(polygon):
+static func polygon_has_problems(polygon):
 	var problems = 0
 	var s = polygon.size()
 	for i in range(s):
@@ -24,7 +21,7 @@ func polygon_has_problems(polygon):
 		print("polygon has "+str(problems)+" problems")
 	return problems
 
-func polygon_area(polygon):
+static func polygon_area(polygon):
 	var area = 0.0
 	for i in range(polygon.size()):
 		var p1 = polygon[(i-1) if (i > 0) else (polygon.size()-1)]
@@ -33,14 +30,14 @@ func polygon_area(polygon):
 		area -= p1.y*p2.x
 	return 0.5*area
 
-func reverse_polygon(polygon):
+static func reverse_polygon(polygon):
 	var size = polygon.size()
 	for i in range(size/2):
 		var tmp = polygon[i]
 		polygon[i] = polygon[size-i-1]
 		polygon[size-i-1] = tmp
 
-func triangles_area(vectices, indexes):
+static func triangles_area(vectices, indexes):
 	var area = 0
 	for i in range(indexes.size()/3):
 		var a = vectices[indexes[3*i]]
@@ -81,10 +78,22 @@ func triangulate_polygon(polygon):
 			break
 	return triangles
 
-func is_rectangle(polygon):
-	return polygon.size() == 4
+# straight skeleton creation algorithm
 
-static func create_skeleton(polygon, canvas_item = null):
+static func add_face_point(faces, location, point, update_location = true):
+	var face = faces[location.face].points
+	var index = face.find(location.element)
+	if index == -1:
+		print("vertex not found")
+	if location.after: index += 1
+	if location == faces[location.face].first + 1:
+		print("problem !")
+	face.insert(index, point)
+	if index <= faces[location.face].first:
+		faces[location.face].first += 1
+	if update_location: location.element = point
+
+static func create_straight_skeleton(polygon, canvas_item = null):
 	var s
 	var points = [ ]
 	var faces = [ ]
@@ -212,15 +221,28 @@ static func create_skeleton(polygon, canvas_item = null):
 		faces[f] = points
 	return faces
 
-static func add_face_point(faces, location, point, update_location = true):
-	var face = faces[location.face].points
-	var index = face.find(location.element)
-	if index == -1:
-		print("vertex not found")
-	if location.after: index += 1
-	if location == faces[location.face].first + 1:
-		print("problem !")
-	face.insert(index, point)
-	if index <= faces[location.face].first:
-		faces[location.face].first += 1
-	if update_location: location.element = point
+# polygon clamping algorithm
+
+static func is_inside_edge(p, e):
+	return e.a*p.x+e.b*p.y+e.c >= 0
+
+static func intersect_line_with_edge(p1, p2, e):
+	var r1 = e.a*p1.x+e.b*p1.y+e.c
+	var r2 = e.a*p2.x+e.b*p2.y+e.c
+	return (r2*p1-r1*p2)/(r2-r1)
+
+static func clamp_polygon(polygon, rect):
+	var output = polygon
+	for l in [ { a=1, b=0, c=-rect.pos.x }, { a=0, b=1, c=-rect.pos.y }, { a=-1, b=0, c=rect.end.x }, { a=0, b=-1, c=rect.end.y } ]:
+		var input = output
+		output = Vector2Array()
+		var s = input[input.size()-1]
+		for e in input:
+			if is_inside_edge(e, l):
+				if !is_inside_edge(s, l):
+					output.append(intersect_line_with_edge(e, s, l))
+				output.append(e)
+			elif is_inside_edge(s, l):
+				output.append(intersect_line_with_edge(e, s, l))
+			s = e
+	return output
