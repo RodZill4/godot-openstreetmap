@@ -12,7 +12,7 @@ var event_timestamp = 0
 
 func _ready():
 	print(osm.TILE_SIZE)
-	var default_pos = osm.pos2tile(45.18103, 5.7055)
+	var default_pos = osm.pos2tile(5.7055, 45.18103)
 	var x = game_state.get_var("Player/Position/X", default_pos.x)
 	var y = game_state.get_var("Player/Position/Y", default_pos.y)
 	map.reference_position = Vector2(x, y)

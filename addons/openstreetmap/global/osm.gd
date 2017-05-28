@@ -4,13 +4,13 @@ const ZOOM = 16
 const TILE_SIZE = 256 * 156412.0 / (1 << ZOOM)
 
 const TWM_ID      = 7938
-const TWM_VERSION = 2
+const TWM_VERSION = 0
 
 func _ready():
 	print(TILE_SIZE)
 	pass
 
-func pos2tile(lat, lon):
+func pos2tile(lon, lat):
 	var n = 1 << ZOOM
 	var x = n * (lon / 360.0 + 0.5)
 	var a = lat * PI / 180.0
@@ -22,7 +22,7 @@ func tile2pos(x, y):
 	var lon_deg = x * 360.0 / n - 180.0
 	var lat_rad = atan(sinh(PI * (1.0 - 2.0 * y / n)))
 	var lat_deg = lat_rad * 180.0 / PI
-	return Vector2(lat_deg, lon_deg)
+	return Vector2(lon_deg, lat_deg)
 
 func gen_twm(in_file, out_file, x, y):
 	var parser = XMLParser.new()
@@ -52,7 +52,7 @@ func gen_twm(in_file, out_file, x, y):
 			stack.append( { name = name } )
 			# Operations that must be executed when entering an XML node
 			if name == "node":
-				var pos = pos2tile(float(parser.get_named_attribute_value("lat")), float(parser.get_named_attribute_value("lon")))
+				var pos = pos2tile(float(parser.get_named_attribute_value("lon")), float(parser.get_named_attribute_value("lat")))
 				pos -= Vector2(x, y)
 				pos *= osm.TILE_SIZE
 				var id = parser.get_named_attribute_value("id")
