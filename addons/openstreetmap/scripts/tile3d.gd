@@ -1,8 +1,9 @@
 extends Spatial
 
-export(float) var building_level_height = 2.5
+export(float) var building_level_height = 6
 export(Material) var building_wall_material
 export(Material) var building_roof_material
+export(float) var house_level_height = 2.5
 export(float, 0, 85) var house_roof_angle = 20
 export(Material) var house_roof_material
 
@@ -13,12 +14,12 @@ var osm_y
 
 onready var buildings = get_node("Buildings")
 onready var doors = get_node("Doors")
-onready var windows = get_node("Windows")
 onready var grounds = get_node("Grounds")
 onready var trees = get_node("Trees")
 onready var traffic_lights = get_node("TrafficLights")
 onready var postboxes = get_node("PostBoxes")
 onready var fountains = get_node("Fountains")
+onready var child_nodes = [ buildings, grounds, doors, trees, traffic_lights, fountains, postboxes]
 
 const WATER_HEIGHT  = 0.02
 const ROAD_HEIGHT  = 0.04
@@ -27,7 +28,7 @@ const GRASS_HEIGHT = 0.06
 const OSM_SIZE = 8
 
 const SPLAT_GROUND = true
-const SPLAT_SIZE   = 1024
+const SPLAT_SIZE   = 512
 
 func _ready():
 	var ground = get_node("Ground")
@@ -79,14 +80,8 @@ func set_tile(_x, _y):
 	var rp = get_parent().reference_position
 	set_translation(osm.TILE_SIZE*Vector3(x-rp.x, 0, y-rp.y))
 	set_name("tile_3d_"+str(x)+"_"+str(y))
-	buildings.hide()
-	grounds.hide()
-	doors.hide()
-	windows.hide()
-	trees.hide()
-	traffic_lights.hide()
-	fountains.hide()
-	postboxes.hide()
+	for c in child_nodes:
+		c.hide()
 	var twm_file_name = "user://tiles3d/twm/"+"tile_"+str(osm.ZOOM)+"_"+str(x)+"_"+str(y)+".twm"
 	var osm_file_name = "user://tiles3d/osm/"+"tile_"+str(osm.ZOOM)+"_"+str(osm_x)+"_"+str(osm_y)+".osm"
 	update_tile(twm_file_name, osm_file_name)
@@ -135,23 +130,19 @@ func load_twm(twm_file_name, osm_file_name):
 		ground_painter.set_scale(SPLAT_SIZE/osm.TILE_SIZE*Vector2(1, 1))
 	var file = File.new()
 	var ok = false
-	while !ok:
+	while true:
 		file.open(twm_file_name, File.READ)
-		if !file.is_open():
-			set_state("Converting")
-			osm.gen_twm(osm_file_name, twm_file_name, x, y)
-		else:
+		if file.is_open():
 			var id = file.get_16()
 			var version = file.get_8()
-			if id != osm.TWM_ID || version != osm.TWM_VERSION:
-				file.close()
-				set_state("Converting")
-				osm.gen_twm(osm_file_name, twm_file_name, x, y)
-			else:
-				ok = true
+			if id == osm.TWM_ID && version == osm.TWM_VERSION:
+				break
+			file.close()
+		set_state("Converting")
+		osm.gen_twm(osm_file_name, twm_file_name, x, y)
 	set_state("Loading")
-	var mesh_buildings = Mesh.new()
-	var mesh_grounds = Mesh.new()
+	var mesh_shadow = Mesh.new()
+	var mesh_noshadow = Mesh.new()
 	var flatroofs_vertices = []
 	var flatroofs_colors = []
 	var roof_angle = house_roof_angle*PI/180
@@ -160,17 +151,16 @@ func load_twm(twm_file_name, osm_file_name):
 	var roofs_colors = []
 	var roofs_normals = []
 	var roofs_uvs = []
-	var walls_vertices = []
-	var walls_colors = []
-	var walls_normals = []
-	var walls_uvs = []
-	var walls_uv2s = []
+	var house_walls = meshes.Walls.new()
+	var building_walls = meshes.Walls.new(false, true)
+	#
+	# Read and create buildings
+	#
 	var building_count = file.get_16()
-	var windows_array = []
 	for i in range(building_count):
-		var polygon = Vector2Array()
 		var height = file.get_8()
 		var point_count = file.get_16()
+		var polygon = Vector2Array()
 		for j in range(point_count):
 			var x = file.get_float()
 			var y = file.get_float()
@@ -179,13 +169,14 @@ func load_twm(twm_file_name, osm_file_name):
 		hue = 6*(hue - floor(hue))
 		var color = hsv2rgb(hue, 0.1, 1)
 		var roofs = null
-		if height < 4: roofs = geometry.create_straight_skeleton(polygon)
+		if height < 40: roofs = geometry.create_straight_skeleton(polygon)
 		var roof_indexes = [ ]
 		var flat_roofs = (roofs == null)
 		if !flat_roofs:
 			for r in roofs:
 				var indexes = Geometry.triangulate_polygon(r)
 				if indexes.size() == 0:
+					height = max(1, int(height * 0.7))
 					flat_roofs = true
 					break
 				roof_indexes.append(indexes)
@@ -195,6 +186,7 @@ func load_twm(twm_file_name, osm_file_name):
 				var a = polygon[indexes[i]]
 				flatroofs_vertices.append(Vector3(a.x, building_level_height*height, a.y))
 				flatroofs_colors.append(color)
+			building_walls.add(polygon, color, building_level_height*height, 0.5, height, 0.25)
 		else:
 			for r in range(roofs.size()):
 				var roof = roofs[r]
@@ -207,26 +199,31 @@ func load_twm(twm_file_name, osm_file_name):
 					var a = roof[indexes[i]]
 					var u = (a - center).dot(u_axis)
 					var v = (a - center).dot(v_axis)
-					roofs_vertices.append(Vector3(a.x, building_level_height*height+tan(roof_angle)*v, a.y))
+					roofs_vertices.append(Vector3(a.x, house_level_height*height+tan(roof_angle)*v, a.y))
 					roofs_normals.append(normal)
 					roofs_uvs.append(Vector2(u, -v*roof_texture_stretch))
 					roofs_colors.append(color)
-		generate_walls(polygon, color, building_level_height*height, 0.5, height, 0.25, walls_vertices, walls_colors, walls_normals, walls_uvs, walls_uv2s)
+			house_walls.add(polygon, color, house_level_height*height, 0.5, height, 0.25)
+	#
+	# Read and create grasslands and water
+	#
 	var grasslands_vertices = []
 	var water_vertices = []
 	if SPLAT_GROUND:
-		read_areas_to_rtt(file, ground_painter.grass, "grass")
-		read_areas_to_rtt(file, ground_painter.water, "water")
+		read_areas_to_splatmap(file, ground_painter.grass, "grass")
+		read_areas_to_splatmap(file, ground_painter.water, "water")
 	else:
 		read_areas(file, grasslands_vertices, GRASS_HEIGHT, "grass")
 		read_areas(file, water_vertices, WATER_HEIGHT, "water")
+	#
+	# Read and create roads
+	#
+	var roads_count = file.get_16()
 	var roads_vertices = []
 	var roads_normals = []
-	var roads_count = file.get_16()
 	for i in range(roads_count):
 		var lanes = file.get_8()
 		var line = Vector2Array()
-		var normals = Vector2Array()
 		var point_count = file.get_16()
 		for j in range(point_count):
 			var x = file.get_float()
@@ -236,6 +233,7 @@ func load_twm(twm_file_name, osm_file_name):
 		if SPLAT_GROUND:
 			ground_painter.roads.append( { width = SPLAT_SIZE*lanes/128, points = line } )
 		else:
+			var normals = Vector2Array()
 			for j in range(point_count):
 				normals.append(Vector2(0, 0))
 			for j in range(point_count-1):
@@ -256,65 +254,26 @@ func load_twm(twm_file_name, osm_file_name):
 					roads_vertices.append(Vector3(a.x-n.x, ROAD_HEIGHT, a.y-n.y))
 					roads_normals.append(Vector3(0, 1, 0))
 	if SPLAT_GROUND:
+		# Draw splatmap for roads, grass and water
 		ground_painter.update()
 		get_node("Ground/RenderToTexture").set_render_target_update_mode(Viewport.RENDER_TARGET_UPDATE_ONCE)
 	else:
-		add_primitive(mesh_grounds, Mesh.PRIMITIVE_TRIANGLE_STRIP, roads_vertices, roads_normals, null, null, null, preload("res://addons/openstreetmap/materials/mat_road.tres"))
-		add_horizontal_triangles(mesh_grounds, grasslands_vertices, null, preload("res://addons/openstreetmap/materials/mat_grass.tres"))
-		add_horizontal_triangles(mesh_grounds, water_vertices, null, preload("res://addons/openstreetmap/materials/mat_water.tres"))
-	add_horizontal_triangles(mesh_grounds, flatroofs_vertices, flatroofs_colors, building_roof_material)
-	add_primitive(mesh_buildings, Mesh.PRIMITIVE_TRIANGLES, roofs_vertices, roofs_normals, roofs_colors, roofs_uvs, null, house_roof_material)
-	add_primitive(mesh_buildings, Mesh.PRIMITIVE_TRIANGLE_STRIP, walls_vertices, walls_normals, walls_colors, walls_uvs, walls_uv2s, building_wall_material)
+		# Add geometry for roads, grass and water
+		add_primitive(mesh_noshadow, Mesh.PRIMITIVE_TRIANGLE_STRIP, roads_vertices, roads_normals, null, null, null, preload("res://addons/openstreetmap/materials/mat_road.tres"))
+		add_horizontal_triangles(mesh_noshadow, grasslands_vertices, null, preload("res://addons/openstreetmap/materials/mat_grass.tres"))
+		add_horizontal_triangles(mesh_noshadow, water_vertices, null, preload("res://addons/openstreetmap/materials/mat_water.tres"))
+	# Add geometry for buildings
+	add_horizontal_triangles(mesh_noshadow, flatroofs_vertices, flatroofs_colors, building_roof_material)
+	add_primitive(mesh_shadow, Mesh.PRIMITIVE_TRIANGLES, roofs_vertices, roofs_normals, roofs_colors, roofs_uvs, null, house_roof_material)
+	building_walls.add_to_mesh(mesh_shadow, building_wall_material)
+	house_walls.add_to_mesh(mesh_shadow, building_wall_material)
+	# Load ans add trees, traffic_lights, postboxes and fountains
 	load_objects(file, trees, "res://addons/openstreetmap/objects/tree.tscn", "tree")
 	load_objects(file, traffic_lights, "res://addons/openstreetmap/objects/traffic_light.tscn", "traffic_light")
 	load_objects(file, postboxes, "res://addons/openstreetmap/objects/post_box.tscn")
 	load_objects(file, fountains, "res://addons/openstreetmap/objects/fountain.tscn")
 	set_state("")
-	call_deferred("on_loaded", mesh_buildings, mesh_grounds)
-
-func generate_walls(polygon, color, height, texture_width, texture_height, texture2_width, vertices, colors, normals, uvs, uv2s = null):
-	polygon.append(polygon[0])
-	var p0 = polygon[0]
-	vertices.append(Vector3(p0.x, height, p0.y))
-	colors.append(color)
-	normals.append(Vector3(0, 0, 0))
-	uvs.append(Vector2(0, 0))
-	if uv2s != null: uv2s.append(Vector2(0, 0))
-	var u = 0
-	var u2 = 0
-	for i in range(polygon.size()-1):
-		var p1 = polygon[i]
-		var p2 = polygon[i+1]
-		var n = Vector3(p2.x-p1.x, 0, p2.y-p1.y).cross(Vector3(0, 1, 0)).normalized()
-		vertices.append(Vector3(p1.x, height, p1.y))
-		colors.append(color)
-		normals.append(n)
-		uvs.append(Vector2(u, 0))
-		if uv2s != null: uv2s.append(Vector2(u2, 0))
-		vertices.append(Vector3(p1.x, 0, p1.y))
-		colors.append(color)
-		normals.append(n)
-		uvs.append(Vector2(u, texture_height))
-		if uv2s != null: uv2s.append(Vector2(u2, texture_height))
-		u += (p2-p1).length() * texture_width
-		u2 += floor((p2-p1).length() * texture2_width)
-		vertices.append(Vector3(p2.x, height, p2.y))
-		colors.append(color)
-		normals.append(n)
-		uvs.append(Vector2(u, 0))
-		if uv2s != null: uv2s.append(Vector2(u2, 0))
-		vertices.append(Vector3(p2.x, 0, p2.y))
-		colors.append(color)
-		normals.append(n)
-		uvs.append(Vector2(u, texture_height))
-		if uv2s != null: uv2s.append(Vector2(u2, texture_height))
-		var v = p2-p1
-		var l = v.length()
-	vertices.append(Vector3(p0.x, 0, p0.y))
-	colors.append(color)
-	normals.append(Vector3(0, 0, 0))
-	uvs.append(Vector2(0, 0))
-	if uv2s != null: uv2s.append(Vector2(0, 0))
+	call_deferred("on_loaded", mesh_shadow, mesh_noshadow)
 
 func read_areas(file, vertices, height, name):
 	var count = file.get_16()
@@ -334,7 +293,7 @@ func read_areas(file, vertices, height, name):
 			var a = polygon[indexes[i]]
 			vertices.append(Vector3(a.x, height, a.y))
 
-func read_areas_to_rtt(file, array, name):
+func read_areas_to_splatmap(file, array, name):
 	var count = file.get_16()
 	#print(str(count)+" "+name+" polygons")
 	for i in range(count):
@@ -346,16 +305,11 @@ func read_areas_to_rtt(file, array, name):
 			polygon.append(Vector2(x, y))
 		if polygon.size() > 2: array.append(polygon)
 
-func on_loaded(mesh_buildings, mesh_grounds):
-	buildings.set_mesh(mesh_buildings)
-	grounds.set_mesh(mesh_grounds)
-	buildings.show()
-	grounds.show()
-	windows.show()
-	trees.show()
-	traffic_lights.show()
-	postboxes.show()
-	fountains.show()
+func on_loaded(mesh_shadow, mesh_noshadow):
+	buildings.set_mesh(mesh_shadow)
+	grounds.set_mesh(mesh_noshadow)
+	for c in child_nodes:
+		c.show()
 
 func load_objects(file, parent, model_path, name = null):
 	var object_count = file.get_16()

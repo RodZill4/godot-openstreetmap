@@ -10,8 +10,8 @@ mapfile = ""
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 
-transform/pos = Vector2( -210.971, -64.7717 )
-polygon = Vector2Array( 818.008, 174.822, 532.039, 100.604, 308.114, 263.459, 517.234, 529.372, 326.62, 663.192, 694.893, 683.549, 739.308, 465.176, 629.642, 325.515 )
+transform/pos = Vector2( -310.727, -70.7994 )
+polygon = Vector2Array( 609.996, 410.348, 595.605, 496.968, 551.155, 540.753, 515.994, 489.007, 403.876, 459.816, 326.62, 663.192, 738.903, 672.111, 746.201, 509.573 )
 uv = Vector2Array(  )
 color = Color( 1, 1, 1, 1 )
 vertex_colors = ColorArray(  )

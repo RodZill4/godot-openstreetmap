@@ -19,4 +19,4 @@ func _draw():
 		draw_colored_polygon(g, Color(0, 1, 0))
 	for r in roads:
 		for i in range(r.points.size()-1):
-			draw_line(r.points[i], r.points[i+1], Color(1, 0, 0), r.width)
+			draw_line(r.points[i], r.points[i+1], Color(1, 0, 0), 3*r.width)

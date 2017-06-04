@@ -80,20 +80,60 @@ func triangulate_polygon(polygon):
 
 # straight skeleton creation algorithm
 
-static func add_face_point(faces, location, point, update_location = true):
-	var face = faces[location.face].points
-	var index = face.find(location.element)
-	if index == -1:
-		print("vertex not found")
-	if location.after: index += 1
-	if location == faces[location.face].first + 1:
-		print("problem !")
-	face.insert(index, point)
-	if index <= faces[location.face].first:
-		faces[location.face].first += 1
-	if update_location: location.element = point
+class PointList:
+	var p = null
+	var prev = null
+	var next = null
+	
+	func _init():
+		pass
+	
+	# add an element after self
+	func add(p):
+		var l = get_script().new()
+		l.p = p
+		l.prev = self
+		l.next = self.next
+		self.next.prev = l
+		self.next = l
+		return l
+	
+	func remove():
+		var rv
+		if next == self:
+			rv = null
+		else:
+			prev.next = next
+			next.prev = prev
+			rv = next
+		next = null
+		prev = null
+		return rv
 
-static func create_straight_skeleton(polygon, canvas_item = null):
+# create a list from a Vector2 array
+static func pl_create(c, l):
+	var rv = null
+	for p in l:
+		if rv == null:
+			rv = c.new()
+			rv.p = p
+			rv.next = rv
+			rv.prev = rv
+		else:
+			rv.prev.add(p)
+	return rv
+	
+static func add_face_point(location, point, update_location = true):
+	var new_point
+	if location.after:
+		new_point = location.point.add(point)
+	else:
+		new_point = location.point.prev.add(point)
+	if update_location:
+		location.point = new_point
+	return new_point
+
+static func create_straight_skeleton(polygon, canvas_item = null, epsilon = 0.01):
 	var s
 	var points = [ ]
 	var faces = [ ]
@@ -104,7 +144,7 @@ static func create_straight_skeleton(polygon, canvas_item = null):
 		var p1 = polygon[i]
 		var p2 = polygon[(i + 1) if (i != s - 1) else 0]
 		points.append( { p = p1 } )
-		faces.append( { points = [ p1, p2 ], first = 0 } )
+		faces.append(pl_create(PointList, [ p1, p2 ]))
 	var first_pass = true
 	while true:
 		s = points.size()
@@ -121,8 +161,8 @@ static func create_straight_skeleton(polygon, canvas_item = null):
 			points[i2].b = b
 			points[i2].is_reflex = (sin(angle) < 0)
 			if first_pass:
-				points[i2].left_face = { face = i1, element = p2, after = true }
-				points[i2].right_face = { face = i2, element = p2, after = false }
+				points[i2].left_face = { point = faces[i1].next, after = true }
+				points[i2].right_face = { point = faces[i2], after = false }
 		var min_t = -1
 		for i in range(s):
 			var p1 = points[i]
@@ -174,12 +214,12 @@ static func create_straight_skeleton(polygon, canvas_item = null):
 			points[i].p += min_t*points[i].b
 		if split != null:
 			if canvas_item != null:
-				canvas_item.draw_circle(points[split.i].p, 50, Color(0, 1, 0))
+				canvas_item.draw_circle(points[split.i].p, 10, Color(0, 1, 0))
 				canvas_item.draw_line(points[split.j1].p, points[split.j2].p, Color(0, 1, 0), 10)
 			var p = points[split.i].p
-			add_face_point(faces, points[split.i].left_face, p)
-			add_face_point(faces, points[split.i].right_face, p)
-			add_face_point(faces, points[split.j1].right_face, p, false)
+			add_face_point(points[split.i].left_face, p)
+			add_face_point(points[split.i].right_face, p)
+			var new_point = add_face_point(points[split.j1].right_face, p, false)
 			for i in range(split.i):
 				points.append(points[0])
 				points.pop_front()
@@ -193,31 +233,30 @@ static func create_straight_skeleton(polygon, canvas_item = null):
 			for i in range(s-split.j2):
 				new_points.insert(1, points.back())
 				points.pop_back()
-			var face = points[split.j1].right_face.face
-			points[split.i].left_face = { face = face, element = p.p, after = true }
-			new_points[0].right_face = { face = face, element = p.p, after = false }
+			points[split.i].left_face = { point = new_point, after = true }
+			new_points[0].right_face = { point = new_point, after = false }
 			queue.append(new_points)
 			s = points.size()
 		for i in range(s-1, -1, -1):
 			var p1 = points[i].p
 			var i2 = (i + 1) if (i != points.size() - 1) else 0
 			var p2 = points[i2].p
-			if (p1-p2).length() < 0.001:
-				add_face_point(faces, points[i].right_face, p1)
-				add_face_point(faces, points[i].left_face, p1)
-				add_face_point(faces, points[i2].right_face, p1)
-				points[i2].left_face = points[i].left_face
+			if (p1-p2).length() < epsilon:
+				add_face_point(points[i].right_face, p1)
+				add_face_point(points[i].left_face, p1)
+				add_face_point(points[i2].right_face, p1)
+				points[i2].left_face = { point = points[i].left_face.point, after = points[i].left_face.after }
 				points.remove(i)
 		first_pass = false
 	for f in range(faces.size()):
-		var points = faces[f].points
-		for i in range(faces[f].first):
-			points.append(points[0])
-			points.remove(0)
-		for i in range(points.size()-1, -1, -1):
-			var i2 = (i + 1) if (i != points.size() - 1) else 0
-			if points[i] == points[i2]:
-				points.remove(i)
+		var pl = faces[f]
+		var points = []
+		var last_point = null
+		while pl != null:
+			if last_point == null || (pl.p-last_point).length() > epsilon:
+				points.append(pl.p)
+				last_point = pl.p
+			pl = pl.remove()
 		faces[f] = points
 	return faces
 

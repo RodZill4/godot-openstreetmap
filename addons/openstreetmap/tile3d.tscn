@@ -15,9 +15,10 @@
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 script/script = ExtResource( 1 )
-building_level_height = 3.5
+building_level_height = 4.5
 building_wall_material = ExtResource( 2 )
 building_roof_material = ExtResource( 3 )
+house_level_height = 2.5
 house_roof_angle = 45.0
 house_roof_material = ExtResource( 4 )
 
@@ -39,8 +40,8 @@ geometry/visible_in_all_rooms = false
 geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
 quad/axis = 1
-quad/size = Vector2( 612, 612 )
-quad/offset = Vector2( 306, 306 )
+quad/size = Vector2( 611, 611 )
+quad/offset = Vector2( 305.5, 305.5 )
 quad/centered = false
 
 [node name="RenderToTexture" type="Viewport" parent="Ground"]
@@ -105,25 +106,6 @@ geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
 mesh/mesh = null
 mesh/skeleton = NodePath("..")
-
-[node name="Windows" type="MultiMeshInstance" parent="."]
-
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-layers = 1
-geometry/visible = true
-geometry/material_override = null
-geometry/cast_shadow = 0
-geometry/receive_shadows = true
-geometry/range_begin = 0.0
-geometry/range_end = 0.0
-geometry/extra_cull_margin = 0.0
-geometry/billboard = false
-geometry/billboard_y = false
-geometry/depth_scale = false
-geometry/visible_in_all_rooms = false
-geometry/use_baked_light = false
-geometry/baked_light_tex_id = 0
-multimesh = null
 
 [node name="Doors" type="MultiMeshInstance" parent="."]
 

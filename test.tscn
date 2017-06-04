@@ -61,6 +61,8 @@ script/script = ExtResource( 1 )
 
 [node name="Camera" parent="." instance=ExtResource( 2 )]
 
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
