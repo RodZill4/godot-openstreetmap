@@ -14,46 +14,44 @@ uniform texture rock;
 uniform texture grass;
 uniform texture water;
 
-uniform float blur     = 0.05;
-uniform float grassres = 1;
-uniform float rockres  = 1;
-uniform float dirtres  = 1;
-uniform float waterres = 1;
-uniform vec2 water_movement = vec2(0, 0);
-
-color splat = 0.25*(tex(splatmap,UV+vec2(blur, blur))+tex(splatmap,UV+vec2(-blur, blur))+tex(splatmap,UV+vec2(blur, -blur))+tex(splatmap,UV+vec2(-blur, -blur)));
-
-vec3 result;
-vec3 grasscol;
-vec3 rockcol;
-vec3 dirtcol;
-vec3 watercol;
+color splat = tex(splatmap,UV);
 
 float grassval = splat.g;
 float rockval = splat.r;
 float waterval = splat.b;
 float dirtval = max(0, 1-grassval-rockval-waterval);
 
-dirtcol = tex(dirt,UV*dirtres).rgb * dirtval;
-grasscol = tex(grass,UV*grassres).rgb * grassval;
-rockcol = tex(rock,UV*rockres).rgb * rockval;
-watercol = tex(water,UV*waterres+TIME*water_movement).rgb * waterval;
+color dirtcol = dirtval * tex(dirt, VAR1.xy);
+color grasscol = grassval * tex(grass, VAR1.zw);
+color rockcol = rockval * tex(rock, VAR2.xy);
+color watercol = waterval * tex(water, VAR2.zw);
 
-result = grasscol+rockcol+dirtcol+watercol;
-
-DIFFUSE = result;
+DIFFUSE = (grasscol+rockcol+dirtcol+watercol).rgb;
 ",
 "fragment_ofs": 0,
 "light": "",
 "light_ofs": 0,
-"vertex": "",
+"vertex": "uniform float grassres = 1;
+uniform float rockres  = 1;
+uniform float dirtres  = 1;
+uniform float waterres = 1;
+uniform vec2 water_movement = vec2(0, 0);
+
+vec2 dirt_uv = UV*dirtres;
+vec2 grass_uv = UV*grassres;
+vec2 rock_uv = UV*rockres;
+vec2 water_uv = UV*waterres+mod(TIME*water_movement, vec2(1, 1));
+
+VAR1 = vec4(dirt_uv, grass_uv);
+VAR2 = vec4(rock_uv, water_uv);
+",
 "vertex_ofs": 0
 }
 
 [resource]
 
 flags/visible = true
-flags/double_sided = false
+flags/double_sided = true
 flags/invert_faces = false
 flags/unshaded = false
 flags/on_top = false
@@ -63,14 +61,13 @@ params/blend_mode = 0
 params/depth_draw = 1
 params/line_width = 5.1848e-43
 shader/shader = SubResource( 1 )
+shader_param/grassres = 200.0
+shader_param/rockres = 200.0
+shader_param/dirtres = 200.0
+shader_param/waterres = 50.0
+shader_param/water_movement = Vector2( 0.05, 0.05 )
 shader_param/dirt = ExtResource( 1 )
 shader_param/rock = ExtResource( 3 )
 shader_param/grass = ExtResource( 2 )
 shader_param/water = ExtResource( 4 )
-shader_param/blur = 0.0
-shader_param/grassres = 100.0
-shader_param/rockres = 100.0
-shader_param/dirtres = 100.0
-shader_param/waterres = 50.0
-shader_param/water_movement = Vector2( 0.05, 0.05 )
 

@@ -44,12 +44,24 @@ mesh/skeleton = NodePath("..")
 material/0 = null
 material/1 = null
 script/script = ExtResource( 3 )
-polygon = Vector2Array( -11.0392, 13.1835, 15.0097, 13.5332, 14.3104, -12.166, -9.99026, -12.3409 )
-height = 2
-level_height = 2.6
-window_width = 2.9
-wall_material = ExtResource( 1 )
-roof_angle = 35.0
-roof_material = ExtResource( 2 )
+
+[node name="TestCube" type="TestCube" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 25.3811, 0 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
 
 

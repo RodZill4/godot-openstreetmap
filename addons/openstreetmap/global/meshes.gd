@@ -92,7 +92,7 @@ class Roofs:
 			var indexes = Geometry.triangulate_polygon(r)
 			if indexes.size() == 0:
 				return false
-			roof_indexes.append(Geometry.triangulate_polygon(r))
+			roof_indexes.append(indexes)
 		for r in range(roofs.size()):
 			var roof = roofs[r]
 			var indexes = roof_indexes[r]

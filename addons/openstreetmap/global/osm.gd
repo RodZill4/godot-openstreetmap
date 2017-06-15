@@ -4,7 +4,7 @@ const ZOOM = 16
 const TILE_SIZE = 256 * 156412.0 / (1 << ZOOM)
 
 const TWM_ID      = 7938
-const TWM_VERSION = 0
+const TWM_VERSION = 1
 
 func _ready():
 	print(TILE_SIZE)
@@ -23,6 +23,24 @@ func tile2pos(x, y):
 	var lat_rad = atan(sinh(PI * (1.0 - 2.0 * y / n)))
 	var lat_deg = lat_rad * 180.0 / PI
 	return Vector2(lon_deg, lat_deg)
+
+func is_valid(f):
+	var dir = Directory.new()
+	if !dir.file_exists(f):
+		return false
+	var parser = XMLParser.new()
+	parser.open(f)
+	while parser.read() == 0:
+		var type = parser.get_node_type()
+		if type == XMLParser.NODE_ELEMENT:
+			var name = parser.get_node_name()
+			if name == "html":
+				break
+			elif name == "osm":
+				return true
+	print("Incorrect OSM file "+f)
+	dir.remove(f)
+	return false
 
 func gen_twm(in_file, out_file, x, y):
 	var parser = XMLParser.new()
@@ -123,10 +141,19 @@ func gen_twm(in_file, out_file, x, y):
 						else:
 							height = floor(0.75*sqrt(sqrt(area)))
 						if height > 0 && geometry.polygon_has_problems(nodes) == 0:
-							if false && geometry.is_rectangle(nodes):
-								houses.append({ height = height, polygon = nodes})
-							else:
-								buildings.append({ height = height, polygon = nodes})
+							var fixed_nodes
+							for i in range(10):
+								var retry = false
+								fixed_nodes = [ ]
+								for n in nodes:
+									fixed_nodes.append(n+0.1*Vector2(randf(), randf()))
+								var skeleton = geometry.create_straight_skeleton(nodes)
+								for p in skeleton:
+									if Geometry.triangulate_polygon(p).size() == 0:
+										retry = true
+								if !retry:
+									break
+							buildings.append({ height = height, polygon = fixed_nodes})
 				elif stack.back().type == "grassland":
 					var nodes = geometry.fix_polygon(stack.back().nodes)
 					if true || rect.has_point(way_center(nodes)):
@@ -143,7 +170,12 @@ func gen_twm(in_file, out_file, x, y):
 							print("water polygon has problems")
 				elif stack.back().type == "road":
 					var nodes = stack.back().nodes
-					if true || rect.has_point(way_center(nodes)):
+					var visible = false
+					for n in nodes:
+						if rect.has_point(n):
+							visible = true
+							break
+					if visible:
 						var lanes = 1
 						if stack.back().has("lanes"):
 							lanes = stack.back().lanes
