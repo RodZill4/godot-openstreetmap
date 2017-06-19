@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=17 format=1]
 
 [ext_resource path="res://addons/openstreetmap/scripts/tile3d.gd" type="Script" id=1]
 [ext_resource path="res://addons/openstreetmap/materials/mat_building_wall.tres" type="Material" id=2]
@@ -7,10 +7,15 @@
 [ext_resource path="res://addons/openstreetmap/materials/mat_ground_splat.tres" type="Material" id=5]
 [ext_resource path="res://addons/openstreetmap/objects/ground.tres" type="Mesh" id=6]
 [ext_resource path="res://addons/openstreetmap/scripts/render_ground.gd" type="Script" id=7]
-[ext_resource path="res://addons/openstreetmap/textures/downloading.png" type="Texture" id=8]
-[ext_resource path="res://addons/openstreetmap/textures/converting.png" type="Texture" id=9]
-[ext_resource path="res://addons/openstreetmap/textures/loading.png" type="Texture" id=10]
-[ext_resource path="res://addons/openstreetmap/textures/waiting.png" type="Texture" id=11]
+[ext_resource path="res://addons/openstreetmap/scripts/ground_details.gd" type="Script" id=8]
+[ext_resource path="res://addons/openstreetmap/objects/grass.tres" type="Mesh" id=9]
+[ext_resource path="res://addons/openstreetmap/objects/brown_grass.tres" type="Mesh" id=10]
+[ext_resource path="res://addons/openstreetmap/objects/plant.tres" type="Mesh" id=11]
+[ext_resource path="res://addons/openstreetmap/objects/stones.tres" type="Mesh" id=12]
+[ext_resource path="res://addons/openstreetmap/textures/downloading.png" type="Texture" id=13]
+[ext_resource path="res://addons/openstreetmap/textures/converting.png" type="Texture" id=14]
+[ext_resource path="res://addons/openstreetmap/textures/loading.png" type="Texture" id=15]
+[ext_resource path="res://addons/openstreetmap/textures/waiting.png" type="Texture" id=16]
 
 [node name="Tile3d" type="Spatial"]
 
@@ -96,7 +101,7 @@ geometry/material_override = null
 geometry/cast_shadow = 0
 geometry/receive_shadows = true
 geometry/range_begin = 0.0
-geometry/range_end = 32768.0
+geometry/range_end = 0.0
 geometry/extra_cull_margin = 0.0
 geometry/billboard = false
 geometry/billboard_y = false
@@ -106,6 +111,34 @@ geometry/use_baked_light = false
 geometry/baked_light_tex_id = 0
 mesh/mesh = null
 mesh/skeleton = NodePath("..")
+
+[node name="Grass" type="Spatial" parent="Grounds"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script/script = ExtResource( 8 )
+mesh = ExtResource( 9 )
+subdivide = 4
+
+[node name="BrownGrass" type="Spatial" parent="Grounds"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script/script = ExtResource( 8 )
+mesh = ExtResource( 10 )
+subdivide = 4
+
+[node name="Plant" type="Spatial" parent="Grounds"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script/script = ExtResource( 8 )
+mesh = ExtResource( 11 )
+subdivide = 4
+
+[node name="Stones" type="Spatial" parent="Grounds"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script/script = ExtResource( 8 )
+mesh = ExtResource( 12 )
+subdivide = 4
 
 [node name="Doors" type="MultiMeshInstance" parent="."]
 
@@ -177,7 +210,7 @@ axis = 2
 flags/transparent = true
 flags/shaded = false
 flags/alpha_cut = 0
-texture = ExtResource( 8 )
+texture = ExtResource( 13 )
 vframes = 1
 hframes = 1
 frame = 0
@@ -214,7 +247,7 @@ axis = 2
 flags/transparent = true
 flags/shaded = false
 flags/alpha_cut = 0
-texture = ExtResource( 9 )
+texture = ExtResource( 14 )
 vframes = 1
 hframes = 1
 frame = 0
@@ -251,7 +284,7 @@ axis = 2
 flags/transparent = true
 flags/shaded = false
 flags/alpha_cut = 0
-texture = ExtResource( 10 )
+texture = ExtResource( 15 )
 vframes = 1
 hframes = 1
 frame = 0
@@ -288,7 +321,7 @@ axis = 2
 flags/transparent = true
 flags/shaded = false
 flags/alpha_cut = 0
-texture = ExtResource( 11 )
+texture = ExtResource( 16 )
 vframes = 1
 hframes = 1
 frame = 0

@@ -264,33 +264,30 @@ func load_twm(twm_file_name, osm_file_name):
 	load_objects(file, traffic_lights, "res://addons/openstreetmap/objects/traffic_light.tscn", "traffic_light")
 	load_objects(file, postboxes, "res://addons/openstreetmap/objects/post_box.tscn")
 	load_objects(file, fountains, "res://addons/openstreetmap/objects/fountain.tscn")
-	var stones = Vector3Array()
-	var plants = Vector3Array()
-	var grass = Vector3Array()
-	var brown_grass = Vector3Array()
+	var grass = get_node("Grounds/Grass")
+	var plants = get_node("Grounds/Plant")
+	var stones = get_node("Grounds/Stones")
+	var brown_grass = get_node("Grounds/BrownGrass")
 	ground_painter.generate_image()
 	for i in range(MULTIMESH_COUNT):
 		var lx = halton(i+20, 5)*osm.TILE_SIZE
 		var ly = halton(i+20, 3)*osm.TILE_SIZE
 		var terrain_type = ground_painter.get_terrain_type(lx, ly)
 		if terrain_type == ground_painter.TERRAIN_DIRT:
-			if stones.size() > brown_grass.size():
-				brown_grass.append(Vector3(lx, 0, ly))
+			if stones.count > brown_grass.count:
+				brown_grass.add(Vector3(lx, 0, ly))
 			else:
-				stones.append(Vector3(lx, 0, ly))
+				stones.add(Vector3(lx, 0, ly))
 		elif terrain_type == ground_painter.TERRAIN_GRASS:
-			if 3*plants.size() > grass.size():
-				grass.append(Vector3(lx, 0, ly))
+			if 3*plants.count > grass.count:
+				grass.add(Vector3(lx, 0, ly))
 			else:
-				plants.append(Vector3(lx, 0, ly))
+				plants.add(Vector3(lx, 0, ly))
 	ground_painter.free_image()
-	var grounds = get_node("Grounds")
-	for c in grounds.get_children():
-		c.queue_free()
-	fill_multimesh(stones, grounds, preload("res://addons/openstreetmap/objects/stones.tres"))
-	fill_multimesh(plants, grounds, preload("res://addons/openstreetmap/objects/plant.tres"))
-	fill_multimesh(grass, grounds, preload("res://addons/openstreetmap/objects/grass.tres"))
-	fill_multimesh(brown_grass, grounds, preload("res://addons/openstreetmap/objects/brown_grass.tres"))
+	grass.update()
+	plants.update()
+	brown_grass.update()
+	stones.update()
 	set_state("")
 	call_deferred("on_loaded", mesh_shadow, mesh_noshadow)
 

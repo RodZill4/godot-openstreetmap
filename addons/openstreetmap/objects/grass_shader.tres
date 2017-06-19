@@ -1,0 +1,20 @@
+[gd_resource type="MaterialShader" format=1]
+
+[resource]
+
+_code = {
+"fragment": "uniform texture diffuse_texture;
+
+DIFFUSE_ALPHA = COLOR * tex(diffuse_texture, UV);",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "uniform color diffuse_color;
+vec3 v = SRC_VERTEX;
+v.x += 0.5*v.y*cos(2*TIME);
+vec3 p = MODELVIEW_MATRIX * v;
+COLOR = color(diffuse_color.rgb, min(1+0.01*min(p.z+20, 0), 1));
+VERTEX = p;",
+"vertex_ofs": 0
+}
+
