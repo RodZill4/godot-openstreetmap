@@ -26,5 +26,5 @@ func _on_Ground_input_event(c, event, click_pos, click_normal, shape_idx):
 			elif OS.get_ticks_msec()-event_timestamp < 200:
 				if event.doubleclick:
 					pass
-				else:
+				elif camera != null:
 					camera.set_target_pos(click_pos)

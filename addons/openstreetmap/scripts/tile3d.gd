@@ -151,7 +151,6 @@ func load_twm(twm_file_name, osm_file_name):
 	# Read and create buildings
 	#
 	var building_count = file.get_16()
-	print(str(building_count)+" buildings")
 	for i in range(building_count):
 		var height = file.get_8()
 		var point_count = file.get_16()
@@ -172,7 +171,7 @@ func load_twm(twm_file_name, osm_file_name):
 		var roofs = null
 		var flat_roofs = true
 		if height < 90:
-			if i % 8 == 0:
+			if false && i % 8 == 0:
 				for j in range(point_count):
 					polygon[j] -= c
 				var house = house_model.instance()
@@ -196,6 +195,21 @@ func load_twm(twm_file_name, osm_file_name):
 				flatroofs_vertices.append(Vector3(a.x, building_level_height*height, a.y))
 				flatroofs_colors.append(color)
 			building_walls.add(polygon, color, building_level_height*height, 0.5, height, 0.25)
+		var static_body = StaticBody.new()
+		var faces = Vector3Array()
+		for j in range(point_count):
+			var p1 = polygon[point_count-1 if j == 0 else j-1]
+			var p2 = polygon[j]
+			faces.append(Vector3(p1.x, 0, p1.y))
+			faces.append(Vector3(p1.x, 10, p1.y))
+			faces.append(Vector3(p2.x, 0, p2.y))
+			faces.append(Vector3(p1.x, 10, p1.y))
+			faces.append(Vector3(p2.x, 10, p2.y))
+			faces.append(Vector3(p2.x, 0, p2.y))
+		var shape = ConcavePolygonShape.new()
+		shape.set_faces(faces)
+		static_body.add_shape(shape)
+		buildings.add_child(static_body)
 	#
 	# Read and create grasslands and water
 	#
