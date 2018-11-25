@@ -1,18 +1,17 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://camera.gd" type="Script" id=1]
-
 
 [node name="Camera" type="Spatial"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.2838, 0 )
-script/script = ExtResource( 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.2838, 0 )
+script = ExtResource( 1 )
 
 [node name="RotateY" type="Spatial" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3842, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3842, 0 )
 
 [node name="RotateX" type="Spatial" parent="RotateY"]
 
@@ -21,7 +20,7 @@ _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 [node name="Camera" type="Camera" parent="RotateY/RotateX"]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 150, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 150, 0 )
 projection = 0
 fov = 60.0
 near = 1.0
@@ -41,7 +40,7 @@ current = false
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 
 _import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 0.810883, -0.00559041, -0.585181, 0.585208, 0.00774626, 0.810846, 0, -0.999954, 0.00955287, 0, 0, 0 )
+transform = Transform( 0.810883, -0.00559041, -0.585181, 0.585208, 0.00774626, 0.810846, 0, -0.999954, 0.00955287, 0, 0, 0 )
 layers = 1
 params/enabled = true
 params/editor_only = false
@@ -58,8 +57,6 @@ shadow/blur_passes = 0.0
 projector = null
 operator = 0
 shadow/mode = 3
-shadow/max_distance = 250.0
+shadow_max_distance = 250.0
 shadow/split_weight = 1.0
 shadow/zoffset_scale = 1.0
-
-

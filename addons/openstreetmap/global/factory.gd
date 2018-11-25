@@ -1,6 +1,5 @@
 extends Node
 
-var classes = {}
 var pool = {}
 
 func _ready():
@@ -8,22 +7,44 @@ func _ready():
 	# Initialization here
 	pass
 
-func new(n):
-	var x
-	if pool.has(n) && !pool[n].empty():
-		x = pool[n].back()
-		pool[n].pop_back()
-	else:
-		var c
-		if classes.has(n):
-			c = classes[n]
-		else:
-			c = load(n)
-			classes[n] = c
-		x = c.instance()
-	return x
+func new(object):
+	if pool.has(object):
+		var p = pool[object]
+		if !p.empty():
+			var x = p.back()
+			p.pop_back()
+			return x
+	return object.instance()
 
-func keep(x, n):
-	if !pool.has(n):
-		pool[n] = []
-	pool[n].append(x)
+func newnew(object, count = 0):
+	if count == 0:
+		if pool.has(object):
+			var p = pool[object]
+			if !p.empty():
+				var x = p.back()
+				p.pop_back()
+				return x
+		return object.instance()
+	else:
+		var a = []
+		if pool.has(object):
+			var p = pool[object]
+			if p.size() > 0:
+				if p.size() <= count:
+					a = p
+					pool[object] = []
+					count -= p.size()
+				else:
+					for i in range(count):
+						a.append(p.back())
+						p.pop_back()
+					return
+		for i in range(count):
+			a.append(object.instance())
+		return a
+
+func keep(x, c):
+	if !pool.has(c):
+		pool[c] = [x]
+	else:
+		pool[c].append(x)

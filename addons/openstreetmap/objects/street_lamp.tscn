@@ -1,0 +1,200 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+
+resource_name = "Material_010"
+render_priority = 0
+flags_transparent = false
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+
+[sub_resource type="SpatialMaterial" id=2]
+
+resource_name = "Material_011"
+render_priority = 0
+flags_transparent = false
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+
+[sub_resource type="ArrayMesh" id=3]
+
+resource_name = "Circle"
+blend_shape_mode = 1
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+surfaces/0 = {
+"aabb": AABB( -1.59243, -0.054846, -0.357494, 1.71429, 9.64341, 0.726741 ),
+"array_data": PoolByteArray( 204, 47, 5, 171, 128, 44, 0, 60, 147, 0, 193, 0, 204, 47, 167, 72, 128, 172, 0, 60, 155, 209, 58, 0, 204, 47, 5, 171, 128, 172, 0, 60, 147, 0, 63, 0, 204, 175, 5, 171, 128, 44, 0, 60, 109, 0, 193, 0, 0, 0, 167, 72, 128, 48, 0, 60, 0, 179, 156, 0, 0, 0, 5, 171, 128, 48, 0, 60, 0, 0, 129, 0, 0, 0, 5, 171, 128, 176, 0, 60, 0, 0, 126, 0, 204, 175, 167, 72, 128, 172, 0, 60, 98, 177, 5, 0, 204, 175, 5, 171, 128, 172, 0, 60, 109, 0, 63, 0, 0, 0, 167, 72, 128, 176, 0, 60, 0, 210, 117, 0, 204, 47, 167, 72, 128, 44, 0, 60, 154, 196, 213, 0, 204, 175, 167, 72, 128, 44, 0, 60, 89, 168, 15, 0, 43, 182, 151, 72, 77, 50, 0, 60, 36, 151, 60, 0, 180, 180, 148, 72, 4, 30, 0, 60, 53, 141, 0, 0, 24, 179, 167, 72, 143, 47, 0, 60, 96, 245, 81, 0, 108, 188, 151, 72, 10, 53, 0, 60, 250, 146, 62, 0, 189, 185, 148, 72, 204, 52, 0, 60, 7, 139, 46, 0, 65, 187, 167, 72, 232, 53, 0, 60, 0, 0, 126, 0, 52, 190, 151, 72, 4, 30, 0, 60, 186, 151, 0, 0, 156, 189, 148, 72, 0, 50, 0, 60, 228, 141, 42, 0, 94, 190, 167, 72, 143, 47, 0, 60, 143, 1, 57, 0, 108, 188, 151, 72, 218, 180, 0, 60, 250, 146, 194, 0, 156, 189, 148, 72, 160, 177, 0, 60, 228, 141, 214, 0, 82, 189, 167, 72, 156, 180, 0, 60, 209, 0, 139, 0, 43, 182, 151, 72, 236, 177, 0, 60, 36, 151, 196, 0, 189, 185, 148, 72, 156, 180, 0, 60, 7, 139, 210, 0, 188, 183, 167, 72, 156, 180, 0, 60, 48, 0, 139, 0, 188, 183, 167, 72, 204, 52, 0, 60, 48, 0, 117, 0, 82, 189, 167, 72, 204, 52, 0, 60, 209, 0, 117, 0, 94, 190, 167, 72, 207, 174, 0, 60, 143, 1, 199, 0, 65, 187, 167, 72, 184, 181, 0, 60, 0, 0, 129, 0, 24, 179, 167, 72, 207, 174, 0, 60, 94, 244, 173, 0, 169, 185, 183, 72, 10, 53, 0, 60, 19, 67, 105, 0, 148, 182, 186, 72, 0, 50, 0, 60, 55, 88, 72, 0, 82, 186, 197, 72, 0, 50, 0, 60, 9, 114, 53, 0, 182, 189, 183, 72, 77, 50, 0, 60, 196, 79, 78, 0, 98, 188, 186, 72, 204, 52, 0, 60, 239, 77, 99, 0, 218, 188, 197, 72, 143, 47, 0, 60, 231, 119, 34, 0, 182, 189, 183, 72, 236, 177, 0, 60, 196, 79, 178, 0, 20, 190, 186, 72, 4, 30, 0, 60, 176, 97, 0, 0, 218, 188, 197, 72, 207, 174, 0, 60, 231, 119, 222, 0, 169, 185, 183, 72, 218, 180, 0, 60, 19, 67, 150, 0, 98, 188, 186, 72, 156, 180, 0, 60, 239, 77, 157, 0, 82, 186, 197, 72, 160, 177, 0, 60, 9, 114, 203, 0, 51, 180, 183, 72, 4, 30, 0, 60, 61, 111, 0, 0, 148, 182, 186, 72, 160, 177, 0, 60, 55, 88, 184, 0, 57, 184, 197, 72, 4, 30, 0, 60, 32, 122, 0, 0, 65, 187, 203, 72, 4, 30, 0, 60, 0, 127, 0, 0, 145, 182, 153, 72, 4, 30, 0, 60, 246, 130, 0, 0, 183, 189, 156, 72, 4, 30, 0, 60, 10, 130, 0, 0, 60, 189, 153, 72, 230, 48, 0, 60, 1, 130, 246, 0, 192, 183, 156, 72, 195, 176, 0, 60, 0, 130, 11, 0, 7, 186, 153, 72, 111, 179, 0, 60, 0, 130, 5, 0, 70, 188, 156, 72, 26, 52, 0, 60, 253, 130, 0, 0, 7, 186, 153, 72, 207, 51, 0, 60, 0, 130, 251, 0, 70, 188, 156, 72, 211, 179, 0, 60, 253, 130, 0, 0, 192, 183, 156, 72, 36, 49, 0, 60, 0, 130, 245, 0, 60, 189, 153, 72, 133, 176, 0, 60, 1, 130, 10, 0, 254, 158, 184, 72, 4, 30, 0, 60, 4, 156, 76, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 3, 0, 5, 0, 4, 0, 6, 0, 8, 0, 7, 0, 2, 0, 6, 0, 9, 0, 5, 0, 0, 0, 10, 0, 8, 0, 3, 0, 11, 0, 12, 0, 14, 0, 13, 0, 15, 0, 17, 0, 16, 0, 18, 0, 20, 0, 19, 0, 21, 0, 23, 0, 22, 0, 24, 0, 26, 0, 25, 0, 12, 0, 27, 0, 14, 0, 15, 0, 28, 0, 17, 0, 18, 0, 29, 0, 20, 0, 21, 0, 30, 0, 23, 0, 24, 0, 31, 0, 26, 0, 32, 0, 34, 0, 33, 0, 35, 0, 37, 0, 36, 0, 38, 0, 40, 0, 39, 0, 41, 0, 43, 0, 42, 0, 44, 0, 46, 0, 45, 0, 46, 0, 47, 0, 43, 0, 46, 0, 43, 0, 45, 0, 45, 0, 43, 0, 41, 0, 43, 0, 47, 0, 40, 0, 43, 0, 40, 0, 42, 0, 42, 0, 40, 0, 38, 0, 40, 0, 47, 0, 37, 0, 40, 0, 37, 0, 39, 0, 39, 0, 37, 0, 35, 0, 37, 0, 47, 0, 34, 0, 37, 0, 34, 0, 36, 0, 36, 0, 34, 0, 32, 0, 34, 0, 47, 0, 46, 0, 34, 0, 46, 0, 33, 0, 33, 0, 46, 0, 44, 0, 31, 0, 44, 0, 45, 0, 31, 0, 45, 0, 26, 0, 26, 0, 45, 0, 41, 0, 30, 0, 41, 0, 42, 0, 30, 0, 42, 0, 23, 0, 23, 0, 42, 0, 38, 0, 29, 0, 38, 0, 39, 0, 29, 0, 39, 0, 20, 0, 20, 0, 39, 0, 35, 0, 28, 0, 35, 0, 36, 0, 28, 0, 36, 0, 17, 0, 17, 0, 36, 0, 32, 0, 27, 0, 32, 0, 33, 0, 27, 0, 33, 0, 14, 0, 14, 0, 33, 0, 44, 0, 26, 0, 41, 0, 30, 0, 26, 0, 30, 0, 25, 0, 25, 0, 30, 0, 21, 0, 23, 0, 38, 0, 29, 0, 23, 0, 29, 0, 22, 0, 22, 0, 29, 0, 18, 0, 20, 0, 35, 0, 28, 0, 20, 0, 28, 0, 19, 0, 19, 0, 28, 0, 15, 0, 17, 0, 32, 0, 27, 0, 17, 0, 27, 0, 16, 0, 16, 0, 27, 0, 12, 0, 31, 0, 14, 0, 11, 0, 14, 0, 31, 0, 13, 0, 13, 0, 31, 0, 24, 0, 12, 0, 13, 0, 48, 0, 19, 0, 50, 0, 49, 0, 24, 0, 51, 0, 48, 0, 25, 0, 52, 0, 51, 0, 16, 0, 54, 0, 53, 0, 15, 0, 53, 0, 50, 0, 25, 0, 21, 0, 55, 0, 16, 0, 12, 0, 56, 0, 21, 0, 22, 0, 57, 0, 22, 0, 18, 0, 49, 0, 11, 0, 58, 0, 7, 0, 44, 0, 58, 0, 11, 0, 44, 0, 31, 0, 7, 0, 7, 0, 58, 0, 9, 0, 1, 0, 9, 0, 58, 0, 10, 0, 1, 0, 58, 0, 10, 0, 7, 0, 4, 0, 4, 0, 7, 0, 11, 0, 0, 0, 1, 0, 10, 0, 3, 0, 4, 0, 11, 0, 6, 0, 7, 0, 9, 0, 2, 0, 9, 0, 1, 0, 5, 0, 10, 0, 4, 0, 8, 0, 11, 0, 7, 0, 31, 0, 11, 0, 7, 0, 12, 0, 48, 0, 56, 0, 19, 0, 49, 0, 18, 0, 24, 0, 48, 0, 13, 0, 25, 0, 51, 0, 24, 0, 16, 0, 53, 0, 15, 0, 15, 0, 50, 0, 19, 0, 25, 0, 55, 0, 52, 0, 16, 0, 56, 0, 54, 0, 21, 0, 57, 0, 55, 0, 22, 0, 49, 0, 57, 0, 44, 0, 11, 0, 14, 0, 44, 0, 7, 0, 58, 0 ),
+"blend_shape_data": [  ],
+"format": 98051,
+"index_count": 309,
+"material": SubResource( 1 ),
+"name": "Material_010",
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 59
+}
+surfaces/1 = {
+"aabb": AABB( -1.42939, 9.09425, -0.2446, 1.01898, 0.125171, 0.500953 ),
+"array_data": PoolByteArray( 65, 187, 140, 72, 4, 30, 0, 60, 0, 130, 0, 0, 69, 185, 144, 72, 51, 46, 0, 60, 25, 137, 34, 0, 2, 188, 144, 72, 230, 48, 0, 60, 247, 142, 53, 0, 192, 183, 156, 72, 36, 49, 0, 60, 0, 130, 245, 0, 145, 182, 153, 72, 4, 30, 0, 60, 246, 130, 0, 0, 219, 188, 144, 72, 4, 30, 0, 60, 224, 134, 0, 0, 2, 188, 144, 72, 133, 176, 0, 60, 247, 142, 203, 0, 69, 185, 144, 72, 114, 173, 0, 60, 25, 137, 222, 0, 7, 186, 153, 72, 111, 179, 0, 60, 0, 130, 5, 0, 192, 183, 156, 72, 195, 176, 0, 60, 0, 130, 11, 0, 70, 188, 156, 72, 211, 179, 0, 60, 253, 130, 0, 0, 60, 189, 153, 72, 133, 176, 0, 60, 1, 130, 10, 0, 183, 189, 156, 72, 4, 30, 0, 60, 10, 130, 0, 0, 60, 189, 153, 72, 230, 48, 0, 60, 1, 130, 246, 0, 70, 188, 156, 72, 26, 52, 0, 60, 253, 130, 0, 0, 7, 186, 153, 72, 207, 51, 0, 60, 0, 130, 251, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 3, 0, 4, 0, 1, 0, 0, 0, 5, 0, 2, 0, 0, 0, 6, 0, 5, 0, 0, 0, 7, 0, 6, 0, 7, 0, 9, 0, 8, 0, 7, 0, 8, 0, 6, 0, 6, 0, 8, 0, 10, 0, 6, 0, 10, 0, 11, 0, 6, 0, 11, 0, 5, 0, 5, 0, 11, 0, 12, 0, 5, 0, 12, 0, 13, 0, 5, 0, 13, 0, 2, 0, 2, 0, 13, 0, 14, 0, 4, 0, 9, 0, 7, 0, 4, 0, 7, 0, 1, 0, 1, 0, 7, 0, 0, 0, 2, 0, 14, 0, 15, 0, 2, 0, 15, 0, 1, 0, 1, 0, 15, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 98051,
+"index_count": 60,
+"material": SubResource( 2 ),
+"name": "Material_011",
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 16
+}
+
+[sub_resource type="BoxShape" id=4]
+
+extents = Vector3( 0.150479, 4.65036, 0.150504 )
+
+[node name="StreetLamp" type="MeshInstance"]
+
+_import_path = NodePath("Circle")
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = true
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 3 )
+skeleton = NodePath("..")
+material/0 = null
+material/1 = null
+
+[node name="SpotLight" type="SpotLight" parent="." index="0"]
+
+transform = Transform( 0.923306, -1.6788e-08, 0.384065, -0.384065, -4.0359e-08, 0.923306, 0, -1, -4.37114e-08, -0.898114, 9.0187, 0 )
+visible = false
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 1.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.5
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = false
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+spot_range = 5.0
+spot_attenuation = 1.0
+spot_angle = 45.0
+spot_angle_attenuation = 1.0
+
+[node name="StaticBody" type="StaticBody" parent="." index="1"]
+
+input_ray_pickable = true
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+friction = 1.0
+bounce = 0.0
+constant_linear_velocity = Vector3( 0, 0, 0 )
+constant_angular_velocity = Vector3( 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.61519, 0 )
+shape = SubResource( 4 )
+disabled = false
+
+

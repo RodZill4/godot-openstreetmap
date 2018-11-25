@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/openstreetmap/details.tscn" type="PackedScene" id=1]
+[ext_resource path="res://openstreetmap_demos/simple/objects/grass.tres" type="ArrayMesh" id=2]
+
+[node name="Details" index="0" instance=ExtResource( 1 )]
+
+mesh = ExtResource( 2 )
+spacing = 3.0
+condition = Color( 0, 1, 0, 1 )
+condition_mask = Color( 0, 1, 0, 1 )
+
+

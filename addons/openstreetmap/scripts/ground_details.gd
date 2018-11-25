@@ -16,11 +16,11 @@ func _ready():
 			var multimesh_instance = MultiMeshInstance.new()
 			var multimesh = MultiMesh.new()
 			multimesh.set_mesh(mesh)
-			multimesh.set_aabb(AABB(Vector3(-subdivision_length*0.5, 0, -subdivision_length*0.5), Vector3(subdivision_length, 100, subdivision_length)))
+			#multimesh.set_aabb(Rect3(Vector3(-subdivision_length*0.5, 0, -subdivision_length*0.5), Vector3(subdivision_length, 100, subdivision_length)))
 			multimesh_instance.set_multimesh(multimesh)
 			multimesh_instance.set_translation(Vector3((x+0.5)*subdivision_length, 0, (y+0.5)*subdivision_length))
-			multimesh_instance.set_draw_range_begin(0)
-			multimesh_instance.set_draw_range_end(200)
+			multimesh_instance.lod_min_distance = 0
+			multimesh_instance.lod_max_distance = 200
 			add_child(multimesh_instance)
 			subdivisions[x+y*subdivide] = multimesh_instance
 			instances[x+y*subdivide] = []

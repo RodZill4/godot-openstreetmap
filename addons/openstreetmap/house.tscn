@@ -1,67 +1,414 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://addons/openstreetmap/materials/mat_building_wall.tres" type="Material" id=1]
-[ext_resource path="res://addons/openstreetmap/materials/mat_house_roof.tres" type="Material" id=2]
-[ext_resource path="res://addons/openstreetmap/scripts/house.gd" type="Script" id=3]
+[ext_resource path="res://addons/openstreetmap/materials/mat_house_wall.tres" type="Material" id=1]
+[ext_resource path="res://addons/openstreetmap/scripts/house.gd" type="Script" id=2]
+[ext_resource path="res://openstreetmap_demos/simple/materials/mat_house_roof.tres" type="Material" id=3]
+[ext_resource path="res://addons/openstreetmap/textures/177.JPG" type="Texture" id=4]
+[ext_resource path="res://addons/openstreetmap/textures/177_norm.JPG" type="Texture" id=5]
+[ext_resource path="res://addons/openstreetmap/textures/MarekGrassDehydrated0001.jpg" type="Texture" id=6]
+[ext_resource path="res://addons/openstreetmap/textures/600px-MarekGrasMoos0001.jpg" type="Texture" id=7]
+[ext_resource path="res://addons/openstreetmap/textures/splatmap.png" type="Texture" id=8]
+[ext_resource path="res://openstreetmap_demos/simple/materials/water1.jpg" type="Texture" id=9]
 
-[sub_resource type="Mesh" id=1]
 
+[sub_resource type="ArrayMesh" id=1]
+
+blend_shape_mode = 1
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 surfaces/0 = {
-"alphasort": false,
-"arrays": [ Vector3Array( -11.0392, 5.2, 13.1835, -11.0392, 5.2, 13.1835, -11.0392, 0, 13.1835, 15.0097, 5.2, 13.5332, 15.0097, 0, 13.5332, 15.0097, 5.2, 13.5332, 15.0097, 0, 13.5332, 14.3104, 5.2, -12.166, 14.3104, 0, -12.166, 14.3104, 5.2, -12.166, 14.3104, 0, -12.166, -9.99026, 5.2, -12.3409, -9.99026, 0, -12.3409, -9.99026, 5.2, -12.3409, -9.99026, 0, -12.3409, -11.0392, 5.2, 13.1835, -11.0392, 0, 13.1835, -11.0392, 0, 13.1835 ), Vector3Array( 0, 0, 0, -0.0134215, 0, 0.99991, -0.0134215, 0, 0.99991, -0.0134215, 0, 0.99991, -0.0134215, 0, 0.99991, 0.99963, 0, -0.0272007, 0.99963, 0, -0.0272007, 0.99963, 0, -0.0272007, 0.99963, 0, -0.0272007, 0.00719402, 0, -0.999974, 0.00719402, 0, -0.999974, 0.00719402, 0, -0.999974, 0.00719402, 0, -0.999974, -0.999157, 0, -0.0410612, -0.999157, 0, -0.0410612, -0.999157, 0, -0.0410612, -0.999157, 0, -0.0410612, 0, 0, 0 ), null, null, Vector2Array( 0, 0, 0, 0, 0, 2, 13.0256, 0, 13.0256, 2, 13.0256, 0, 13.0256, 2, 25.88, 0, 25.88, 2, 25.88, 0, 25.88, 2, 38.0306, 0, 38.0306, 2, 38.0306, 0, 38.0306, 2, 50.8036, 0, 50.8036, 2, 0, 0 ), Vector2Array( 0, 0, 0, 0, 0, 2, 8, 0, 8, 2, 8, 0, 8, 2, 16, 0, 16, 2, 16, 0, 16, 2, 24, 0, 24, 2, 24, 0, 24, 2, 32, 0, 32, 2, 0, 0 ), null, null, null ],
+"aabb": AABB( -6.32303, 0, -7.65081, 14.989, 5.40001, 15.4624 ),
+"array_data": PoolByteArray( 150, 196, 102, 69, 126, 196, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 196, 102, 69, 126, 196, 0, 60, 138, 0, 210, 0, 210, 0, 118, 127, 0, 0, 0, 0, 0, 0, 0, 0, 150, 196, 0, 0, 126, 196, 0, 60, 138, 0, 210, 0, 210, 0, 118, 127, 0, 0, 0, 64, 0, 0, 0, 64, 82, 198, 102, 69, 244, 172, 0, 60, 138, 0, 210, 0, 210, 0, 118, 127, 0, 64, 0, 0, 191, 64, 0, 0, 82, 198, 0, 0, 244, 172, 0, 60, 138, 0, 210, 0, 210, 0, 118, 127, 0, 64, 0, 64, 191, 64, 0, 64, 82, 198, 102, 69, 244, 172, 0, 60, 168, 0, 90, 0, 90, 0, 88, 127, 0, 0, 0, 0, 248, 53, 0, 0, 82, 198, 0, 0, 244, 172, 0, 60, 168, 0, 90, 0, 90, 0, 88, 127, 0, 0, 0, 64, 248, 53, 0, 64, 229, 62, 102, 69, 207, 71, 0, 60, 168, 0, 90, 0, 90, 0, 88, 127, 0, 69, 0, 0, 1, 70, 0, 0, 229, 62, 0, 0, 207, 71, 0, 60, 168, 0, 90, 0, 90, 0, 88, 127, 0, 69, 0, 64, 1, 70, 0, 64, 229, 62, 102, 69, 207, 71, 0, 60, 90, 0, 88, 0, 88, 0, 166, 127, 0, 0, 0, 0, 213, 31, 0, 0, 229, 62, 0, 0, 207, 71, 0, 60, 90, 0, 88, 0, 88, 0, 166, 127, 0, 0, 0, 64, 213, 31, 0, 64, 85, 72, 102, 69, 177, 57, 0, 60, 90, 0, 88, 0, 88, 0, 166, 127, 0, 68, 0, 0, 249, 68, 0, 0, 85, 72, 0, 0, 177, 57, 0, 60, 90, 0, 88, 0, 88, 0, 166, 127, 0, 68, 0, 64, 249, 68, 0, 64, 85, 72, 102, 69, 177, 57, 0, 60, 110, 0, 194, 0, 194, 0, 146, 127, 0, 0, 0, 0, 200, 59, 0, 0, 85, 72, 0, 0, 177, 57, 0, 60, 110, 0, 194, 0, 194, 0, 146, 127, 0, 0, 0, 64, 200, 59, 0, 64, 221, 67, 102, 69, 166, 199, 0, 60, 110, 0, 194, 0, 194, 0, 146, 127, 0, 68, 0, 0, 198, 69, 0, 0, 221, 67, 0, 0, 166, 199, 0, 60, 110, 0, 194, 0, 194, 0, 146, 127, 0, 68, 0, 64, 198, 69, 0, 64, 221, 67, 102, 69, 166, 199, 0, 60, 212, 0, 137, 0, 137, 0, 44, 127, 0, 0, 0, 0, 55, 58, 0, 0, 221, 67, 0, 0, 166, 199, 0, 60, 212, 0, 137, 0, 137, 0, 44, 127, 0, 0, 0, 64, 55, 58, 0, 64, 150, 196, 102, 69, 126, 196, 0, 60, 212, 0, 137, 0, 137, 0, 44, 127, 0, 68, 0, 0, 81, 69, 0, 0, 150, 196, 0, 0, 126, 196, 0, 60, 212, 0, 137, 0, 137, 0, 44, 127, 0, 68, 0, 64, 81, 69, 0, 64, 150, 196, 0, 0, 126, 196, 0, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray(  ),
+"blend_shape_data": [  ],
+"format": 97847,
+"index_count": 0,
 "material": ExtResource( 1 ),
-"morph_arrays": [  ],
-"primitive": 5
+"primitive": 5,
+"skeleton_aabb": [  ],
+"vertex_count": 22
 }
 surfaces/1 = {
-"alphasort": false,
-"arrays": [ Vector3Array( -11.0392, 5.2, 13.1835, 2.06963, 14.0143, 0.770281, 15.0097, 5.2, 13.5332, 15.0097, 5.2, 13.5332, 2.06963, 14.0143, 0.770281, 2.07276, 14.0035, 0.318928, 2.07276, 14.0035, 0.318928, 14.3104, 5.2, -12.166, 15.0097, 5.2, 13.5332, 14.3104, 5.2, -12.166, 2.07276, 14.0035, 0.318928, -9.99026, 5.2, -12.3409, -9.99026, 5.2, -12.3409, 2.07276, 14.0035, 0.318928, 2.06963, 14.0143, 0.770281, 2.06963, 14.0143, 0.770281, -11.0392, 5.2, 13.1835, -9.99026, 5.2, -12.3409 ), Vector3Array( -0.00769828, 0.819152, 0.573525, -0.00769828, 0.819152, 0.573525, -0.00769828, 0.819152, 0.573525, 0.573364, 0.819152, -0.0156017, 0.573364, 0.819152, -0.0156017, 0.573364, 0.819152, -0.0156017, 0.573364, 0.819152, -0.0156017, 0.573364, 0.819152, -0.0156017, 0.573364, 0.819152, -0.0156017, 0.00412632, 0.819152, -0.573562, 0.00412632, 0.819152, -0.573562, 0.00412632, 0.819152, -0.573562, -0.573093, 0.819152, -0.0235517, -0.573093, 0.819152, -0.0235517, -0.573093, 0.819152, -0.0235517, -0.573093, 0.819152, -0.0235517, -0.573093, 0.819152, -0.0235517, -0.573093, 0.819152, -0.0235517 ), null, null, Vector2Array( 0, 0, 12.9411, -15.3672, 26.0512, 8.00402e-07, 0, 0, 13.1102, -15.3672, 13.5613, -15.3484, 13.5613, -15.3484, 25.7087, -1.52804e-06, 0, 0, 0, 0, 12.1475, -15.3484, 24.3012, 1.29156e-06, 0, 0, 12.1538, -15.3484, 12.6049, -15.3672, 12.6049, -15.3672, 25.5459, 1.6008e-06, 0, 0 ), null, null, null, null ],
-"material": ExtResource( 2 ),
-"morph_arrays": [  ],
-"primitive": 4
+"aabb": AABB( -6.32303, 5.4, -7.65081, 14.989, 4.01287, 15.4624 ),
+"array_data": PoolByteArray( 150, 196, 102, 69, 126, 196, 0, 60, 189, 104, 230, 0, 210, 0, 118, 127, 0, 0, 0, 0, 57, 189, 50, 72, 152, 188, 0, 60, 189, 104, 230, 0, 210, 0, 118, 127, 168, 63, 56, 197, 82, 198, 102, 69, 244, 172, 0, 60, 189, 104, 230, 0, 210, 0, 118, 127, 191, 68, 0, 0, 82, 198, 102, 69, 244, 172, 0, 60, 206, 104, 52, 0, 90, 0, 88, 127, 0, 0, 0, 0, 57, 189, 50, 72, 152, 188, 0, 60, 206, 104, 52, 0, 90, 0, 88, 127, 169, 65, 56, 197, 100, 61, 180, 72, 168, 184, 0, 60, 206, 104, 52, 0, 90, 0, 88, 127, 31, 69, 255, 198, 100, 61, 180, 72, 168, 184, 0, 60, 206, 104, 52, 0, 90, 0, 88, 127, 31, 69, 255, 198, 142, 62, 174, 72, 134, 178, 0, 60, 206, 104, 52, 0, 90, 0, 88, 127, 152, 69, 234, 198, 229, 62, 102, 69, 207, 71, 0, 60, 206, 104, 52, 0, 90, 0, 88, 127, 162, 73, 0, 0, 229, 62, 102, 69, 207, 71, 0, 60, 206, 104, 52, 0, 90, 0, 88, 127, 162, 73, 0, 0, 82, 198, 102, 69, 244, 172, 0, 60, 206, 104, 52, 0, 90, 0, 88, 127, 0, 0, 0, 0, 100, 61, 180, 72, 168, 184, 0, 60, 206, 104, 52, 0, 90, 0, 88, 127, 31, 69, 255, 198, 229, 62, 102, 69, 207, 71, 0, 60, 52, 104, 50, 0, 88, 0, 166, 127, 0, 0, 0, 0, 142, 62, 174, 72, 134, 178, 0, 60, 52, 104, 50, 0, 88, 0, 166, 127, 172, 69, 234, 198, 85, 72, 102, 69, 177, 57, 0, 60, 52, 104, 50, 0, 88, 0, 166, 127, 247, 72, 0, 0, 85, 72, 102, 69, 177, 57, 0, 60, 63, 104, 221, 0, 194, 0, 146, 127, 0, 0, 0, 0, 142, 62, 174, 72, 134, 178, 0, 60, 63, 104, 221, 0, 194, 0, 146, 127, 66, 68, 234, 198, 100, 61, 180, 72, 168, 184, 0, 60, 63, 104, 221, 0, 194, 0, 146, 127, 187, 68, 255, 198, 100, 61, 180, 72, 168, 184, 0, 60, 63, 104, 221, 0, 194, 0, 146, 127, 187, 68, 255, 198, 221, 67, 102, 69, 166, 199, 0, 60, 63, 104, 221, 0, 194, 0, 146, 127, 205, 72, 0, 0, 85, 72, 102, 69, 177, 57, 0, 60, 63, 104, 221, 0, 194, 0, 146, 127, 0, 0, 0, 0, 221, 67, 102, 69, 166, 199, 0, 60, 231, 104, 188, 0, 137, 0, 44, 127, 0, 0, 0, 0, 100, 61, 180, 72, 168, 184, 0, 60, 231, 104, 188, 0, 137, 0, 44, 127, 224, 68, 255, 198, 57, 189, 50, 72, 152, 188, 0, 60, 231, 104, 188, 0, 137, 0, 44, 127, 43, 71, 56, 197, 57, 189, 50, 72, 152, 188, 0, 60, 231, 104, 188, 0, 137, 0, 44, 127, 43, 71, 56, 197, 150, 196, 102, 69, 126, 196, 0, 60, 231, 104, 188, 0, 137, 0, 44, 127, 138, 72, 0, 0, 221, 67, 102, 69, 166, 199, 0, 60, 231, 104, 188, 0, 137, 0, 44, 127, 0, 0, 0, 0 ),
+"array_index_data": PoolByteArray(  ),
+"blend_shape_data": [  ],
+"format": 97815,
+"index_count": 0,
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 27
 }
-custom_aabb/custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 
-[node name="House" type="MeshInstance"]
+[sub_resource type="ProceduralSky" id=2]
 
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+radiance_size = 4
+sky_top_color = Color( 0.0470588, 0.454902, 0.976471, 1 )
+sky_horizon_color = Color( 0.556863, 0.823529, 0.909804, 1 )
+sky_curve = 0.25
+sky_energy = 1.0
+ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
+ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
+ground_curve = 0.01
+ground_energy = 1.0
+sun_color = Color( 1, 1, 1, 1 )
+sun_latitude = 35.0
+sun_longitude = 0.0
+sun_angle_min = 1.0
+sun_angle_max = 100.0
+sun_curve = 0.05
+sun_energy = 16.0
+texture_size = 2
+
+[sub_resource type="Environment" id=3]
+
+background_mode = 2
+background_sky = SubResource( 2 )
+background_sky_custom_fov = 0.0
+background_color = Color( 0, 0, 0, 1 )
+background_energy = 1.0
+background_canvas_max_layer = 0
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.82
+ambient_light_sky_contribution = 1.0
+fog_enabled = false
+fog_color = Color( 0.5, 0.6, 0.7, 1 )
+fog_sun_color = Color( 1, 0.9, 0.7, 1 )
+fog_sun_amount = 0.0
+fog_depth_enabled = true
+fog_depth_begin = 10.0
+fog_depth_curve = 1.0
+fog_transmit_enabled = false
+fog_transmit_curve = 1.0
+fog_height_enabled = false
+fog_height_min = 0.0
+fog_height_max = 100.0
+fog_height_curve = 1.0
+tonemap_mode = 0
+tonemap_exposure = 1.0
+tonemap_white = 1.0
+auto_exposure_enabled = false
+auto_exposure_scale = 0.4
+auto_exposure_min_luma = 0.05
+auto_exposure_max_luma = 8.0
+auto_exposure_speed = 0.5
+ss_reflections_enabled = false
+ss_reflections_max_steps = 64
+ss_reflections_fade_in = 0.15
+ss_reflections_fade_out = 2.0
+ss_reflections_depth_tolerance = 0.2
+ss_reflections_roughness = true
+ssao_enabled = false
+ssao_radius = 2.0
+ssao_intensity = 1.0
+ssao_radius2 = 0.0
+ssao_intensity2 = 1.0
+ssao_bias = 0.01
+ssao_light_affect = 0.0
+ssao_color = Color( 0, 0, 0, 1 )
+ssao_quality = 0
+ssao_blur = 1
+ssao_edge_sharpness = 4.0
+dof_blur_far_enabled = false
+dof_blur_far_distance = 10.0
+dof_blur_far_transition = 5.0
+dof_blur_far_amount = 0.1
+dof_blur_far_quality = 1
+dof_blur_near_enabled = false
+dof_blur_near_distance = 2.0
+dof_blur_near_transition = 1.0
+dof_blur_near_amount = 0.1
+dof_blur_near_quality = 1
+glow_enabled = false
+glow_levels/1 = false
+glow_levels/2 = false
+glow_levels/3 = true
+glow_levels/4 = false
+glow_levels/5 = true
+glow_levels/6 = false
+glow_levels/7 = false
+glow_intensity = 0.8
+glow_strength = 1.0
+glow_bloom = 0.0
+glow_blend_mode = 2
+glow_hdr_threshold = 1.0
+glow_hdr_scale = 2.0
+glow_bicubic_upscale = false
+adjustment_enabled = false
+adjustment_brightness = 1.0
+adjustment_contrast = 1.0
+adjustment_saturation = 1.0
+_sections_unfolded = [ "Adjustments", "Background", "Glow" ]
+
+[sub_resource type="Animation" id=4]
+
+length = 20.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spatial:rotation_deg")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+
+[sub_resource type="SpatialMaterial" id=5]
+
+render_priority = 0
+flags_transparent = false
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 0.460938, 0.460938, 0.460938, 1 )
+albedo_texture = ExtResource( 4 )
+metallic = 0.41
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.78
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 5 )
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Metallic", "NormalMap", "Roughness", "UV1" ]
+
+[sub_resource type="PlaneMesh" id=6]
+
+material = SubResource( 5 )
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+size = Vector2( 200, 200 )
+subdivide_width = 0
+subdivide_depth = 0
+
+[sub_resource type="Shader" id=7]
+
+code = "shader_type spatial;
+
+uniform sampler2D splatmap;
+uniform sampler2D grass_albedo;
+uniform float grassres = 1;
+uniform sampler2D road_albedo;
+uniform sampler2D road_nm;
+uniform float roadres  = 1;
+uniform sampler2D dirt_albedo;
+uniform float dirtres  = 1;
+uniform sampler2D water_albedo;
+uniform float waterres = 1;
+uniform vec2 water_movement = vec2(0, 0);
+
+varying vec2 grass_uv;
+varying vec2 dirt_uv;
+varying vec2 road_uv;
+varying vec2 water_uv;
+
+void vertex() {
+	dirt_uv = UV*dirtres;
+	grass_uv = UV*grassres;
+	road_uv = UV*roadres;
+	water_uv = UV*waterres+mod(TIME*water_movement, vec2(1, 1));
+}
+
+void fragment() {
+	vec3 splat = texture(splatmap, UV).rgb;
+	
+	float grassval = splat.g;
+	float roadval = splat.r;
+	float waterval = splat.b;
+	float dirtval = max(0.0, 1.0-grassval-roadval-waterval);
+	
+	vec4 dirtcol = dirtval * texture(dirt_albedo, dirt_uv);
+	vec4 grasscol = grassval * texture(grass_albedo, dirt_uv);
+	vec4 roadcol = roadval * texture(road_albedo, road_uv);
+	vec4 watercol = waterval * texture(water_albedo, dirt_uv);
+	
+	vec3 color = (grasscol+roadcol+dirtcol+watercol).rgb;
+	vec3 normalmap = (texture(road_nm, road_uv).rgb-vec3(0.5, 0.5, 0.5)) * roadval + vec3(0.0, 0.0, -1.0) * (1.0 - roadval);
+	//normalmap = vec3(0.0, 0.0, -0.5);
+	
+	ALBEDO = color;
+	NORMALMAP = 0.5*normalize(normalmap)+vec3(0.5, 0.5, 0.5);
+	NORMALMAP_DEPTH = 1.0;
+	ROUGHNESS = 1.0-waterval;
+	METALLIC = 1.0;
+	SPECULAR = 1.0;
+}"
+
+[sub_resource type="ShaderMaterial" id=8]
+
+render_priority = 0
+shader = SubResource( 7 )
+shader_param/grassres = 100.0
+shader_param/roadres = 100.0
+shader_param/dirtres = 100.0
+shader_param/waterres = 100.0
+shader_param/water_movement = Vector2( 1, 1 )
+shader_param/splatmap = ExtResource( 8 )
+shader_param/grass_albedo = ExtResource( 7 )
+shader_param/road_albedo = ExtResource( 4 )
+shader_param/road_nm = ExtResource( 5 )
+shader_param/dirt_albedo = ExtResource( 6 )
+shader_param/water_albedo = ExtResource( 9 )
+_sections_unfolded = [ "shader_param" ]
+
+[node name="House" type="MeshInstance" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.644495, 0.307964, -1.00732 )
 layers = 1
-geometry/visible = true
-geometry/material_override = null
-geometry/cast_shadow = 1
-geometry/receive_shadows = true
-geometry/range_begin = 0.0
-geometry/range_end = 0.0
-geometry/extra_cull_margin = 0.0
-geometry/billboard = false
-geometry/billboard_y = false
-geometry/depth_scale = false
-geometry/visible_in_all_rooms = false
-geometry/use_baked_light = false
-geometry/baked_light_tex_id = 0
-mesh/mesh = SubResource( 1 )
-mesh/skeleton = NodePath("..")
+material_override = null
+cast_shadow = 0
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 1 )
+skeleton = NodePath("..")
 material/0 = null
 material/1 = null
-script/script = ExtResource( 3 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Geometry", "material" ]
+roof_shape = 2
+polygon = PoolVector2Array( -4.58746, -4.49522, -6.32303, -0.0774043, 1.72371, 7.81156, 8.66599, 0.711494, 3.93262, -7.65081 )
+height = 2
+level_height = 2.7
+window_width = 2.0
+wall_material = ExtResource( 1 )
+roof_angle = 35.0
+roof_material = ExtResource( 3 )
 
-[node name="TestCube" type="TestCube" parent="."]
+[node name="Polygon2D" type="Polygon2D" parent="." index="0"]
 
-_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
-transform/local = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 25.3811, 0 )
+position = Vector2( 0, -0.263519 )
+polygon = PoolVector2Array( -4.58746, -4.49522, -6.32303, -0.0774043, 1.72371, 7.81156, 8.66599, 0.711494, 3.93262, -7.65081 )
+uv = PoolVector2Array(  )
+color = Color( 1, 1, 1, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+
+[node name="Spatial" type="Spatial" parent="." index="1"]
+
+transform = Transform( 0.0627904, 0, 0.998028, 0, 1, 0, -0.998028, 0, 0.0627904, 0, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Light" type="OmniLight" parent="Spatial" index="0"]
+
+transform = Transform( 0.962521, 0, 0.271195, 0, 1, 0, -0.271195, 0, 0.962521, -3.45618, 8.05097, 9.96162 )
 layers = 1
-geometry/visible = true
-geometry/material_override = null
-geometry/cast_shadow = 1
-geometry/receive_shadows = true
-geometry/range_begin = 0.0
-geometry/range_end = 0.0
-geometry/extra_cull_margin = 0.0
-geometry/billboard = false
-geometry/billboard_y = false
-geometry/depth_scale = false
-geometry/visible_in_all_rooms = false
-geometry/use_baked_light = false
-geometry/baked_light_tex_id = 0
+light_color = Color( 1, 0.969403, 0.878906, 1 )
+light_energy = 16.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.5
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.5
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 32.4282
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Editor", "Light", "Shadow", "Transform" ]
+
+[node name="Camera" type="Camera" parent="." index="2"]
+
+transform = Transform( -0.993462, 0, -0.114165, 0, 1, 0, 0.114165, 0, -0.993462, 0, 4.41849, -18.66 )
+keep_aspect = 1
+cull_mask = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+doppler_tracking = 0
+projection = 0
+current = false
+fov = 65.0
+size = 1.0
+near = 0.1
+far = 100.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="3"]
+
+environment = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+"anims/Nouvelle animation" = SubResource( 4 )
+blend_times = [  ]
+_sections_unfolded = [ "Playback", "playback" ]
+
+[node name="Ground" type="MeshInstance" parent="." index="5"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.782834, -2.60434, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 6 )
+skeleton = NodePath("..")
+material/0 = SubResource( 8 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[connection signal="item_rect_changed" from="Polygon2D" to="." method="force_update"]
 
 

@@ -1,28 +1,28 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/openstreetmap/tools/map2polygons.gd" type="Script" id=1]
 [ext_resource path="res://addons/openstreetmap/tools/skeleton_test.gd" type="Script" id=2]
 
 [node name="Node2D" type="Node2D"]
 
-script/script = ExtResource( 1 )
+script = ExtResource( 1 )
 mapfile = ""
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 
-transform/pos = Vector2( -310.727, -70.7994 )
-polygon = Vector2Array( 609.996, 410.348, 595.605, 496.968, 551.155, 540.753, 515.994, 489.007, 403.876, 459.816, 326.62, 663.192, 738.903, 672.111, 746.201, 509.573 )
-uv = Vector2Array(  )
+position = Vector2( -310.727, -70.7994 )
+polygon = PoolVector2Array( 66.432, 36.166, 80.05, -410.337, 980.239, -445.197, 1369.84, -33.0372, 831.073, 104.247, 912.571, 471.397, 328.166, 676.451 )
+uv = PoolVector2Array(  )
 color = Color( 1, 1, 1, 1 )
-vertex_colors = ColorArray(  )
+vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
-texture/texture = null
-texture/offset = Vector2( 0, 0 )
-texture/scale = Vector2( 1, 1 )
-texture/rotation = 0.0
-invert/enable = false
-invert/border = 100.0
-script/script = ExtResource( 2 )
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation = 0.0
+invert_enable = false
+invert_border = 100.0
+script = ExtResource( 2 )
 show_polygons = true
 
 

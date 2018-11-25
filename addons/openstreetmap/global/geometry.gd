@@ -21,6 +21,17 @@ static func polygon_has_problems(polygon):
 		print("polygon has "+str(problems)+" problems")
 	return problems
 
+static func polygon_is_convex(polygon):
+	var s = polygon.size()
+	for i in range(s):
+		var p1 = polygon[(i+s-1) % s]
+		var p2 = polygon[i]
+		var p3 = polygon[(i+1) % s]
+		var angle = (p3-p2).angle_to(p1-p2)
+		if sin(angle) < 0:
+			return false
+	return true
+
 static func polygon_area(polygon):
 	var area = 0.0
 	for i in range(polygon.size()):
@@ -55,7 +66,7 @@ func triangulate_polygon(polygon):
 		vertices.append(i)
 	while vertices.size() > 2:
 		var ears = []
-		var s = vertices.size()
+		s = vertices.size()
 		var p1
 		var p2
 		var p3
@@ -138,7 +149,6 @@ static func create_straight_skeleton(polygon, canvas_item = null, epsilon = 0.01
 	var points = [ ]
 	var faces = [ ]
 	var queue = [ ]
-	var shrinked = Vector2Array()
 	s = polygon.size()
 	for i in range(s):
 		var p1 = polygon[i]
@@ -156,7 +166,7 @@ static func create_straight_skeleton(polygon, canvas_item = null, epsilon = 0.01
 			var p3 = points[i3].p
 			if canvas_item != null: canvas_item.draw_line(p1, p2, Color(1, 0, 0))
 			var b = (p1-p2).normalized()+(p3-p2).normalized()
-			var angle = 0.5*(p3-p2).angle_to(p1-p2)
+			var angle = 0.5*(p1-p2).angle_to(p3-p2)
 			b = b.normalized() / sin(angle)
 			points[i2].b = b
 			points[i2].is_reflex = (sin(angle) < 0)
@@ -169,13 +179,14 @@ static func create_straight_skeleton(polygon, canvas_item = null, epsilon = 0.01
 			var p2 = points[(i + 1) if (i != s - 1) else 0]
 			var a = p1.b-p2.b
 			var b = p1.p-p2.p
-			var t
-			if abs(a.y) > abs(a.x):
-				t = -b.y/a.y
-			else:
-				t = -b.x/a.x
-			if t > 0 && (min_t < 0 || t < min_t):
-				min_t = t
+			if a != Vector2(0, 0):
+				var t
+				if abs(a.y) > abs(a.x):
+					t = -b.y/a.y
+				else:
+					t = -b.x/a.x
+				if t > 0 && (min_t < 0 || t < min_t):
+					min_t = t
 		var split = null
 		for i in range(s):
 			var p = points[i]
@@ -189,11 +200,11 @@ static func create_straight_skeleton(polygon, canvas_item = null, epsilon = 0.01
 				var p2 = points[j2]
 				var u = (p2.p - p1.p).normalized()
 				var normal = Vector2(u.y, -u.x)
-				var s = p.b.dot(normal)
-				if s > 0:
+				var speed = p.b.dot(normal)
+				if speed > 0:
 					continue
 				var d = ((p1.p - p.p) - (p1.p - p.p).dot(u) * u).length()
-				var t = d / (1-s)
+				var t = d / (1-speed)
 				var pi = p.p + t*p.b
 				var pj1 = p1.p + t*p1.b
 				var pj2 = p2.p + t*p2.b
@@ -228,7 +239,7 @@ static func create_straight_skeleton(polygon, canvas_item = null, epsilon = 0.01
 			split.j2 -= split.i
 			if split.j2 < 0: split.j2 += s
 			split.i = 0
-			var p = points[0]
+			p = points[0]
 			var new_points = [ { p = p.p, left_face = p.left_face, right_face = p.right_face } ]
 			for i in range(s-split.j2):
 				new_points.insert(1, points.back())
@@ -250,7 +261,7 @@ static func create_straight_skeleton(polygon, canvas_item = null, epsilon = 0.01
 		first_pass = false
 	for f in range(faces.size()):
 		var pl = faces[f]
-		var points = []
+		points = []
 		var last_point = null
 		while pl != null:
 			if last_point == null || (pl.p-last_point).length() > epsilon:
@@ -274,7 +285,7 @@ static func clamp_polygon(polygon, rect):
 	var output = polygon
 	for l in [ { a=1, b=0, c=-rect.pos.x }, { a=0, b=1, c=-rect.pos.y }, { a=-1, b=0, c=rect.end.x }, { a=0, b=-1, c=rect.end.y } ]:
 		var input = output
-		output = Vector2Array()
+		output = PoolVector2Array()
 		var s = input[input.size()-1]
 		for e in input:
 			if is_inside_edge(e, l):

@@ -1,0 +1,31 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=3
+
+[application]
+
+config/name="godot-openstreetmap"
+run/main_scene="res://openstreetmap_demos/car/test.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+osm="*res://addons/openstreetmap/global/osm.gd"
+geometry="*res://addons/openstreetmap/global/geometry.gd"
+game_state="*res://addons/openstreetmap/global/game_state.gd"
+http="*res://addons/openstreetmap/global/http.gd"
+meshes="*res://addons/openstreetmap/global/meshes.gd"
+
+[network]
+
+ssl/certificates="res://ca-certificates.crt"
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

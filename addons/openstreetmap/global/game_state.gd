@@ -5,6 +5,7 @@ onready var savegame_key = null#"TW"+OS.get_unique_ID()
 var variables = { }
 
 func _ready():
+	print("game state ready")
 	read()
 
 # user configuration

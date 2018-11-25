@@ -9,6 +9,7 @@ var terrain_map = null
 const TERRAIN_DIRT     = 0
 const TERRAIN_GRASS    = 1
 const TERRAIN_NONE     = 2
+const TERRAIN_STREET   = 3
 
 class TerrainMap:
 	var image
@@ -16,7 +17,7 @@ class TerrainMap:
 	
 	func _init():
 		var image_size = IMAGE_SIZE*(IMAGE_SIZE >> 3)
-		image = IntArray()
+		image = PoolIntArray()
 		image.resize(image_size)
 		for i in range(image_size):
 			image[i] = 0
@@ -71,15 +72,15 @@ class TerrainMap:
 	func _draw_triangle(p1, p2, p3, color):
 		var tmp
 		if p1.y > p2.y:
-			var tmp = p1
+			tmp = p1
 			p1 = p2
 			p2 = tmp
 		if p2.y > p3.y:
-			var tmp = p2
+			tmp = p2
 			p2 = p3
 			p3 = tmp
 		if p1.y > p2.y:
-			var tmp = p1
+			tmp = p1
 			p1 = p2
 			p2 = tmp
 		var xmid
@@ -119,6 +120,7 @@ func do_draw(tmap = false):
 		for g in grass:
 			terrain_map.draw_polygon(g, TERRAIN_GRASS)
 	else:
+		draw_rect(Rect2(0, 0, 1000, 1000), Color(0, 0, 0))
 		for w in water:
 			draw_colored_polygon(w, Color(0, 0, 1))
 		for g in grass:
@@ -128,7 +130,7 @@ func do_draw(tmap = false):
 		if tmap:
 			width += 1
 		var point_count = r.points.size()
-		var normals = Vector2Array()
+		var normals = PoolVector2Array()
 		for j in range(point_count):
 			normals.append(Vector2(0, 0))
 		for j in range(point_count-1):
@@ -138,7 +140,7 @@ func do_draw(tmap = false):
 		var a2
 		var n2
 		for j in range(point_count):
-			var polygon = Vector2Array()
+			var polygon = PoolVector2Array()
 			var a1 = r.points[j]
 			var n1 = normals[j].normalized()*width
 			if j != 0:
@@ -147,7 +149,7 @@ func do_draw(tmap = false):
 				polygon.append(a2+n2)
 				polygon.append(a2-n2)
 				if tmap:
-					terrain_map.draw_polygon(polygon, TERRAIN_NONE)
+					terrain_map.draw_polygon(polygon, TERRAIN_STREET)
 				else:
 					draw_colored_polygon(polygon, Color(1, 0, 0))
 			a2 = a1

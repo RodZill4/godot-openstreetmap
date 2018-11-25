@@ -1,2 +1,4 @@
+.import
+*.import
 *.dae
-addons/openstreetmap/objects/nature.scn
+*.scn

@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/openstreetmap/buildings.gd" type="Script" id=1]
+
+[node name="Buildings" type="MeshInstance"]
+
+layers = 1
+material_override = null
+cast_shadow = 2
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = null
+skeleton = NodePath("..")
+script = ExtResource( 1 )
+_sections_unfolded = [ "Geometry", "Transform" ]
+building_level_height = 3.5
+building_wall_material = null
+building_roof_material = null
+house_level_height = 2.5
+house_roof_angle = 20
+house_roof_material = null
+
+

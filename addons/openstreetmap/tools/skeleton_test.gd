@@ -12,11 +12,11 @@ func _draw():
 	if show_polygons:
 		for p in skeleton: draw_colored_polygon(p, Color(0.7*randf(), 0.7*randf(), 0.7*randf()))
 		for p in skeleton:
-			var color = Color(randf(), randf(), randf())
+			var c = Color(randf(), randf(), randf(), 1)
 			for i in range(p.size()):
 				var i2 = i-1 if (i>0) else 0
-				draw_line(p[i], p[i2], color, 5)
-				draw_line(p[i], p[i]+50*Vector2(1, 0).rotated(i*0.2), color, 5)
+				draw_line(p[i], p[i2], c, 5)
+				draw_line(p[i], p[i]+50*Vector2(1, 0).rotated(i*0.2), c, 5)
 
 func set_show_polygons(b):
 	show_polygons = b

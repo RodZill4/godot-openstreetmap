@@ -4,7 +4,7 @@ const ZOOM = 16
 const TILE_SIZE = 256 * 156412.0 / (1 << ZOOM)
 
 const TWM_ID      = 7938
-const TWM_VERSION = 1
+const TWM_VERSION = 2
 
 func _ready():
 	print(TILE_SIZE)
@@ -126,8 +126,8 @@ func gen_twm(in_file, out_file, x, y):
 			# Operations that must be executed when exiting an XML node
 			if stack.back().name == "way":
 				if stack.back().type == "building":
-					var nodes = geometry.fix_polygon(stack.back().nodes)
-					if rect.has_point(way_center(nodes)):
+					var building_nodes = geometry.fix_polygon(stack.back().nodes)
+					if rect.has_point(way_center(building_nodes)):
 						var area = geometry.polygon_area(stack.back().nodes)
 						if area < 0:
 							area = -area
@@ -140,14 +140,14 @@ func gen_twm(in_file, out_file, x, y):
 								height = floor(1*sqrt(sqrt(area)))
 						else:
 							height = floor(0.75*sqrt(sqrt(area)))
-						if height > 0 && geometry.polygon_has_problems(nodes) == 0:
+						if height > 0 && geometry.polygon_has_problems(building_nodes) == 0:
 							var fixed_nodes
 							for i in range(10):
 								var retry = false
 								fixed_nodes = [ ]
-								for n in nodes:
+								for n in building_nodes:
 									fixed_nodes.append(n+0.1*Vector2(randf(), randf()))
-								var skeleton = geometry.create_straight_skeleton(nodes)
+								var skeleton = geometry.create_straight_skeleton(building_nodes)
 								for p in skeleton:
 									if Geometry.triangulate_polygon(p).size() == 0:
 										retry = true
@@ -155,23 +155,23 @@ func gen_twm(in_file, out_file, x, y):
 									break
 							buildings.append({ height = height, polygon = fixed_nodes})
 				elif stack.back().type == "grassland":
-					var nodes = geometry.fix_polygon(stack.back().nodes)
-					if true || rect.has_point(way_center(nodes)):
-						if geometry.polygon_has_problems(nodes) == 0:
-							grasslands.append(nodes)
+					var grassland_nodes = geometry.fix_polygon(stack.back().nodes)
+					if true || rect.has_point(way_center(grassland_nodes)):
+						if geometry.polygon_has_problems(grassland_nodes) == 0:
+							grasslands.append(grassland_nodes)
 						else:
 							print("grassland polygon has problems")
 				elif stack.back().type == "water":
-					var nodes = geometry.fix_polygon(stack.back().nodes)
-					if true || rect.has_point(way_center(nodes)):
-						if geometry.polygon_has_problems(nodes) == 0:
-							water.append(nodes)
+					var water_nodes = geometry.fix_polygon(stack.back().nodes)
+					if true || rect.has_point(way_center(water_nodes)):
+						if geometry.polygon_has_problems(water_nodes) == 0:
+							water.append(water_nodes)
 						else:
 							print("water polygon has problems")
 				elif stack.back().type == "road":
-					var nodes = stack.back().nodes
+					var road_nodes = stack.back().nodes
 					var visible = false
-					for n in nodes:
+					for n in road_nodes:
 						if rect.has_point(n):
 							visible = true
 							break
@@ -179,7 +179,7 @@ func gen_twm(in_file, out_file, x, y):
 						var lanes = 1
 						if stack.back().has("lanes"):
 							lanes = stack.back().lanes
-						roads.append( { nodes = nodes, lanes = lanes } )
+						roads.append( { nodes = road_nodes, lanes = lanes } )
 			stack.pop_back()
 	var out = File.new()
 	out.open(out_file, File.WRITE)
