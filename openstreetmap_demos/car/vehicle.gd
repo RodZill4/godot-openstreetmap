@@ -4,12 +4,13 @@ extends VehicleBody
 # var a=2
 # var b="textvar"
 
-const STEER_SPEED=1
-const STEER_LIMIT=0.4
+const STEER_SPEED = 1
+const STEER_LIMIT = 0.4
 
-var steer_angle=0
-var steer_target=0
-onready var backlights = get_node("BackLights")
+var steer_angle = 0
+var steer_target = 0
+
+var map = null
 
 export var max_engine_force = 40
 
@@ -37,10 +38,13 @@ func _physics_process(delta):
 			steer_angle=steer_target
 	set_steering(steer_angle)
 	if force < 0 || brake_action:
-		backlights.show()
+		$BackLights.show()
 	else:
-		backlights.hide()
-	get_node("../Map").set_center(Vector2(translation.x, translation.z))
+		$BackLights.hide()
+	if map == null:
+		map = get_node("../Map")
+	else:
+		map.set_center(Vector2(translation.x, translation.z))
 
 func _ready():
 	pass

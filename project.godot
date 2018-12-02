@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="godot-openstreetmap"
-run/main_scene="res://openstreetmap_demos/car/test.tscn"
+run/main_scene="res://openstreetmap_demos/menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -28,4 +28,5 @@ ssl/certificates="res://ca-certificates.crt"
 
 [rendering]
 
+quality/filters/msaa=1
 environment/default_environment="res://default_env.tres"

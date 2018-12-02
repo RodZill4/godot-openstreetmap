@@ -1,77 +1,72 @@
-[gd_resource type="ArrayMesh" load_steps=3 format=2]
+[gd_resource type="ArrayMesh" load_steps=6 format=2]
 
-[ext_resource path="res://openstreetmap_demos/simple/objects/grass.png" type="Texture" id=1]
+[ext_resource path="res://openstreetmap_demos/simple/materials/grass_02_normal.png" type="Texture" id=1]
+[ext_resource path="res://openstreetmap_demos/simple/materials/grass_02_specular.png" type="Texture" id=2]
+[ext_resource path="res://openstreetmap_demos/simple/materials/grass_02_diffuse.png" type="Texture" id=3]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="Shader" id=1]
+
+code = "shader_type spatial;
+render_mode cull_disabled;
+
+uniform sampler2D texture_map : hint_albedo;
+uniform sampler2D normal_map : hint_normal;
+uniform sampler2D specular_map : hint_black;
+uniform float amplitude = 0.1;
+uniform vec2 speed = vec2(2.0, 1.5);
+uniform vec2 scale = vec2(0.1, 0.2);
+
+void vertex() {
+	if (VERTEX.y > 0.0) {
+		vec3 worldpos = (WORLD_MATRIX * vec4(VERTEX, 1.0)).xyz;
+		VERTEX.x += amplitude * sin(worldpos.x * scale.x * 0.75 + TIME * speed.x) * cos(worldpos.z * scale.x + TIME * speed.x * 0.25);
+		VERTEX.z += amplitude * sin(worldpos.x * scale.y + TIME * speed.y * 0.35) * cos(worldpos.z * scale.y * 0.80 + TIME * speed.y);
+	}
+}
+
+void fragment() {
+	vec4 color = texture(texture_map, UV);
+	ALBEDO = color.rgb;
+	if (color.a < 0.3) {
+		discard;
+	}
+	
+	NORMALMAP = texture(normal_map, UV).rgb;
+	
+	METALLIC = 0.0;
+	SPECULAR = texture(specular_map, UV).r;
+	ROUGHNESS = 1.0 - SPECULAR;
+	TRANSMISSION = vec3(0.2, 0.2, 0.2);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
 
 render_priority = 0
-flags_transparent = true
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
-albedo_color = Color( 0.247825, 0.800781, 0.215836, 1 )
-albedo_texture = ExtResource( 1 )
-metallic = 0.0
-metallic_specular = 0.5
-metallic_texture_channel = 0
-roughness = 0.0
-roughness_texture_channel = 0
-emission_enabled = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
-_sections_unfolded = [ "Flags" ]
+shader = SubResource( 1 )
+shader_param/amplitude = 0.1
+shader_param/speed = Vector2( 2, 2 )
+shader_param/scale = Vector2( 0.3, 0.6 )
+shader_param/texture_map = ExtResource( 3 )
+shader_param/normal_map = ExtResource( 1 )
+shader_param/specular_map = ExtResource( 2 )
 
 [resource]
 
-resource_name = "Plane.004"
 blend_shape_mode = 1
 custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
 surfaces/0 = {
-"aabb": AABB( -2.34962, 0.0484162, -2.27934, 4.47772, 0.397154, 4.95565 ),
-"array_data": PoolByteArray( 132, 49, 50, 42, 105, 57, 0, 60, 215, 255, 136, 0, 255, 59, 255, 59, 31, 64, 33, 55, 237, 36, 0, 60, 215, 255, 136, 0, 141, 6, 140, 6, 32, 64, 50, 42, 14, 38, 0, 60, 215, 255, 136, 0, 142, 6, 255, 59, 138, 181, 50, 42, 94, 173, 0, 60, 87, 255, 164, 0, 255, 59, 255, 59, 111, 60, 33, 55, 38, 61, 0, 60, 87, 255, 164, 0, 141, 6, 140, 6, 108, 60, 50, 42, 42, 61, 0, 60, 87, 255, 164, 0, 142, 6, 255, 59, 86, 60, 50, 42, 99, 60, 0, 60, 78, 255, 99, 0, 255, 59, 255, 59, 207, 183, 33, 55, 170, 64, 0, 60, 78, 255, 99, 0, 141, 6, 140, 6, 219, 183, 50, 42, 168, 64, 0, 60, 78, 255, 99, 0, 142, 6, 255, 59, 176, 192, 50, 42, 11, 185, 0, 60, 132, 255, 26, 0, 142, 6, 255, 59, 186, 191, 33, 55, 78, 61, 0, 60, 132, 255, 26, 0, 255, 59, 140, 6, 179, 192, 33, 55, 9, 185, 0, 60, 132, 255, 26, 0, 141, 6, 140, 6, 169, 179, 50, 42, 118, 56, 0, 60, 44, 255, 118, 0, 255, 59, 255, 59, 56, 192, 33, 55, 14, 61, 0, 60, 44, 255, 118, 0, 141, 6, 140, 6, 57, 192, 50, 42, 10, 61, 0, 60, 44, 255, 118, 0, 142, 6, 255, 59, 154, 188, 50, 42, 133, 57, 0, 60, 126, 255, 15, 0, 255, 59, 255, 59, 141, 189, 33, 55, 90, 65, 0, 60, 126, 255, 15, 0, 141, 6, 140, 6, 145, 189, 50, 42, 89, 65, 0, 60, 126, 255, 15, 0, 142, 6, 255, 59, 33, 60, 50, 42, 173, 183, 0, 60, 142, 255, 201, 0, 255, 59, 255, 59, 159, 63, 33, 55, 143, 192, 0, 60, 142, 255, 201, 0, 141, 6, 140, 6, 163, 63, 50, 42, 141, 192, 0, 60, 142, 255, 201, 0, 142, 6, 255, 59, 65, 64, 50, 42, 161, 185, 0, 60, 253, 255, 129, 0, 142, 6, 255, 59, 29, 48, 33, 55, 64, 185, 0, 60, 253, 255, 129, 0, 255, 59, 140, 6, 65, 64, 33, 55, 171, 185, 0, 60, 253, 255, 129, 0, 141, 6, 140, 6, 230, 63, 50, 42, 156, 186, 0, 60, 125, 255, 15, 0, 255, 59, 255, 59, 241, 62, 33, 55, 163, 60, 0, 60, 125, 255, 15, 0, 141, 6, 140, 6, 236, 62, 50, 42, 162, 60, 0, 60, 125, 255, 15, 0, 142, 6, 255, 59, 143, 59, 50, 42, 125, 192, 0, 60, 215, 255, 136, 0, 142, 6, 255, 59, 148, 187, 33, 55, 100, 190, 0, 60, 215, 255, 136, 0, 255, 59, 140, 6, 140, 59, 33, 55, 127, 192, 0, 60, 215, 255, 136, 0, 141, 6, 140, 6, 37, 37, 50, 42, 99, 161, 0, 60, 144, 255, 58, 0, 255, 59, 255, 59, 66, 187, 33, 55, 33, 191, 0, 60, 144, 255, 58, 0, 141, 6, 140, 6, 57, 187, 50, 42, 35, 191, 0, 60, 144, 255, 58, 0, 142, 6, 255, 59, 24, 179, 50, 42, 48, 187, 0, 60, 0, 255, 126, 0, 255, 59, 255, 59, 113, 192, 33, 55, 39, 187, 0, 60, 0, 255, 126, 0, 141, 6, 140, 6, 113, 192, 50, 42, 48, 187, 0, 60, 0, 255, 126, 0, 142, 6, 255, 59, 119, 49, 33, 55, 96, 57, 0, 60, 215, 255, 136, 0, 255, 59, 140, 6, 124, 181, 33, 55, 150, 173, 0, 60, 87, 255, 164, 0, 255, 59, 140, 6, 88, 60, 33, 55, 102, 60, 0, 60, 78, 255, 99, 0, 255, 59, 140, 6, 182, 191, 50, 42, 77, 61, 0, 60, 132, 255, 26, 0, 255, 59, 255, 59, 156, 179, 33, 55, 127, 56, 0, 60, 44, 255, 118, 0, 255, 59, 140, 6, 149, 188, 33, 55, 135, 57, 0, 60, 126, 255, 15, 0, 255, 59, 140, 6, 29, 60, 33, 55, 181, 183, 0, 60, 142, 255, 201, 0, 255, 59, 140, 6, 30, 48, 50, 42, 55, 185, 0, 60, 253, 255, 129, 0, 255, 59, 255, 59, 235, 63, 33, 55, 154, 186, 0, 60, 125, 255, 15, 0, 255, 59, 140, 6, 145, 187, 50, 42, 95, 190, 0, 60, 215, 255, 136, 0, 255, 59, 255, 59, 21, 36, 33, 55, 72, 160, 0, 60, 144, 255, 58, 0, 255, 59, 140, 6, 24, 179, 33, 55, 39, 187, 0, 60, 0, 255, 126, 0, 255, 59, 140, 6 ),
-"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 3, 0, 5, 0, 4, 0, 6, 0, 8, 0, 7, 0, 9, 0, 11, 0, 10, 0, 12, 0, 14, 0, 13, 0, 15, 0, 17, 0, 16, 0, 18, 0, 20, 0, 19, 0, 21, 0, 23, 0, 22, 0, 24, 0, 26, 0, 25, 0, 27, 0, 29, 0, 28, 0, 30, 0, 32, 0, 31, 0, 33, 0, 35, 0, 34, 0, 0, 0, 1, 0, 36, 0, 3, 0, 4, 0, 37, 0, 6, 0, 7, 0, 38, 0, 9, 0, 10, 0, 39, 0, 12, 0, 13, 0, 40, 0, 15, 0, 16, 0, 41, 0, 18, 0, 19, 0, 42, 0, 21, 0, 22, 0, 43, 0, 24, 0, 25, 0, 44, 0, 27, 0, 28, 0, 45, 0, 30, 0, 31, 0, 46, 0, 33, 0, 34, 0, 47, 0 ),
+"aabb": AABB( -0.5, 0, -0.433013, 1.00001, 1, 0.866026 ),
+"array_data": PoolByteArray( 0, 56, 0, 0, 121, 179, 0, 60, 0, 0, 127, 0, 127, 0, 0, 129, 255, 59, 255, 59, 0, 184, 0, 0, 121, 179, 0, 60, 0, 0, 127, 0, 127, 0, 0, 129, 141, 6, 255, 59, 0, 56, 0, 60, 121, 179, 0, 60, 0, 0, 127, 0, 127, 0, 0, 129, 255, 59, 142, 6, 0, 184, 0, 60, 121, 179, 0, 60, 0, 0, 127, 0, 127, 0, 0, 129, 141, 6, 142, 6, 125, 54, 0, 0, 237, 182, 0, 60, 109, 0, 63, 0, 63, 0, 147, 129, 255, 59, 255, 59, 8, 174, 0, 0, 237, 54, 0, 60, 109, 0, 63, 0, 63, 0, 147, 129, 141, 6, 255, 59, 125, 54, 0, 60, 237, 182, 0, 60, 109, 0, 63, 0, 63, 0, 147, 129, 255, 59, 142, 6, 8, 174, 0, 60, 237, 54, 0, 60, 109, 0, 63, 0, 63, 0, 147, 129, 141, 6, 142, 6, 85, 182, 0, 0, 237, 182, 0, 60, 109, 0, 193, 0, 193, 0, 147, 129, 255, 59, 255, 59, 168, 46, 0, 0, 237, 54, 0, 60, 109, 0, 193, 0, 193, 0, 147, 129, 141, 6, 255, 59, 85, 182, 0, 60, 237, 182, 0, 60, 109, 0, 193, 0, 193, 0, 147, 129, 255, 59, 142, 6, 168, 46, 0, 60, 237, 54, 0, 60, 109, 0, 193, 0, 193, 0, 147, 129, 141, 6, 142, 6 ),
+"array_index_data": PoolByteArray( 0, 0, 1, 0, 2, 0, 2, 0, 1, 0, 3, 0, 4, 0, 5, 0, 6, 0, 6, 0, 5, 0, 7, 0, 8, 0, 9, 0, 10, 0, 10, 0, 9, 0, 11, 0 ),
 "blend_shape_data": [  ],
-"format": 98067,
-"index_count": 72,
-"material": SubResource( 1 ),
-"name": "Material_002",
+"format": 98071,
+"index_count": 18,
+"material": SubResource( 2 ),
+"name": "None",
 "primitive": 4,
 "skeleton_aabb": [  ],
-"vertex_count": 48
+"vertex_count": 12
 }
 _sections_unfolded = [ "surface_1" ]
 

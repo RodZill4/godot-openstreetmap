@@ -133,12 +133,10 @@ func gen_twm(in_file, out_file, x, y):
 							area = -area
 						else:
 							geometry.reverse_polygon(stack.back().nodes)
-						var height
+						var height = 0
 						if stack.back().has("height"):
 							height = stack.back().height
-							if int(height) < 1:
-								height = floor(1*sqrt(sqrt(area)))
-						else:
+						if int(height) < 1:
 							height = floor(0.75*sqrt(sqrt(area)))
 						if height > 0 && geometry.polygon_has_problems(building_nodes) == 0:
 							var fixed_nodes

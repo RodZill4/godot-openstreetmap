@@ -1,180 +1,23 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/openstreetmap/scripts/tile3d.gd" type="Script" id=1]
-[ext_resource path="res://addons/openstreetmap/buildings.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/openstreetmap/scripts/render_ground.gd" type="Script" id=3]
-[ext_resource path="res://openstreetmap_demos/simple/objects/ground.tres" type="ArrayMesh" id=4]
-[ext_resource path="res://addons/openstreetmap/materials/mat_simpleground.tres" type="Material" id=5]
-[ext_resource path="res://addons/openstreetmap/scripts/ground_details.gd" type="Script" id=6]
-[ext_resource path="res://openstreetmap_demos/simple/objects/grass.tres" type="ArrayMesh" id=7]
-[ext_resource path="res://addons/openstreetmap/objects/brown_grass.tres" type="ArrayMesh" id=8]
-[ext_resource path="res://addons/openstreetmap/textures/downloading.png" type="Texture" id=9]
-[ext_resource path="res://addons/openstreetmap/textures/converting.png" type="Texture" id=10]
-[ext_resource path="res://addons/openstreetmap/textures/loading.png" type="Texture" id=11]
-[ext_resource path="res://addons/openstreetmap/textures/waiting.png" type="Texture" id=12]
+[ext_resource path="res://addons/openstreetmap/textures/downloading.png" type="Texture" id=2]
+[ext_resource path="res://addons/openstreetmap/textures/converting.png" type="Texture" id=3]
+[ext_resource path="res://addons/openstreetmap/textures/loading.png" type="Texture" id=4]
+[ext_resource path="res://addons/openstreetmap/textures/waiting.png" type="Texture" id=5]
 
-
-
-[sub_resource type="QuadMesh" id=1]
-
-custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
-size = Vector2( 1, 1 )
-
-[sub_resource type="ShaderMaterial" id=2]
-
-render_priority = 0
-
-[node name="Tile3d" type="Spatial"]
+[node name="Tile3d" type="Spatial" index="0"]
 
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Buildings" parent="." index="0" instance=ExtResource( 2 )]
-
-[node name="GroundRTT" type="MeshInstance" parent="." index="1"]
-
-transform = Transform( 305.99, 0, 0, 0, -1.33752e-005, 1, 0, -305.99, -4.37114e-008, 305.99, 0, 305.99 )
-visible = false
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 1 )
-skeleton = NodePath("..")
-material/0 = SubResource( 2 )
-_sections_unfolded = [ "Transform", "material" ]
-
-[node name="RenderToTexture" type="Viewport" parent="GroundRTT" index="0"]
-
-arvr = false
-size = Vector2( 512, 512 )
-own_world = false
-world = null
-transparent_bg = false
-msaa = 0
-hdr = false
-disable_3d = false
-usage = 2
-debug_draw = 0
-render_target_v_flip = true
-render_target_clear_mode = 0
-render_target_update_mode = 1
-audio_listener_enable_2d = false
-audio_listener_enable_3d = false
-physics_object_picking = false
-gui_disable_input = true
-gui_snap_controls_to_pixels = false
-shadow_atlas_size = 0
-shadow_atlas_quad_0 = 2
-shadow_atlas_quad_1 = 2
-shadow_atlas_quad_2 = 3
-shadow_atlas_quad_3 = 4
-_sections_unfolded = [ "Audio Listener", "GUI", "Render Target", "Rendering" ]
-
-[node name="Draw" type="Node2D" parent="GroundRTT/RenderToTexture" index="0"]
-
-script = ExtResource( 3 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Ground" type="MeshInstance" parent="." index="2"]
-
-layers = 1
-material_override = null
-cast_shadow = 0
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = ExtResource( 4 )
-skeleton = NodePath("..")
-material/0 = ExtResource( 5 )
-_sections_unfolded = [ "Geometry", "Transform", "material" ]
-
-[node name="Grounds" type="MeshInstance" parent="." index="3"]
-
-editor/display_folded = true
-layers = 1
-material_override = null
-cast_shadow = 2
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = null
-skeleton = NodePath("..")
-_sections_unfolded = [ "Geometry", "Transform" ]
-
-[node name="Grass" type="Spatial" parent="Grounds" index="0"]
-
-script = ExtResource( 6 )
-mesh = ExtResource( 7 )
-subdivide = 4
-
-[node name="BrownGrass" type="Spatial" parent="Grounds" index="1"]
-
-script = ExtResource( 6 )
-mesh = ExtResource( 8 )
-subdivide = 4
-
-[node name="Plant" type="Spatial" parent="Grounds" index="2"]
-
-script = ExtResource( 6 )
-mesh = null
-subdivide = 4
-
-[node name="Stones" type="Spatial" parent="Grounds" index="3"]
-
-script = ExtResource( 6 )
-mesh = null
-subdivide = 4
-
-[node name="Doors" type="MultiMeshInstance" parent="." index="4"]
-
-layers = 1
-material_override = null
-cast_shadow = 0
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-multimesh = null
-
-[node name="Trees" type="Spatial" parent="." index="5"]
-
-[node name="TrafficLights" type="Spatial" parent="." index="6"]
-
-visible = false
-
-[node name="PostBoxes" type="Spatial" parent="." index="7"]
-
-visible = false
-
-[node name="Fountains" type="Spatial" parent="." index="8"]
-
-visible = false
-
-[node name="Zombies" type="Spatial" parent="." index="9"]
-
-visible = false
-
-[node name="State" type="Spatial" parent="." index="10"]
+[node name="State" type="Spatial" parent="." index="0"]
 
 transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 305, 50, 305 )
 
 [node name="Downloading" type="Sprite3D" parent="State" index="0"]
 
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
+visible = false
 layers = 1
 material_override = null
 cast_shadow = 0
@@ -191,18 +34,17 @@ flip_v = false
 modulate = Color( 1, 1, 1, 1 )
 opacity = 1.0
 pixel_size = 0.01
-axis = 1
+axis = 0
 transparent = true
 shaded = false
 double_sided = true
 alpha_cut = 0
-texture = ExtResource( 9 )
+texture = ExtResource( 2 )
 vframes = 1
 hframes = 1
 frame = 0
 region_enabled = false
 region_rect = Rect2( 0, 0, 0, 0 )
-_sections_unfolded = [ "Animation", "Flags", "Geometry", "LOD", "Region", "Transform", "Visibility" ]
 
 [node name="Converting" type="Sprite3D" parent="State" index="1"]
 
@@ -224,12 +66,12 @@ flip_v = false
 modulate = Color( 1, 1, 1, 1 )
 opacity = 1.0
 pixel_size = 0.01
-axis = 1
+axis = 2
 transparent = true
 shaded = false
 double_sided = true
 alpha_cut = 0
-texture = ExtResource( 10 )
+texture = ExtResource( 3 )
 vframes = 1
 hframes = 1
 frame = 0
@@ -256,12 +98,12 @@ flip_v = false
 modulate = Color( 1, 1, 1, 1 )
 opacity = 1.0
 pixel_size = 0.01
-axis = 1
+axis = 2
 transparent = true
 shaded = false
 double_sided = true
 alpha_cut = 0
-texture = ExtResource( 11 )
+texture = ExtResource( 4 )
 vframes = 1
 hframes = 1
 frame = 0
@@ -288,12 +130,12 @@ flip_v = false
 modulate = Color( 1, 1, 1, 1 )
 opacity = 1.0
 pixel_size = 0.01
-axis = 1
+axis = 2
 transparent = true
 shaded = false
 double_sided = true
 alpha_cut = 0
-texture = ExtResource( 12 )
+texture = ExtResource( 5 )
 vframes = 1
 hframes = 1
 frame = 0

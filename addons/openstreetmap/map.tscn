@@ -13,16 +13,16 @@ map_objects = null
 [node name="GroundTextureGenerator" type="Viewport" parent="." index="0"]
 
 arvr = false
-size = Vector2( 2048, 2048 )
+size = Vector2( 1024, 1024 )
 own_world = false
 world = null
 transparent_bg = false
-msaa = 0
-hdr = true
-disable_3d = false
-usage = 2
+msaa = 4
+hdr = false
+disable_3d = true
+usage = 0
 debug_draw = 0
-render_target_v_flip = false
+render_target_v_flip = true
 render_target_clear_mode = 0
 render_target_update_mode = 3
 audio_listener_enable_2d = false
@@ -35,6 +35,7 @@ shadow_atlas_quad_0 = 2
 shadow_atlas_quad_1 = 2
 shadow_atlas_quad_2 = 3
 shadow_atlas_quad_3 = 4
+_sections_unfolded = [ "Render Target", "Rendering" ]
 
 [node name="DrawGround" type="Node2D" parent="GroundTextureGenerator" index="0"]
 

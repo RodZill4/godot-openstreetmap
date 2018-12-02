@@ -5,9 +5,12 @@
 
 [node name="Details" instance=ExtResource( 1 )]
 
+amount = 1
 mesh = ExtResource( 2 )
-spacing = 3.0
+spacing = 0.6
+random = 0.2
+distance = 100.0
 condition = Color( 0, 1, 0, 1 )
-condition_mask = Color( 0, 1, 0, 1 )
+condition_mask = Color( 0, 0, 0, 0 )
 
 

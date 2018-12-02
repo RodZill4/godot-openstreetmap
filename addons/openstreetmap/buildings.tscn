@@ -22,6 +22,7 @@ building_wall_material = null
 building_roof_material = null
 house_level_height = 2.5
 house_roof_angle = 20
+house_wall_material = null
 house_roof_material = null
 
 

@@ -16,6 +16,23 @@ class BaseMesh:
 			mesh.add_surface_from_arrays(primitive, surface)
 			mesh.surface_set_material(mesh.get_surface_count()-1, material)
 
+class Polygons:
+	extends BaseMesh
+	
+	func _init():
+		primitive = ArrayMesh.PRIMITIVE_TRIANGLES
+		vertices = PoolVector3Array()
+		normals = PoolVector3Array()
+		uvs = PoolVector2Array()
+	
+	func add(polygon, height):
+		var indexes = Geometry.triangulate_polygon(polygon)
+		for i in range(indexes.size()):
+			var a = polygon[indexes[i]]
+			vertices.append(Vector3(a.x, height, a.y))
+			normals.append(Vector3(0.0, 1.0, 0.0))
+			uvs.append(Vector2(a.x, a.y))
+
 class Walls:
 	extends BaseMesh
 	

@@ -55,4 +55,6 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[connection signal="pressed" from="BackToMenu" to="." method="_on_BackToMenu_pressed"]
+
 

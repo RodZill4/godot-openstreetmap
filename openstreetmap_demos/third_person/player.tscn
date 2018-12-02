@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://openstreetmap_demos/third_person/player.gd" type="Script" id=1]
+[ext_resource path="res://openstreetmap_demos/third_person/human.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+
+radius = 0.29108
+height = 1.08465
+
+[node name="Player" type="KinematicBody"]
+
+input_ray_pickable = false
+input_capture_on_drag = false
+collision_layer = 1
+collision_mask = 1
+axis_lock_linear_x = false
+axis_lock_linear_y = false
+axis_lock_linear_z = false
+axis_lock_angular_x = false
+axis_lock_angular_y = false
+axis_lock_angular_z = false
+collision/safe_margin = 0.01
+script = ExtResource( 1 )
+_sections_unfolded = [ "Axis Lock", "Collision", "Transform", "collision" ]
+run_speed = 0.001
+
+[node name="CollisionShape" type="CollisionShape" parent="." index="0"]
+
+transform = Transform( 1, 0, 0, 0, -4.37114e-008, 1, 0, -1, -4.37114e-008, 0, 0.830528, 0 )
+shape = SubResource( 1 )
+disabled = false
+
+[node name="Model" parent="." index="1" instance=ExtResource( 2 )]
+
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
+_sections_unfolded = [ "Transform" ]
+
+

@@ -1,6 +1,6 @@
 extends Spatial
 
-export(String)  var tile_model = "res://addons/openstreetmap/tile3d_rtt.tscn"
+export(String)  var tile_model = "res://addons/openstreetmap/tile3d.tscn"
 export(int,0,4) var size = 1
 export(Array)   var map_objects = []
 
@@ -27,40 +27,41 @@ func set_center(p):
 	var map_pos = reference_position + p/osm.TILE_SIZE
 	var _x = int(map_pos.x)
 	var _y = int(map_pos.y)
-	if x == _x && y == _y:
-		return
-	x = _x
-	y = _y
-	http.cancel()
-	for t in tiles:
-		t.hide()
-	var needed_tiles = []
-	for _x in range(2*size+1):
-		for _y in range(2*size+1):
-			var t = { x=int(x+_x-size), y=int(y+_y-size) }
-			var name = "tile_3d_"+str(t.x)+"_"+str(t.y)
-			if has_node(name):
-				get_node(name).show()
+	if x != _x or y != _y:
+		x = _x
+		y = _y
+		http.cancel()
+		for t in tiles:
+			t.hide()
+		var needed_tiles = []
+		for _x in range(2*size+1):
+			for _y in range(2*size+1):
+				var t = { x=int(x+_x-size), y=int(y+_y-size) }
+				var name = "tile_3d_"+str(t.x)+"_"+str(t.y)
+				if has_node(name):
+					get_node(name).show()
+				else:
+					needed_tiles.append(t)
+		var free_tiles = []
+		for t in tiles:
+			if !t.is_visible():
+				free_tiles.append(t)
+		needed_tiles.sort_custom(self, "tile_order")
+		for t in needed_tiles:
+			var tile
+			if free_tiles.empty():
+				tile = tile_class.instance()
+				add_child(tile)
+				tiles.append(tile)
+				for o in map_objects:
+					tile.add_child(o.instance())
 			else:
-				needed_tiles.append(t)
-	var free_tiles = []
+				tile = free_tiles.back()
+				free_tiles.pop_back()
+			tile.set_tile(t.x, t.y)
+			tile.show()
 	for t in tiles:
-		if !t.is_visible():
-			free_tiles.append(t)
-	needed_tiles.sort_custom(self, "tile_order")
-	for t in needed_tiles:
-		var tile
-		if free_tiles.empty():
-			tile = tile_class.instance()
-			add_child(tile)
-			tiles.append(tile)
-			for o in map_objects:
-				tile.add_child(o.instance())
-		else:
-			tile = free_tiles.back()
-			free_tiles.pop_back()
-		tile.set_tile(t.x, t.y)
-		tile.show()
+		t.set_center(p-Vector2(t.translation.x, t.translation.z))
 
 var ground_texture_queue = []
 

@@ -1,4 +1,5 @@
 shader_type spatial;
+render_mode cull_disabled;
 
 uniform sampler2D splatmap;
 uniform sampler2D grass_albedo;

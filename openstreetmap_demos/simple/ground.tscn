@@ -8,8 +8,6 @@
 [ext_resource path="res://openstreetmap_demos/simple/materials/219_norm.jpg" type="Texture" id=6]
 [ext_resource path="res://openstreetmap_demos/simple/materials/water1.jpg" type="Texture" id=7]
 
-
-
 [sub_resource type="ShaderMaterial" id=1]
 
 render_priority = 0

@@ -81,7 +81,7 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 0.7, 0.7, 0.7, 1 )
-metallic = 0.1
+metallic = 1.0
 metallic_specular = 0.5
 metallic_texture_channel = 0
 roughness = 0.0
@@ -107,6 +107,7 @@ uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
 proximity_fade_enable = false
 distance_fade_enable = false
+_sections_unfolded = [ "Metallic", "Roughness" ]
 
 [sub_resource type="SpatialMaterial" id=3]
 
@@ -133,7 +134,7 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 0.7, 0.7, 0.7, 1 )
-metallic = 0.1
+metallic = 1.0
 metallic_specular = 0.5
 metallic_texture_channel = 0
 roughness = 0.0
@@ -159,6 +160,7 @@ uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
 proximity_fade_enable = false
 distance_fade_enable = false
+_sections_unfolded = [ "Metallic" ]
 
 [sub_resource type="SpatialMaterial" id=4]
 
@@ -269,6 +271,7 @@ surfaces/3 = {
 "skeleton_aabb": [  ],
 "vertex_count": 60
 }
+_sections_unfolded = [ "surface_1", "surface_2", "surface_3", "surface_4" ]
 
 [sub_resource type="SpatialMaterial" id=6]
 
@@ -295,10 +298,10 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 0.945313, 1, 0, 1 )
-metallic = 0.1
+metallic = 0.4
 metallic_specular = 0.5
 metallic_texture_channel = 0
-roughness = 0.0
+roughness = 0.1
 roughness_texture_channel = 0
 emission_enabled = false
 normal_enabled = false
@@ -321,7 +324,7 @@ uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
 proximity_fade_enable = false
 distance_fade_enable = false
-_sections_unfolded = [ "Albedo", "Roughness" ]
+_sections_unfolded = [ "Albedo", "Metallic", "Roughness" ]
 
 [sub_resource type="SpatialMaterial" id=7]
 
@@ -399,7 +402,7 @@ params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
 albedo_color = Color( 0.7, 0.7, 0.7, 1 )
-metallic = 0.1
+metallic = 0.8
 metallic_specular = 0.5
 metallic_texture_channel = 0
 roughness = 0.0
@@ -425,6 +428,7 @@ uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
 proximity_fade_enable = false
 distance_fade_enable = false
+_sections_unfolded = [ "Metallic" ]
 
 [sub_resource type="SpatialMaterial" id=9]
 
@@ -965,14 +969,14 @@ axis_lock_angular_x = false
 axis_lock_angular_y = false
 axis_lock_angular_z = false
 linear_velocity = Vector3( 0, 0, 0 )
-linear_damp = -1.0
+linear_damp = 0.0
 angular_velocity = Vector3( 0, 0, 0 )
-angular_damp = -1.0
+angular_damp = 0.0
 engine_force = 40.0
 brake = 0.0
 steering = 0.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Mass", "Motion" ]
+_sections_unfolded = [ "Angular", "Axis Lock", "Collision", "Linear", "Mass", "Motion" ]
 max_engine_force = 40
 
 [node name="wheel1" type="VehicleWheel" parent="." index="0"]
@@ -1177,6 +1181,7 @@ autoturn_speed = 50
 [node name="SpotLight" type="SpotLight" parent="." index="7"]
 
 transform = Transform( -1, 8.74228e-008, 0, 8.56696e-008, 0.979947, 0.199259, 1.74199e-008, 0.199259, -0.979947, 0.0242163, 0.171536, 1.42032 )
+visible = false
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0
@@ -1199,6 +1204,7 @@ spot_angle_attenuation = 1.0
 [node name="BackLights" type="SpotLight" parent="." index="8"]
 
 transform = Transform( 1, 0, 1.74846e-007, 0, 1, 0, -1.74846e-007, 0, 1, 0.011222, 0.466041, -2.29261 )
+visible = false
 layers = 1
 light_color = Color( 1, 1, 1, 1 )
 light_energy = 1.0

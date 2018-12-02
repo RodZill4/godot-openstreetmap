@@ -147,6 +147,11 @@ func set_ground_texture(t):
 		if c.has_method("set_ground_texture"):
 			c.set_ground_texture(t)
 
+func set_center(p):
+	for c in get_children():
+		if c.has_method("set_center"):
+			c.set_center(p)
+
 func fill_multimesh(array, parent, mesh):
 	var multimesh_instance = MultiMeshInstance.new()
 	parent.add_child(multimesh_instance)

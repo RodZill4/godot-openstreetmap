@@ -5,14 +5,14 @@ export(Material) var building_wall_material
 export(Material) var building_roof_material
 export(float) var house_level_height = 2.5
 export(float, 0, 85) var house_roof_angle = 20
+export(Material) var house_wall_material
 export(Material) var house_roof_material
 
 func update_data(data):
 	var generated_mesh = Mesh.new()
-	var flatroofs_vertices = []
-	var flatroofs_colors = []
 	var house_model = null #preload("res://addons/openstreetmap/house.tscn")
 	var house_walls = meshes.Walls.new()
+	var flat_roofs = meshes.Polygons.new()
 	var house_roofs = meshes.Roofs.new()
 	var house_convex_roofs = meshes.ConvexRoofs.new()
 	var building_walls = meshes.Walls.new()
@@ -32,7 +32,7 @@ func update_data(data):
 		hue = 6*(hue - floor(hue))
 		var color = hsv2rgb(hue, 0.1, 1)
 		var roofs = null
-		var flat_roofs = true
+		var flat_roof = true
 		var is_convex = geometry.polygon_is_convex(polygon)
 		if height < 4:
 			if false:
@@ -45,26 +45,22 @@ func update_data(data):
 				house.force_update()
 				house.set_translation(Vector3(c.x, 0, c.y))
 				add_child(house)
-				flat_roofs = false
+				flat_roof = false
 			else:
 				var roof_type = house_roofs
 				if is_convex:
 					roof_type = house_convex_roofs
 				if roof_type.add(polygon, house_level_height*height, house_roof_angle, color):
 					house_walls.add(polygon, color, house_level_height*height, 0.5, height, 0.25)
-					flat_roofs = false
+					flat_roof = false
 				else:
 					height = max(1, int(height * 0.7))
-		if flat_roofs:
-			var indexes = Geometry.triangulate_polygon(polygon)
-			for i in range(indexes.size()):
-				var a = polygon[indexes[i]]
-				flatroofs_vertices.append(Vector3(a.x, building_level_height*height, a.y))
-				flatroofs_colors.append(color)
+		if flat_roof:
+			flat_roofs.add(polygon, building_level_height*height)
 			building_walls.add(polygon, color, building_level_height*height, 0.5, height, 0.25)
-	add_horizontal_triangles(generated_mesh, flatroofs_vertices, null, building_roof_material)
 	building_walls.add_to_mesh(generated_mesh, building_wall_material)
-	house_walls.add_to_mesh(generated_mesh, building_wall_material)
+	flat_roofs.add_to_mesh(generated_mesh, building_roof_material)
+	house_walls.add_to_mesh(generated_mesh, house_wall_material)
 	house_roofs.add_to_mesh(generated_mesh, house_roof_material)
 	house_convex_roofs.add_to_mesh(generated_mesh, house_roof_material)
 	call_deferred("on_updated", generated_mesh)

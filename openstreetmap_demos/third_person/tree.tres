@@ -1,0 +1,142 @@
+[gd_resource type="ArrayMesh" load_steps=4 format=2]
+
+[ext_resource path="res://openstreetmap_demos/third_person/paper_albedo.png" type="Texture" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+
+render_priority = 0
+flags_transparent = false
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 0.643494, 1, 0.613281, 1 )
+albedo_texture = ExtResource( 1 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "UV1" ]
+
+[sub_resource type="SpatialMaterial" id=2]
+
+render_priority = 0
+flags_transparent = false
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 0.640625, 0.514213, 0.335327, 1 )
+albedo_texture = ExtResource( 1 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo", "UV1" ]
+
+[resource]
+
+blend_shape_mode = 1
+custom_aabb = AABB( 0, 0, 0, 0, 0, 0 )
+surfaces/0 = {
+"aabb": AABB( -1.21478, 1.85391, -1.46263, 2.69626, 1.5489, 2.80006 ),
+"array_data": PoolByteArray( 103, 162, 106, 63, 190, 181, 0, 60, 244, 131, 245, 0, 191, 57, 230, 63, 244, 52, 0, 60, 29, 137, 29, 0, 119, 175, 227, 63, 130, 56, 0, 60, 242, 136, 35, 0, 163, 60, 152, 64, 159, 57, 0, 60, 85, 194, 68, 0, 59, 61, 83, 64, 78, 173, 0, 60, 92, 170, 1, 0, 166, 188, 99, 64, 213, 177, 0, 60, 160, 175, 249, 0, 237, 61, 192, 65, 123, 45, 0, 60, 114, 51, 19, 0, 43, 187, 126, 64, 92, 56, 0, 60, 181, 170, 53, 0, 219, 188, 73, 65, 199, 52, 0, 60, 135, 10, 35, 0, 206, 61, 20, 65, 230, 184, 0, 60, 115, 236, 208, 0, 145, 54, 78, 64, 39, 189, 0, 60, 26, 171, 166, 0, 119, 59, 71, 65, 12, 189, 0, 60, 76, 252, 156, 0, 108, 59, 77, 65, 4, 60, 0, 60, 71, 13, 104, 0, 122, 172, 121, 64, 167, 60, 0, 60, 244, 176, 97, 0, 92, 52, 110, 65, 89, 61, 0, 60, 20, 21, 123, 0, 41, 186, 97, 65, 26, 60, 0, 60, 181, 12, 100, 0, 181, 188, 64, 65, 91, 184, 0, 60, 137, 252, 215, 0, 110, 183, 123, 64, 100, 189, 0, 60, 212, 187, 160, 0, 194, 185, 85, 65, 9, 189, 0, 60, 177, 11, 158, 0, 171, 53, 213, 65, 217, 189, 0, 60, 20, 49, 141, 0, 115, 60, 245, 65, 105, 56, 0, 60, 72, 87, 57, 0, 71, 38, 107, 66, 187, 58, 0, 60, 254, 109, 63, 0, 203, 179, 34, 66, 48, 189, 0, 60, 228, 79, 162, 0, 112, 53, 154, 66, 166, 186, 0, 60, 20, 117, 214, 0, 81, 60, 19, 66, 147, 186, 0, 60, 75, 88, 206, 0, 156, 55, 206, 66, 68, 173, 0, 60, 24, 124, 8, 0, 195, 182, 181, 66, 6, 185, 0, 60, 228, 121, 233, 0, 23, 188, 39, 66, 36, 185, 0, 60, 164, 78, 220, 0, 142, 186, 74, 66, 48, 56, 0, 60, 190, 99, 43, 0, 176, 57, 185, 63, 6, 184, 0, 60, 39, 139, 230, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 3, 0, 4, 0, 1, 0, 0, 0, 5, 0, 2, 0, 3, 0, 6, 0, 4, 0, 5, 0, 8, 0, 7, 0, 9, 0, 11, 0, 10, 0, 3, 0, 12, 0, 6, 0, 13, 0, 15, 0, 14, 0, 5, 0, 16, 0, 8, 0, 17, 0, 19, 0, 18, 0, 14, 0, 21, 0, 20, 0, 19, 0, 23, 0, 22, 0, 6, 0, 25, 0, 24, 0, 25, 0, 23, 0, 24, 0, 24, 0, 23, 0, 19, 0, 23, 0, 25, 0, 26, 0, 23, 0, 26, 0, 22, 0, 22, 0, 26, 0, 27, 0, 26, 0, 25, 0, 28, 0, 26, 0, 28, 0, 27, 0, 28, 0, 25, 0, 21, 0, 21, 0, 25, 0, 20, 0, 20, 0, 25, 0, 6, 0, 9, 0, 6, 0, 24, 0, 9, 0, 24, 0, 11, 0, 11, 0, 24, 0, 19, 0, 19, 0, 22, 0, 18, 0, 18, 0, 22, 0, 27, 0, 16, 0, 27, 0, 8, 0, 8, 0, 27, 0, 28, 0, 15, 0, 28, 0, 21, 0, 15, 0, 21, 0, 14, 0, 12, 0, 14, 0, 20, 0, 12, 0, 20, 0, 6, 0, 11, 0, 19, 0, 10, 0, 10, 0, 19, 0, 17, 0, 18, 0, 27, 0, 16, 0, 18, 0, 16, 0, 17, 0, 17, 0, 16, 0, 5, 0, 8, 0, 28, 0, 15, 0, 8, 0, 15, 0, 7, 0, 7, 0, 15, 0, 13, 0, 14, 0, 12, 0, 13, 0, 13, 0, 12, 0, 3, 0, 6, 0, 9, 0, 4, 0, 29, 0, 9, 0, 10, 0, 29, 0, 10, 0, 0, 0, 0, 0, 10, 0, 17, 0, 0, 0, 17, 0, 5, 0, 5, 0, 7, 0, 2, 0, 2, 0, 7, 0, 13, 0, 4, 0, 9, 0, 29, 0, 4, 0, 29, 0, 1, 0, 1, 0, 29, 0, 0, 0, 2, 0, 13, 0, 1, 0, 1, 0, 13, 0, 3, 0 ),
+"blend_shape_data": [  ],
+"format": 98051,
+"index_count": 168,
+"material": SubResource( 1 ),
+"name": "Material_001",
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 30
+}
+surfaces/1 = {
+"aabb": AABB( -0.821031, -0.00678635, -0.793371, 1.87586, 2.41667, 1.55112 ),
+"array_data": PoolByteArray( 60, 186, 160, 64, 195, 183, 0, 60, 229, 116, 215, 0, 157, 184, 91, 63, 19, 170, 0, 60, 145, 223, 50, 0, 58, 183, 139, 63, 218, 174, 0, 60, 75, 88, 206, 0, 145, 186, 116, 64, 104, 184, 0, 60, 188, 1, 150, 0, 148, 183, 236, 62, 104, 176, 0, 60, 204, 167, 183, 0, 64, 184, 209, 64, 57, 52, 0, 60, 255, 125, 240, 0, 69, 184, 182, 64, 133, 53, 0, 60, 251, 67, 107, 0, 162, 170, 152, 62, 210, 176, 0, 60, 233, 83, 164, 0, 104, 170, 242, 61, 157, 176, 0, 60, 197, 212, 154, 0, 51, 183, 106, 63, 195, 35, 0, 60, 40, 0, 120, 0, 37, 174, 48, 62, 208, 42, 0, 60, 186, 210, 94, 0, 24, 169, 161, 62, 140, 41, 0, 60, 255, 112, 59, 0, 56, 60, 115, 64, 108, 182, 0, 60, 88, 73, 202, 0, 114, 56, 120, 63, 94, 182, 0, 60, 33, 122, 5, 0, 49, 60, 114, 64, 224, 180, 0, 60, 73, 63, 82, 0, 84, 54, 155, 64, 88, 186, 0, 60, 230, 67, 152, 0, 117, 56, 244, 62, 125, 183, 0, 60, 48, 177, 170, 0, 150, 54, 84, 63, 5, 183, 0, 60, 161, 23, 177, 0, 164, 54, 181, 64, 180, 185, 0, 60, 3, 125, 16, 0, 93, 52, 108, 64, 228, 44, 0, 60, 216, 219, 114, 0, 172, 54, 45, 63, 205, 180, 0, 60, 168, 26, 87, 0, 29, 56, 211, 62, 237, 180, 0, 60, 75, 176, 62, 0, 49, 54, 149, 64, 15, 58, 0, 60, 53, 34, 109, 0, 119, 48, 152, 62, 54, 54, 0, 60, 214, 181, 92, 0, 45, 51, 202, 62, 104, 53, 0, 60, 120, 224, 231, 0, 170, 47, 5, 62, 31, 168, 0, 60, 109, 210, 45, 0, 76, 52, 243, 158, 89, 179, 0, 60, 86, 190, 191, 0, 90, 51, 243, 30, 76, 52, 0, 60, 75, 195, 81, 0, 209, 52, 143, 64, 239, 34, 0, 60, 222, 24, 119, 0, 165, 53, 177, 64, 120, 57, 0, 60, 11, 125, 15, 0, 132, 47, 248, 62, 119, 53, 0, 60, 175, 96, 243, 0, 37, 180, 26, 37, 74, 51, 0, 60, 179, 190, 75, 0, 90, 179, 243, 158, 76, 180, 0, 60, 193, 187, 172, 0 ),
+"array_index_data": PoolByteArray( 0, 0, 2, 0, 1, 0, 3, 0, 1, 0, 4, 0, 5, 0, 1, 0, 2, 0, 5, 0, 6, 0, 1, 0, 4, 0, 8, 0, 7, 0, 9, 0, 11, 0, 10, 0, 1, 0, 10, 0, 4, 0, 2, 0, 7, 0, 9, 0, 12, 0, 14, 0, 13, 0, 15, 0, 17, 0, 16, 0, 18, 0, 13, 0, 17, 0, 17, 0, 7, 0, 8, 0, 19, 0, 21, 0, 20, 0, 22, 0, 24, 0, 23, 0, 9, 0, 5, 0, 2, 0, 6, 0, 9, 0, 1, 0, 21, 0, 16, 0, 8, 0, 16, 0, 14, 0, 12, 0, 3, 0, 2, 0, 0, 0, 17, 0, 8, 0, 16, 0, 0, 0, 1, 0, 3, 0, 4, 0, 10, 0, 8, 0, 9, 0, 7, 0, 11, 0, 2, 0, 4, 0, 7, 0, 1, 0, 9, 0, 10, 0, 15, 0, 13, 0, 18, 0, 14, 0, 21, 0, 13, 0, 12, 0, 13, 0, 16, 0, 25, 0, 20, 0, 21, 0, 18, 0, 17, 0, 15, 0, 8, 0, 25, 0, 21, 0, 20, 0, 7, 0, 17, 0, 8, 0, 26, 0, 25, 0, 25, 0, 26, 0, 27, 0, 20, 0, 28, 0, 19, 0, 13, 0, 19, 0, 28, 0, 28, 0, 17, 0, 13, 0, 25, 0, 23, 0, 24, 0, 11, 0, 23, 0, 10, 0, 22, 0, 30, 0, 29, 0, 30, 0, 11, 0, 24, 0, 24, 0, 11, 0, 25, 0, 29, 0, 30, 0, 24, 0, 29, 0, 24, 0, 22, 0, 31, 0, 25, 0, 27, 0, 8, 0, 31, 0, 32, 0, 31, 0, 26, 0, 32, 0, 6, 0, 5, 0, 9, 0, 21, 0, 14, 0, 16, 0, 4, 0, 2, 0, 3, 0, 16, 0, 13, 0, 15, 0, 11, 0, 20, 0, 25, 0, 11, 0, 7, 0, 20, 0, 32, 0, 26, 0, 8, 0, 17, 0, 28, 0, 20, 0, 21, 0, 19, 0, 13, 0, 10, 0, 23, 0, 25, 0, 30, 0, 23, 0, 11, 0, 23, 0, 30, 0, 22, 0, 10, 0, 25, 0, 31, 0, 10, 0, 31, 0, 8, 0, 27, 0, 26, 0, 31, 0 ),
+"blend_shape_data": [  ],
+"format": 98051,
+"index_count": 186,
+"material": SubResource( 2 ),
+"name": "Material",
+"primitive": 4,
+"skeleton_aabb": [  ],
+"vertex_count": 33
+}
+_sections_unfolded = [ "surface_1", "surface_2" ]
+

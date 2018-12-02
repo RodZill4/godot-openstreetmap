@@ -4,21 +4,37 @@
 [ext_resource path="res://addons/openstreetmap/map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://openstreetmap_demos/simple/buildings.tscn" type="PackedScene" id=3]
 [ext_resource path="res://openstreetmap_demos/simple/ground.tscn" type="PackedScene" id=4]
-[ext_resource path="res://openstreetmap_demos/car/trees.tscn" type="PackedScene" id=5]
+[ext_resource path="res://openstreetmap_demos/simple/trees.tscn" type="PackedScene" id=5]
 [ext_resource path="res://openstreetmap_demos/simple/objects/fountain.tscn" type="PackedScene" id=6]
 [ext_resource path="res://openstreetmap_demos/simple/post_boxes.tscn" type="PackedScene" id=7]
 [ext_resource path="res://openstreetmap_demos/simple/grass.tscn" type="PackedScene" id=8]
-[ext_resource path="res://addons/openstreetmap/collider.tscn" type="PackedScene" id=9]
+[ext_resource path="res://openstreetmap_demos/car/collider.tscn" type="PackedScene" id=9]
 [ext_resource path="res://openstreetmap_demos/car/car_base.tscn" type="PackedScene" id=10]
 [ext_resource path="res://openstreetmap_demos/demo_interface.tscn" type="PackedScene" id=11]
 
-[sub_resource type="PanoramaSky" id=1]
+[sub_resource type="ProceduralSky" id=1]
 
 radiance_size = 4
+sky_top_color = Color( 0.0470588, 0.454902, 0.976471, 1 )
+sky_horizon_color = Color( 0.556863, 0.823529, 0.909804, 1 )
+sky_curve = 0.25
+sky_energy = 1.0
+ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
+ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
+ground_curve = 0.01
+ground_energy = 1.0
+sun_color = Color( 1, 1, 1, 1 )
+sun_latitude = 35.0
+sun_longitude = 0.0
+sun_angle_min = 1.0
+sun_angle_max = 100.0
+sun_curve = 0.05
+sun_energy = 16.0
+texture_size = 2
 
 [sub_resource type="Environment" id=2]
 
-background_mode = 1
+background_mode = 2
 background_sky = SubResource( 1 )
 background_sky_custom_fov = 0.0
 background_color = Color( 0.491119, 0.717295, 0.816406, 1 )
@@ -96,7 +112,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Ambient Light", "Background", "Fog", "SSAO" ]
 
-[node name="Spatial" type="Spatial" index="0"]
+[node name="Spatial" type="Spatial"]
 
 script = ExtResource( 1 )
 
@@ -107,7 +123,6 @@ environment = SubResource( 2 )
 [node name="Map" parent="." index="1" instance=ExtResource( 2 )]
 
 _sections_unfolded = [ "Transform" ]
-tile_model = "res://addons/openstreetmap/tile3d_rtt.tscn"
 map_objects = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="." index="2"]

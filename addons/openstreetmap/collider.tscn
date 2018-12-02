@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/openstreetmap/collider.gd" type="Script" id=1]
 
-[node name="Collider" type="StaticBody" index="0"]
+[node name="Collider" type="StaticBody"]
 
 input_ray_pickable = true
 input_capture_on_drag = false
@@ -13,6 +13,8 @@ bounce = 0.0
 constant_linear_velocity = Vector3( 0, 0, 0 )
 constant_angular_velocity = Vector3( 0, 0, 0 )
 script = ExtResource( 1 )
+ground = true
+walls = true
 
 [node name="Ground" type="CollisionShape" parent="." index="0"]
 

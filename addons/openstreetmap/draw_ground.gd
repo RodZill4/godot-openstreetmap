@@ -11,6 +11,7 @@ func set_data(d):
 	update()
 
 func _draw():
+	var empty_vec2_array = PoolVector2Array()
 	var viewport_size = get_parent().size
 	scale = Vector2(viewport_size.x/osm.TILE_SIZE, viewport_size.y/osm.TILE_SIZE)
 	draw_rect(Rect2(0, 0, osm.TILE_SIZE, osm.TILE_SIZE), Color(0, 0, 0))
@@ -18,13 +19,13 @@ func _draw():
 		return
 	if data.has("water"):
 		for w in data.water:
-			draw_colored_polygon(w, Color(0, 0, 1))
+			draw_colored_polygon(w, Color(0, 0, 1), empty_vec2_array, null, null, true)
 	if data.has("grass"):
 		for g in data.grass:
-			draw_colored_polygon(g, Color(0, 1, 0))
+			draw_colored_polygon(g, Color(0, 1, 0), empty_vec2_array, null, null, true)
 	if data.has("buildings"):
 		for g in data.buildings:
-			draw_colored_polygon(g.points, Color(0, 0, 0))
+			draw_colored_polygon(g.points, Color(0, 0, 0), empty_vec2_array, null, null, true)
 	if data.has("roads"):
 		for r in data.roads:
 			var width = max(1, r.width) * 0.5 + 1
@@ -47,7 +48,7 @@ func _draw():
 					polygon.append(a1+n1)
 					polygon.append(a2+n2)
 					polygon.append(a2-n2)
-					draw_colored_polygon(polygon, Color(1, 0, 0))
+					draw_colored_polygon(polygon, Color(1, 0, 0), empty_vec2_array, null, null, true)
 				a2 = a1
 				n2 = n1
 			draw_circle(r.points[0], width, Color(1, 0, 0))

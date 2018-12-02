@@ -6,6 +6,6 @@
 [node name="Spatial" instance=ExtResource( 1 )]
 
 object_type = 3
-model = ExtResource( 2 )
+scenes = [ ExtResource( 2 ) ]
 
 
