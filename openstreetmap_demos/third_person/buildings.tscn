@@ -114,12 +114,13 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Albedo", "UV1" ]
 
-[node name="Buildings" instance=ExtResource( 1 )]
+[node name="Buildings" index="0" instance=ExtResource( 1 )]
 
 building_level_height = 2.6
 building_wall_material = SubResource( 2 )
 house_level_height = 2.6
 house_roof_angle = 35.0
+house_wall_material = SubResource( 2 )
 house_roof_material = SubResource( 3 )
 
 

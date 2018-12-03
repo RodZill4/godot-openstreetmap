@@ -2,15 +2,19 @@
 
 [ext_resource path="res://openstreetmap_demos/simple/test.gd" type="Script" id=1]
 [ext_resource path="res://addons/openstreetmap/map.tscn" type="PackedScene" id=2]
-[ext_resource path="res://openstreetmap_demos/simple/buildings.tscn" type="PackedScene" id=3]
-[ext_resource path="res://openstreetmap_demos/simple/ground.tscn" type="PackedScene" id=4]
-[ext_resource path="res://openstreetmap_demos/simple/trees.tscn" type="PackedScene" id=5]
+[ext_resource path="res://openstreetmap_demos/car/buildings.tscn" type="PackedScene" id=3]
+[ext_resource path="res://openstreetmap_demos/car/ground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://openstreetmap_demos/car/trees.tscn" type="PackedScene" id=5]
 [ext_resource path="res://openstreetmap_demos/simple/objects/fountain.tscn" type="PackedScene" id=6]
 [ext_resource path="res://openstreetmap_demos/simple/post_boxes.tscn" type="PackedScene" id=7]
-[ext_resource path="res://openstreetmap_demos/simple/grass.tscn" type="PackedScene" id=8]
+[ext_resource path="res://openstreetmap_demos/car/grass.tscn" type="PackedScene" id=8]
 [ext_resource path="res://openstreetmap_demos/car/collider.tscn" type="PackedScene" id=9]
 [ext_resource path="res://openstreetmap_demos/car/car_base.tscn" type="PackedScene" id=10]
 [ext_resource path="res://openstreetmap_demos/demo_interface.tscn" type="PackedScene" id=11]
+
+
+
+
 
 [sub_resource type="ProceduralSky" id=1]
 

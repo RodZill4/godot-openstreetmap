@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/openstreetmap/multi_mesh.tscn" type="PackedScene" id=1]
-[ext_resource path="res://openstreetmap_demos/third_person/tree.tres" type="ArrayMesh" id=2]
+[ext_resource path="res://openstreetmap_demos/simple/objects/tree.tres" type="ArrayMesh" id=2]
 
 [node name="MultiMesh" index="0" instance=ExtResource( 1 )]
 
+_sections_unfolded = [ "Geometry" ]
 mesh = ExtResource( 2 )
 
 

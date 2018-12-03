@@ -22,6 +22,11 @@ game_state="*res://addons/openstreetmap/global/game_state.gd"
 http="*res://addons/openstreetmap/global/http.gd"
 meshes="*res://addons/openstreetmap/global/meshes.gd"
 
+[display]
+
+window/size/width=1280
+window/size/height=720
+
 [network]
 
 ssl/certificates="res://ca-certificates.crt"

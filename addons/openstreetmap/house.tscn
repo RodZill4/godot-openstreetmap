@@ -1,14 +1,15 @@
 [gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://openstreetmap_demos/simple/materials/mat_building_wall.tres" type="Material" id=1]
-[ext_resource path="res://openstreetmap_demos/simple/materials/mat_house_roof.tres" type="Material" id=2]
+[ext_resource path="res://openstreetmap_demos/car/materials/mat_building_wall.tres" type="Material" id=1]
+[ext_resource path="res://openstreetmap_demos/car/materials/mat_house_roof.tres" type="Material" id=2]
 [ext_resource path="res://addons/openstreetmap/scripts/house.gd" type="Script" id=3]
 [ext_resource path="res://addons/openstreetmap/textures/177.JPG" type="Texture" id=4]
 [ext_resource path="res://addons/openstreetmap/textures/177_norm.JPG" type="Texture" id=5]
 [ext_resource path="res://addons/openstreetmap/textures/MarekGrassDehydrated0001.jpg" type="Texture" id=6]
 [ext_resource path="res://addons/openstreetmap/textures/600px-MarekGrasMoos0001.jpg" type="Texture" id=7]
 [ext_resource path="res://addons/openstreetmap/textures/splatmap.png" type="Texture" id=8]
-[ext_resource path="res://openstreetmap_demos/simple/materials/water1.jpg" type="Texture" id=9]
+[ext_resource path="res://openstreetmap_demos/car/materials/water1.jpg" type="Texture" id=9]
+
 
 [sub_resource type="ArrayMesh" id=9]
 

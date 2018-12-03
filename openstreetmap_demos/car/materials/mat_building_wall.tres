@@ -1,12 +1,13 @@
 [gd_resource type="ShaderMaterial" load_steps=8 format=2]
 
-[ext_resource path="res://openstreetmap_demos/simple/materials/mat_building_wall.shader" type="Shader" id=1]
-[ext_resource path="res://openstreetmap_demos/simple/materials/interior.png" type="Texture" id=2]
-[ext_resource path="res://openstreetmap_demos/simple/materials/MarekCompositeWall00003.png" type="Texture" id=3]
-[ext_resource path="res://openstreetmap_demos/simple/materials/244.jpg" type="Texture" id=4]
-[ext_resource path="res://openstreetmap_demos/simple/materials/244_norm.jpg" type="Texture" id=5]
-[ext_resource path="res://openstreetmap_demos/simple/materials/MarekCompositeWall00003_nm.png" type="Texture" id=6]
-[ext_resource path="res://openstreetmap_demos/simple/materials/MarekCompositeWall00003_roughness.png" type="Texture" id=7]
+[ext_resource path="res://openstreetmap_demos/car/materials/mat_building_wall.shader" type="Shader" id=1]
+[ext_resource path="res://openstreetmap_demos/car/materials/interior.png" type="Texture" id=2]
+[ext_resource path="res://openstreetmap_demos/car/materials/MarekCompositeWall00003.png" type="Texture" id=3]
+[ext_resource path="res://openstreetmap_demos/car/materials/244.jpg" type="Texture" id=4]
+[ext_resource path="res://openstreetmap_demos/car/materials/244_norm.jpg" type="Texture" id=5]
+[ext_resource path="res://openstreetmap_demos/car/materials/MarekCompositeWall00003_nm.png" type="Texture" id=6]
+[ext_resource path="res://openstreetmap_demos/car/materials/MarekCompositeWall00003_roughness.png" type="Texture" id=7]
+
 
 [resource]
 

@@ -1,9 +1,8 @@
-[gd_resource type="SpatialMaterial" load_steps=3 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://openstreetmap_demos/simple/materials/220.jpg" type="Texture" id=1]
-[ext_resource path="res://openstreetmap_demos/simple/materials/220_norm.jpg" type="Texture" id=2]
+[ext_resource path="res://addons/openstreetmap/roads_poly.tscn" type="PackedScene" id=1]
 
-[resource]
+[sub_resource type="SpatialMaterial" id=1]
 
 render_priority = 0
 flags_transparent = false
@@ -16,7 +15,7 @@ flags_fixed_size = false
 flags_albedo_tex_force_srgb = false
 vertex_color_use_as_albedo = false
 vertex_color_is_srgb = false
-params_diffuse_mode = 2
+params_diffuse_mode = 0
 params_specular_mode = 0
 params_blend_mode = 0
 params_cull_mode = 2
@@ -26,17 +25,14 @@ params_point_size = 1.0
 params_billboard_mode = 0
 params_grow = false
 params_use_alpha_scissor = false
-albedo_color = Color( 0.7, 0.7, 0.7, 1 )
-albedo_texture = ExtResource( 1 )
-metallic = 0.5
+albedo_color = Color( 0.105469, 0.105469, 0.105469, 1 )
+metallic = 0.4
 metallic_specular = 0.5
 metallic_texture_channel = 0
-roughness = 1.0
+roughness = 0.8
 roughness_texture_channel = 0
 emission_enabled = false
-normal_enabled = true
-normal_scale = 1.0
-normal_texture = ExtResource( 2 )
+normal_enabled = false
 rim_enabled = false
 clearcoat_enabled = false
 anisotropy_enabled = false
@@ -56,5 +52,12 @@ uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
 proximity_fade_enable = false
 distance_fade_enable = false
-_sections_unfolded = [ "Albedo", "Metallic" ]
+_sections_unfolded = [ "Albedo", "Metallic", "Parameters", "Roughness" ]
+
+[node name="MeshInstance" instance=ExtResource( 1 )]
+
+material = SubResource( 1 )
+lane_width = 1.2
+road_height = 0.02
+
 

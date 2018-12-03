@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/openstreetmap/objects.tscn" type="PackedScene" id=1]
+[ext_resource path="res://openstreetmap_demos/car/objects/foliage/tree_maple.tscn" type="PackedScene" id=2]
+[ext_resource path="res://openstreetmap_demos/car/objects/foliage/tree_oak.tscn" type="PackedScene" id=3]
+
+[node name="Spatial" instance=ExtResource( 1 )]
+
+scenes = [ ExtResource( 2 ), ExtResource( 3 ) ]
+
+
