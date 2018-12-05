@@ -43,7 +43,10 @@ class Walls:
 		normals = PoolVector3Array()
 		tangents = PoolRealArray()
 		uvs = PoolVector2Array()
-		uv2s = PoolVector2Array() if has_uv2s else null
+		if has_uv2s:
+			uv2s = PoolVector2Array()
+		else:
+			uv2s = null
 
 	func add_uv2(x, y):
 		uv2s.append(Vector2(x, y))
@@ -56,9 +59,11 @@ class Walls:
 		if colors != null: colors.append(color)
 		normals.append(Vector3(0, 0, 0))
 		tangents.append_array(t0)
-		uvs.append(Vector2(0, 0))
 		if uv2s != null:
+			uvs.append(Vector2(0, 0))
 			add_uv2(0, 0)
+		else:
+			uvs.append(Vector2(0, 0))
 		var u = 0
 		for i in range(polygon.size()-1):
 			var p1 = polygon[i]
@@ -66,12 +71,13 @@ class Walls:
 			var n = Vector3(p2.x-p1.x, 0, p2.y-p1.y).cross(Vector3(0, 1, 0)).normalized()
 			var t = Vector3(p2.x-p1.x, 0, p2.y-p1.y).normalized()
 			t = PoolRealArray([t.x, t.y, t.z, 1])
-			var u2 = 0
+			var u2 = floor((p2-p1).length() * texture2_width)
+			var u2_gap = (p2-p1).length()*texture2_width/u2 if u2 != 0 else 1.0
 			vertices.append(Vector3(p1.x, height, p1.y))
 			normals.append(n)
 			tangents.append_array(t)
 			if uv2s != null:
-				uvs.append(Vector2(u2, 0))
+				uvs.append(Vector2(0, u2_gap))
 				add_uv2(u, 0)
 			else:
 				uvs.append(Vector2(u, 0))
@@ -79,17 +85,16 @@ class Walls:
 			normals.append(n)
 			tangents.append_array(t)
 			if uv2s != null:
-				uvs.append(Vector2(u2, texture_height))
+				uvs.append(Vector2(0, u2_gap))
 				add_uv2(u, texture_height)
 			else:
 				uvs.append(Vector2(u, texture_height))
 			u += (p2-p1).length() * texture_width
-			u2 = floor((p2-p1).length() * texture2_width)
 			vertices.append(Vector3(p2.x, height, p2.y))
 			normals.append(n)
 			tangents.append_array(t)
 			if uv2s != null:
-				uvs.append(Vector2(u2, 0))
+				uvs.append(Vector2(u2, u2_gap))
 				add_uv2(u, 0)
 			else:
 				uvs.append(Vector2(u, 0))
@@ -97,7 +102,7 @@ class Walls:
 			normals.append(n)
 			tangents.append_array(t)
 			if uv2s != null:
-				uvs.append(Vector2(u2, texture_height))
+				uvs.append(Vector2(u2, u2_gap))
 				add_uv2(u, texture_height)
 			else:
 				uvs.append(Vector2(u, texture_height))
@@ -111,9 +116,11 @@ class Walls:
 		if colors != null: colors.append(color)
 		normals.append(Vector3(0, 0, 0))
 		tangents.append_array(t0)
-		uvs.append(Vector2(0, 0))
 		if uv2s != null:
+			uvs.append(Vector2(0, 0))
 			add_uv2(0, 0)
+		else:
+			uvs.append(Vector2(0, 0))
 		return true
 
 class ConvexRoofs:

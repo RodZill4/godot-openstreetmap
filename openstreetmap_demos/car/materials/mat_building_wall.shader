@@ -76,7 +76,7 @@ vec3 rand3(vec2 x) {
 }
 
 void fragment() {
-	vec2 base_uv = UV;
+	vec2 base_uv = vec2(floor(UV.x)+clamp((fract(UV.x)-(1.0-1.0/UV.y)*0.5)*UV.y, 0.0, 1.0), UV2.y);
 	vec2 base_uv2 = UV2;
 	vec4 albedo_tex = texture(texture_albedo,base_uv);
 	ALBEDO = albedo.rgb * albedo_tex.rgb;
@@ -94,7 +94,7 @@ void fragment() {
 	NORMALMAP = mix(NORMALMAP,detail_norm,1.0-albedo_tex.a);
 	ALBEDO.rgb = mix(ALBEDO.rgb,detail,1.0-albedo_tex.a);
 	vec3 rand = rand3(floor(UV));
-	vec4 interior = texture(interior_tex, interior_uv(fract(UV), rand)).rgba;
+	vec4 interior = texture(interior_tex, interior_uv(fract(base_uv), rand)).rgba;
 	interior.xyz = mix(hsv_to_rgb(vec3(dot(rand, vec3(2.0)), 0.3, 0.95)), interior.xyz, interior.a);
 	EMISSION = 0.5*(1.0-ROUGHNESS)*interior.rgb;
 }
