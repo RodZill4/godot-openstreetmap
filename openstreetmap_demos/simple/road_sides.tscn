@@ -58,11 +58,11 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Albedo", "Emission", "Metallic", "Parameters", "Roughness" ]
 
-[node name="MeshInstance" index="0" instance=ExtResource( 1 )]
+[node name="MeshInstance" instance=ExtResource( 1 )]
 
 material = SubResource( 1 )
 lane_width = 1.2
 border_width = 0.8
-road_height = 0.01
+road_height = 0.03
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/openstreetmap/tools/polygon_clamp_test.gd" type="Script" id=1]
 
@@ -11,27 +11,28 @@ extents = Vector2( 156.336, 242.406 )
 
 position = Vector2( 12.4047, 3.01468 )
 
-[node name="polygon" type="Polygon2D" parent="."]
+[node name="polygon" type="Polygon2D" parent="." index="0"]
 
 position = Vector2( -6.24839, 38.9876 )
 scale = Vector2( 1.10473, 1.07481 )
-polygon = PoolVector2Array( 23.5751, 126.431, -17.7538, 498.073, 512.192, 819.428, 746.528, 373.449, 486.491, 676.466, 464.864, 242.832, 553.553, 234.418, 539.406, 448.038, 794.908, 300.415, 661.865, 682.682, 861.429, 232.042, 592.32, 339.263, 717.803, 17.5989, 539.406, 44.0157, 497.074, 208.733, 442.142, 60.8134 )
+polygon = PoolVector2Array( 23.5751, 126.431, 454.427, 569.464, -17.7538, 498.073, 569.494, 824.877, 576.406, 512.859, 522.589, 740.508, 486.491, 676.466, 464.864, 242.832, 553.553, 234.418, 521.109, 455.266, 772.524, 491.641, 872.79, 697.772, 909.554, 475.351, 860.398, 460.49, 624.775, 389.26, 948.083, 375.486, 656.603, 359.989, 933.006, 218.801, 708.589, 151.89, 885.758, 89.187, 685.862, 133.998, 755.449, 239.18, 592.32, 339.263, 717.803, 17.5989, 539.406, 44.0157, 497.074, 208.733, 322.177, 257.621, 450.196, 174.561, 369.965, 72.5712 )
 uv = PoolVector2Array(  )
 color = Color( 1, 1, 1, 1 )
 vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
+antialiased = false
 texture = null
 texture_offset = Vector2( 0, 0 )
 texture_scale = Vector2( 1, 1 )
-texture_rotation = 0.0
+texture_rotation_degrees = 0.0
 invert_enable = false
 invert_border = 100.0
 script = ExtResource( 1 )
 show_polygons = true
 
-[node name="rect" type="CollisionShape2D" parent="polygon"]
+[node name="rect" type="CollisionShape2D" parent="polygon" index="0"]
 
 position = Vector2( 560.377, 381.459 )
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = -1
+
+

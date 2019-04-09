@@ -4,7 +4,7 @@ const ZOOM = 16
 const TILE_SIZE = 256 * 156412.0 / (1 << ZOOM)
 
 const TWM_ID      = 7938
-const TWM_VERSION = 2
+const TWM_VERSION = 4
 
 func _ready():
 	print(TILE_SIZE)
@@ -46,6 +46,7 @@ func gen_twm(in_file, out_file, x, y):
 	var parser = XMLParser.new()
 	parser.open(in_file)
 	var nodes = { }
+	var ways = { }
 	var buildings = [ ]
 	var houses = [ ]
 	var grasslands = [ ]
@@ -79,6 +80,7 @@ func gen_twm(in_file, out_file, x, y):
 				nodes[id] = pos
 				stack.back().pos = pos
 			elif name == "way":
+				stack.back().id = parser.get_named_attribute_value("id")
 				stack.back().nodes = [ ]
 				stack.back().type = "none"
 				last_node = null
@@ -125,14 +127,15 @@ func gen_twm(in_file, out_file, x, y):
 		if pop_item:
 			# Operations that must be executed when exiting an XML node
 			if stack.back().name == "way":
+				var way_nodes = stack.back().nodes
 				if stack.back().type == "building":
-					var building_nodes = geometry.fix_polygon(stack.back().nodes)
+					var building_nodes = geometry.fix_polygon(way_nodes)
 					if rect.has_point(way_center(building_nodes)):
-						var area = geometry.polygon_area(stack.back().nodes)
+						var area = geometry.polygon_area(way_nodes)
 						if area < 0:
 							area = -area
 						else:
-							geometry.reverse_polygon(stack.back().nodes)
+							geometry.reverse_polygon(way_nodes)
 						var height = 0
 						if stack.back().has("height"):
 							height = stack.back().height
@@ -153,21 +156,20 @@ func gen_twm(in_file, out_file, x, y):
 									break
 							buildings.append({ height = height, polygon = fixed_nodes})
 				elif stack.back().type == "grassland":
-					var grassland_nodes = geometry.fix_polygon(stack.back().nodes)
+					var grassland_nodes = geometry.fix_polygon(way_nodes)
 					if true || rect.has_point(way_center(grassland_nodes)):
 						if geometry.polygon_has_problems(grassland_nodes) == 0:
 							grasslands.append(grassland_nodes)
 						else:
 							print("grassland polygon has problems")
 				elif stack.back().type == "water":
-					var water_nodes = geometry.fix_polygon(stack.back().nodes)
-					if true || rect.has_point(way_center(water_nodes)):
-						if geometry.polygon_has_problems(water_nodes) == 0:
+					var water_nodes = stack.back().nodes
+					if water_nodes.front() == water_nodes.back():
+						water_nodes = geometry.clamp_polygon(water_nodes, rect)
+						if water_nodes.size() > 0:
 							water.append(water_nodes)
-						else:
-							print("water polygon has problems")
 				elif stack.back().type == "road":
-					var road_nodes = stack.back().nodes
+					var road_nodes = way_nodes
 					var visible = false
 					for n in road_nodes:
 						if rect.has_point(n):

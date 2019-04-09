@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://openstreetmap_demos/simple/test.gd" type="Script" id=1]
 [ext_resource path="res://openstreetmap_demos/simple/camera.tscn" type="PackedScene" id=2]
@@ -9,7 +9,9 @@
 [ext_resource path="res://openstreetmap_demos/simple/objects/fountain.tscn" type="PackedScene" id=7]
 [ext_resource path="res://openstreetmap_demos/simple/roads.tscn" type="PackedScene" id=8]
 [ext_resource path="res://openstreetmap_demos/simple/road_sides.tscn" type="PackedScene" id=9]
-[ext_resource path="res://openstreetmap_demos/demo_interface.tscn" type="PackedScene" id=10]
+[ext_resource path="res://openstreetmap_demos/simple/grass.tscn" type="PackedScene" id=10]
+[ext_resource path="res://openstreetmap_demos/simple/water.tscn" type="PackedScene" id=11]
+[ext_resource path="res://openstreetmap_demos/demo_interface.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -130,7 +132,7 @@ environment = SubResource( 2 )
 [node name="Map" parent="." index="2" instance=ExtResource( 3 )]
 
 _sections_unfolded = [ "Transform" ]
-map_objects = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ]
+map_objects = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ]
 
 [node name="Ground" type="Area" parent="." index="3"]
 
@@ -189,7 +191,7 @@ directional_shadow_depth_range = 0
 directional_shadow_max_distance = 200.0
 _sections_unfolded = [ "Light" ]
 
-[node name="UserInterface" parent="." index="5" instance=ExtResource( 10 )]
+[node name="UserInterface" parent="." index="5" instance=ExtResource( 12 )]
 
 [connection signal="input_event" from="Ground" to="." method="_on_Ground_input_event"]
 

@@ -20,11 +20,13 @@ func _draw():
 	var rect = rect_node.get_shape().get_extents()
 	rect = rect_node.get_transform().xform(Rect2(-rect, 2*rect))
 	var output = geometry.clamp_polygon(get_polygon(), rect)
-	draw_colored_polygon(output, Color(1, 0, 0))
-	var s = output.size()
-	for i in range(output.size()):
-		draw_circle(output[i], 10, Color(0, 1, 0))
-		draw_line(output[i], output[(i+1)%s], Color(0, 1, 0), 3)
+	if output != null:
+		for p in output:
+			draw_colored_polygon(p, Color(1, 0, 0))
+			var s = p.size()
+			for i in range(p.size()):
+				draw_circle(p[i], 3, Color(0, 1, 0))
+				draw_line(p[i], p[(i+1)%s], Color(0, 1, 0), 3)
 
 func set_show_polygons(b):
 	show_polygons = b

@@ -283,7 +283,7 @@ static func intersect_line_with_edge(p1, p2, e):
 
 static func clamp_polygon(polygon, rect):
 	var output = polygon
-	for l in [ { a=1, b=0, c=-rect.pos.x }, { a=0, b=1, c=-rect.pos.y }, { a=-1, b=0, c=rect.end.x }, { a=0, b=-1, c=rect.end.y } ]:
+	for l in [ { a=1, b=0, c=-rect.position.x }, { a=0, b=1, c=-rect.position.y }, { a=-1, b=0, c=rect.end.x }, { a=0, b=-1, c=rect.end.y } ]:
 		var input = output
 		output = PoolVector2Array()
 		var s = input[input.size()-1]

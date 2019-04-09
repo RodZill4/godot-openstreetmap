@@ -58,6 +58,6 @@ _sections_unfolded = [ "Albedo", "Metallic", "Parameters", "Roughness" ]
 
 material = SubResource( 1 )
 lane_width = 1.2
-road_height = 0.02
+road_height = 0.04
 
 
