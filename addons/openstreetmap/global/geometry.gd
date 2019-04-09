@@ -58,10 +58,10 @@ static func triangles_area(vectices, indexes):
 	return area
 
 func triangulate_polygon(polygon):
-	var triangles = IntArray()
+	var triangles = Array()
 	var s = polygon.size()
 	var expected_size = (s-2)*3
-	var vertices = IntArray()
+	var vertices = Array()
 	for i in range(s):
 		vertices.append(i)
 	while vertices.size() > 2:

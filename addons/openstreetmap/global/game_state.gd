@@ -43,4 +43,3 @@ func write():
 
 func reset():
 	variables = { }
-	save_variables()
