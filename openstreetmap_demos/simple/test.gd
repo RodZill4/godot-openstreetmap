@@ -11,13 +11,7 @@ var y = null
 var event_timestamp = 0
 
 func _ready():
-	var default_pos = osm.pos2tile(5.7055, 45.18103)
-	var x = default_pos.x
-	var y = default_pos.y
-	#x = game_state.get_var("Player/Position/X", x)
-	#y = game_state.get_var("Player/Position/Y", y)
-	map.reference_position = Vector2(x, y)
-	map.set_center(Vector2(0, 0))
+	teleport(7.6132, 51.98306)
 
 func _on_Ground_input_event(c, event, click_pos, click_normal, shape_idx):
 	if event is InputEventMouseButton:
@@ -30,3 +24,11 @@ func _on_Ground_input_event(c, event, click_pos, click_normal, shape_idx):
 				elif camera != null:
 					camera.set_target_pos(click_pos)
 					map.set_center(Vector2(click_pos.x, click_pos.z))
+
+func teleport(lat : float, lon : float):
+	if map != null:
+		var default_pos = osm.pos2tile(lon, lat)
+		var x = default_pos.x
+		var y = default_pos.y
+		map.reference_position = Vector2(x, y)
+		map.set_center(Vector2(0, 0))

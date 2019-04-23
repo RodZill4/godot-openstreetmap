@@ -46,7 +46,5 @@ func _physics_process(delta):
 	else:
 		map.set_center(Vector2(translation.x, translation.z))
 
-func _ready():
-	pass
-
-
+func teleport(lat, lon):
+	translation = Vector3(0, 0, 0)
