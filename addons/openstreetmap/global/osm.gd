@@ -25,8 +25,7 @@ func tile2pos(x, y):
 	return Vector2(lon_deg, lat_deg)
 
 func is_valid(f):
-	var dir = Directory.new()
-	if !dir.file_exists(f):
+	if !FileAccess.file_exists(f):
 		return false
 	var parser = XMLParser.new()
 	parser.open(f)
@@ -39,7 +38,7 @@ func is_valid(f):
 			elif name == "osm":
 				return true
 	print("Incorrect OSM file "+f)
-	dir.remove(f)
+	DirAccess.remove_absolute(f)
 	return false
 
 func gen_twm(in_file, out_file, x, y):
@@ -150,7 +149,7 @@ func gen_twm(in_file, out_file, x, y):
 									fixed_nodes.append(n+0.1*Vector2(randf(), randf()))
 								var skeleton = geometry.create_straight_skeleton(building_nodes)
 								for p in skeleton:
-									if Geometry.triangulate_polygon(p).size() == 0:
+									if Geometry2D.triangulate_polygon(p).size() == 0:
 										retry = true
 								if !retry:
 									break
@@ -181,8 +180,7 @@ func gen_twm(in_file, out_file, x, y):
 							lanes = stack.back().lanes
 						roads.append( { nodes = road_nodes, lanes = lanes } )
 			stack.pop_back()
-	var out = File.new()
-	out.open(out_file, File.WRITE)
+	var out = FileAccess.open(out_file,FileAccess.WRITE)
 	out.store_16(TWM_ID)
 	out.store_8(TWM_VERSION)
 	out.store_16(buildings.size())

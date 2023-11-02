@@ -1,13 +1,13 @@
-extends MeshInstance
+extends MeshInstance3D
 
-export(int, "Grass", "Water") var zone = 0
-export(Material) var material
-export(float) var height = 0.001
+@export_enum("Grass", "Water") var zone: int = 0
+@export var material : Material
+@export var height: float = 0.001
 
 const ZONE_NAMES = [ "grass", "water" ]
 
 func update_data(data):
-	var generated_mesh = Mesh.new()
+	var generated_mesh = ArrayMesh.new()
 	var generator = meshes.Polygons.new()
 	for grass in data[ZONE_NAMES[zone]]:
 		generator.add(grass, height)

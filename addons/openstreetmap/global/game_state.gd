@@ -1,7 +1,7 @@
 extends Node
 
-const variables_file_name = "user://savedata.bin"
-onready var savegame_key = null#"TW"+OS.get_unique_ID()
+const variables_file_name = "user://savedata.save"
+@onready var savegame_key = null#"TW"+OS.get_unique_ID()
 var variables = { }
 
 func _ready():
@@ -20,26 +20,30 @@ func set_var(n, v):
 	variables[n] = v
 
 func read():
-	var f = File.new()
-	var err
+	if not FileAccess.file_exists(variables_file_name):
+		return # Read-Error, no save file detected
+	
+	var file
 	if savegame_key == null:
-		err = f.open(variables_file_name, File.READ)
+		file = FileAccess.open(variables_file_name, FileAccess.READ)
 	else:
-		err = f.open_encrypted_with_pass(variables_file_name, File.READ, savegame_key)
-	if err == 0:
-		variables = f.get_var()
-		f.close()
+		file = FileAccess.open_encrypted_with_pass(variables_file_name, FileAccess.READ, savegame_key)
+	if file != null:
+		variables = file.get_var()
+	file.close()
 
 func write():
-	var f = File.new()
-	var err
+	if not FileAccess.file_exists(variables_file_name):
+		return # Write-Error, no save file detected
+	
+	var file
 	if savegame_key == null:
-		err = f.open(variables_file_name, File.WRITE)
+		file = FileAccess.open(variables_file_name, FileAccess.WRITE)
 	else:
-		err = f.open_encrypted_with_pass(variables_file_name, File.WRITE, savegame_key)
-	if err == 0:
-		f.store_var(variables)
-		f.close()
+		file = FileAccess.open_encrypted_with_pass(variables_file_name, FileAccess.WRITE, savegame_key)
+	if file != null:
+		file.store_var(variables)
+	file.close()
 
 func reset():
 	variables = { }

@@ -1,7 +1,7 @@
-extends Spatial
+extends Node3D
 
-export(int, "Trees", "Traffic lights", "Postboxes", "Fountains") var object_type = 0
-export(Array) var scenes = []
+@export_enum("Trees", "Traffic lights", "Postboxes", "Fountains") var object_type: int = 0
+@export var scenes : Array = []
 
 var objects = []
 
@@ -15,7 +15,7 @@ func update_data(data):
 	var choice = scenes.size()
 	for c in get_children():
 		remove_child(c)
-	var object_count = PoolIntArray()
+	var object_count = PackedInt32Array()
 	for i in range(choice):
 		object_count.append(0)
 	for p in data[OBJECT_NAMES[object_type]]:

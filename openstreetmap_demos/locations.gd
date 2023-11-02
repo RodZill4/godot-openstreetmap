@@ -6,9 +6,9 @@ var country_index
 signal new_location(lat, lon)
 
 func _ready():
-	var f : File = File.new()
-	f.open("res://openstreetmap_demos/cities.json", File.READ)
-	cities = parse_json(f.get_as_text())
+	var f : FileAccess = FileAccess.open("res://openstreetmap_demos/cities.json",FileAccess.READ)
+	var json = JSON.new()
+	cities = json.parse_string(f.get_as_text())
 	f.close()
 	for c in cities:
 		$Country.add_item(c.country)

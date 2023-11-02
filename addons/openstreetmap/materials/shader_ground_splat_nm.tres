@@ -1,16 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=8 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://54grrpl2ri7k"]
 
-[ext_resource path="res://addons/openstreetmap/textures/MarekGrassDehydrated0001.jpg" type="Texture" id=1]
-[ext_resource path="res://addons/openstreetmap/textures/600px-MarekGrasMoos0001.jpg" type="Texture" id=2]
-[ext_resource path="res://addons/openstreetmap/textures/MarekFootway0005.jpg" type="Texture" id=3]
-[ext_resource path="res://addons/openstreetmap/textures/177_norm.JPG" type="Texture" id=4]
-[ext_resource path="res://addons/openstreetmap/textures/splatmap.png" type="Texture" id=5]
-[ext_resource path="res://openstreetmap_demos/car/materials/water1.jpg" type="Texture" id=6]
-
-
-
-[sub_resource type="Shader" id=1]
-
+[sub_resource type="Shader" id="1"]
 code = "shader_type spatial;
 
 uniform sampler2D splatmap;
@@ -61,19 +51,5 @@ void fragment() {
 }"
 
 [resource]
-
 render_priority = 0
-shader = SubResource( 1 )
-shader_param/grassres = 100.0
-shader_param/roadres = 100.0
-shader_param/dirtres = 100.0
-shader_param/waterres = 100.0
-shader_param/water_movement = Vector2( 1, 1 )
-shader_param/splatmap = ExtResource( 5 )
-shader_param/grass_albedo = ExtResource( 2 )
-shader_param/road_albedo = ExtResource( 3 )
-shader_param/road_nm = ExtResource( 4 )
-shader_param/dirt_albedo = ExtResource( 1 )
-shader_param/water_albedo = ExtResource( 6 )
-_sections_unfolded = [ "shader_param" ]
-
+shader = SubResource("1")

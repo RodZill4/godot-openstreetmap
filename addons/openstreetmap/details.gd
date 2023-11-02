@@ -1,11 +1,11 @@
-extends Particles
+extends GPUParticles3D
 
-export(Mesh) var mesh
-export(float) var spacing = 1.0
-export(float,0.0,1.0) var random = 1.0
-export(float) var distance = 50.0
-export(Color) var condition
-export(Color) var condition_mask
+@export var mesh : Mesh
+@export var spacing : float = 1.0
+@export_range(0.0,1.0) var random: float = 1.0
+@export var distance : float = 50.0
+@export var condition : Color
+@export var condition_mask : Color
 
 func _ready():
 	draw_pass_1 = mesh

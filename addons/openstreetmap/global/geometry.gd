@@ -12,7 +12,7 @@ static func polygon_has_problems(polygon):
 		for j in range(i+2, polygon.size()):
 			if (j+1) % s == i:
 				continue
-			var p = Geometry.segment_intersects_segment_2d(polygon[i], polygon[(i+1) % s], polygon[j], polygon[(j+1) % s])
+			var p = Geometry2D.segment_intersects_segment(polygon[i], polygon[(i+1) % s], polygon[j], polygon[(j+1) % s])
 			if p != null:
 				problems += 1
 				print(p)
@@ -58,10 +58,10 @@ static func triangles_area(vectices, indexes):
 	return area
 
 func triangulate_polygon(polygon):
-	var triangles = PoolIntArray()
+	var triangles = PackedInt32Array()
 	var s = polygon.size()
 	var expected_size = (s-2)*3
-	var vertices = PoolIntArray()
+	var vertices = PackedInt32Array()
 	for i in range(s):
 		vertices.append(i)
 	while vertices.size() > 2:
@@ -285,7 +285,7 @@ static func clamp_polygon(polygon, rect):
 	var output = polygon
 	for l in [ { a=1, b=0, c=-rect.position.x }, { a=0, b=1, c=-rect.position.y }, { a=-1, b=0, c=rect.end.x }, { a=0, b=-1, c=rect.end.y } ]:
 		var input = output
-		output = PoolVector2Array()
+		output = PackedVector2Array()
 		var s = input[input.size()-1]
 		for e in input:
 			if is_inside_edge(e, l):

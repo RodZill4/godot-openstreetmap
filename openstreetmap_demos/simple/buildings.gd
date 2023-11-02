@@ -1,11 +1,11 @@
-extends MeshInstance
+extends MeshInstance3D
 
-export(float) var building_height = 1.0
-export(Material) var building_wall_material
-export(Material) var building_roof_material
+@export var building_height : float = 1.0
+@export var building_wall_material : Material
+@export var building_roof_material : Material
 
 func update_data(data):
-	var generated_mesh = Mesh.new()
+	var generated_mesh = ArrayMesh.new()
 	var flat_roofs = meshes.Polygons.new()
 	var building_walls = meshes.Walls.new(false, false)
 	#

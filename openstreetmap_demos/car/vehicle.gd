@@ -1,4 +1,4 @@
-extends VehicleBody
+extends VehicleBody3D
 
 # member variables here, example:
 # var a=2
@@ -12,7 +12,7 @@ var steer_target = 0
 
 var map = null
 
-export var max_engine_force = 40
+@export var max_engine_force = 40
 
 func _physics_process(delta):
 	var force = 0
@@ -44,7 +44,7 @@ func _physics_process(delta):
 	if map == null:
 		map = get_node("../Map")
 	else:
-		map.set_center(Vector2(translation.x, translation.z))
+		map.set_center(Vector2(position.x, position.z))
 
 func teleport(lat, lon):
-	translation = Vector3(0, 0, 0)
+	position = Vector3(0, 0, 0)

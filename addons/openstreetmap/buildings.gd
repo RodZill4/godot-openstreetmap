@@ -1,12 +1,12 @@
-extends MeshInstance
+extends MeshInstance3D
 
-export(float) var building_level_height = 6
-export(Material) var building_wall_material
-export(Material) var building_roof_material
-export(float) var house_level_height = 2.5
-export(float, 0, 85) var house_roof_angle = 20
-export(Material) var house_wall_material
-export(Material) var house_roof_material
+@export var building_level_height: float = 6
+@export var building_wall_material : Material
+@export var building_roof_material : Material
+@export var house_level_height : float = 2.5
+@export_range(0, 85) var house_roof_angle : float = 20
+@export var house_wall_material : Material
+@export var house_roof_material : Material
 
 func update_data(data):
 	var generated_mesh = Mesh.new()
@@ -77,23 +77,23 @@ func hsv2rgb(h, s, v):
 
 func add_horizontal_triangles(mesh, vertices, colors, material):
 	if vertices.size() > 0:
-		var normals = PoolVector3Array()
-		var uvs = PoolVector2Array()
+		var normals = PackedVector3Array()
+		var uvs = PackedVector2Array()
 		for v in vertices:
 			normals.append(Vector3(0, 1, 0))
 			uvs.append(Vector2(v.x, v.z))
-		if colors != null: colors = PoolColorArray(colors)
-		var surface = [ PoolVector3Array(vertices), normals, null, colors, uvs, null, null, null, null ]
+		if colors != null: colors = PackedColorArray(colors)
+		var surface = [ PackedVector3Array(vertices), normals, null, colors, uvs, null, null, null, null ]
 		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface)
 		mesh.surface_set_material(mesh.get_surface_count()-1, material)
 
 func add_primitive(mesh, primitive, vertices, normals, colors, uvs, uv2s, material):
 	if vertices.size() > 0:
-		if vertices != null: vertices = PoolVector3Array(vertices)
-		if normals != null: normals = PoolVector3Array(normals)
-		if colors != null: colors = PoolColorArray(colors)
-		if uvs != null: uvs = PoolVector2Array(uvs)
-		if uv2s != null: uv2s = PoolVector2Array(uv2s)
+		if vertices != null: vertices = PackedVector3Array(vertices)
+		if normals != null: normals = PackedVector3Array(normals)
+		if colors != null: colors = PackedColorArray(colors)
+		if uvs != null: uvs = PackedVector2Array(uvs)
+		if uv2s != null: uv2s = PackedVector2Array(uv2s)
 		var surface = [ vertices, normals, null, colors, uvs, uv2s, null, null, null ]
 		mesh.add_surface_from_arrays(primitive, surface)
 		mesh.surface_set_material(mesh.get_surface_count()-1, material)

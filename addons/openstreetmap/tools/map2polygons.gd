@@ -1,7 +1,7 @@
-tool
+@tool
 extends Node2D
 
-export(String) var mapfile = null setget set_mapfile
+@export var mapfile : String = "" : set = set_mapfile
 
 func _ready():
 	pass
@@ -10,14 +10,13 @@ func set_mapfile(n):
 	for c in get_children():
 		remove_child(c)
 	mapfile = n
-	var file = File.new()
-	file.open(n, File.READ)
+	var file = FileAccess.open(n, FileAccess.READ)
 	var id = file.get_16()
 	var version = file.get_8()
 	var building_count = file.get_16()
 	var windows_array = []
 	for i in range(building_count):
-		var polygon = Vector2Array()
+		var polygon = PackedVector2Array()
 		var height = file.get_8()
 		var point_count = file.get_16()
 		for j in range(point_count):
