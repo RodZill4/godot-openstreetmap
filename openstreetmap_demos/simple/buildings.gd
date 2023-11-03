@@ -22,4 +22,4 @@ func update_data(data):
 
 func on_updated(generated_mesh):
 	mesh = generated_mesh
-	
+

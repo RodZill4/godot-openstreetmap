@@ -23,8 +23,8 @@ func update_data(data):
 			normals.append(Vector2(0, 0))
 		for j in range(point_count-1):
 			var n = (points[j+1]-points[j]).rotated(0.5*PI).normalized()
-			normals[j] += n 
-			normals[j+1] += n 
+			normals[j] += n
+			normals[j+1] += n
 		for j in range(point_count):
 			var a = points[j]
 			var n = normals[j].normalized()*(lane_width*lanes+border_width)

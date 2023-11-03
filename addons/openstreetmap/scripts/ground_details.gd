@@ -1,7 +1,7 @@
-extends Spatial
+extends Node3D
 
-export(Mesh) var mesh
-export(int, 1, 8) var subdivide = 4
+@export var mesh : Mesh
+@export_range(1, 8) var subdivide : int  = 4
 
 var count = 0
 var instances = []
@@ -13,7 +13,7 @@ func _ready():
 	subdivisions.resize(subdivide*subdivide)
 	for x in range(subdivide):
 		for y in range(subdivide):
-			var multimesh_instance = MultiMeshInstance.new()
+			var multimesh_instance = MultiMeshInstance3D.new()
 			var multimesh = MultiMesh.new()
 			multimesh.set_mesh(mesh)
 			#multimesh.set_aabb(Rect3(Vector3(-subdivision_length*0.5, 0, -subdivision_length*0.5), Vector3(subdivision_length, 100, subdivision_length)))
@@ -33,7 +33,7 @@ func add(pos):
 	count += 1
 
 func update():
-	var identity = Transform(Quat(Vector3(0, 1, 0), 0))
+	var identity = Transform3D(Quaternion(Vector3(0, 1, 0), 0))
 	var subdivision_length = osm.TILE_SIZE / subdivide
 	for i in range(subdivide*subdivide):
 		var instance_count = instances[i].size()

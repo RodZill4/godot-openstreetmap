@@ -9,7 +9,7 @@ class BaseMesh:
 	var tangents
 	var uvs
 	var uv2s
-	
+
 	func add_to_mesh(mesh, material):
 		if vertices.size() > 0:
 			var surface = [ vertices, normals, tangents, colors, uvs, uv2s, null, null, null ]
@@ -18,13 +18,13 @@ class BaseMesh:
 
 class Polygons:
 	extends BaseMesh
-	
+
 	func _init():
 		primitive = ArrayMesh.PRIMITIVE_TRIANGLES
 		vertices = PackedVector3Array()
 		normals = PackedVector3Array()
 		uvs = PackedVector2Array()
-	
+
 	func add(polygon, height):
 		var indexes = Geometry2D.triangulate_polygon(polygon)
 		for i in range(indexes.size()):
@@ -35,7 +35,7 @@ class Polygons:
 
 class Walls:
 	extends BaseMesh
-	
+
 	func _init(has_colors = true, has_uv2s = true):
 		primitive = ArrayMesh.PRIMITIVE_TRIANGLE_STRIP
 		vertices = PackedVector3Array()
@@ -125,7 +125,7 @@ class Walls:
 
 class ConvexRoofs:
 	extends BaseMesh
-	
+
 	func _init(has_colors = false):
 		primitive = ArrayMesh.PRIMITIVE_TRIANGLES
 		vertices = PackedVector3Array()
@@ -134,7 +134,7 @@ class ConvexRoofs:
 		tangents = PackedFloat32Array()
 		uvs = PackedVector2Array()
 		uv2s = null
-	
+
 	func add(polygon, height, roof_angle, color = Color(1, 1, 1)):
 		roof_angle *= PI/180
 		var s = polygon.size()
@@ -181,7 +181,7 @@ class ConvexRoofs:
 
 class Roofs:
 	extends BaseMesh
-	
+
 	func _init(has_colors = false):
 		primitive = ArrayMesh.PRIMITIVE_TRIANGLES
 		vertices = PackedVector3Array()
@@ -190,7 +190,7 @@ class Roofs:
 		tangents = PackedFloat32Array([])
 		uvs = PackedVector2Array()
 		uv2s = null
-	
+
 	func add(polygon, height, roof_angle, color = Color(1, 1, 1)):
 		roof_angle *= PI/180
 		var texture_stretch = 1/cos(roof_angle)

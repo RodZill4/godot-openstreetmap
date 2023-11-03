@@ -1,55 +1,26 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://0wrwc6ohme2r"]
 
-[ext_resource path="res://addons/openstreetmap/details_particles.shader" type="Shader" id=1]
-[ext_resource path="res://addons/openstreetmap/details.gd" type="Script" id=2]
+[ext_resource type="Shader" path="res://addons/openstreetmap/details_particles.gdshader" id="1_j2nt4"]
+[ext_resource type="Script" path="res://addons/openstreetmap/details.gd" id="2"]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("1_j2nt4")
+shader_parameter/rows = 16.0
+shader_parameter/spacing = 1.0
+shader_parameter/random = 1.0
+shader_parameter/tile_size = 1.0
+shader_parameter/start = Vector2(0, 0)
+shader_parameter/condition = Vector4(0, 1, 0, 0)
+shader_parameter/condition_mask = Vector4(1, 1, 1, 0)
 
-render_priority = 0
-shader = ExtResource( 1 )
-shader_param/rows = 300.0
-shader_param/spacing = 3.0
-shader_param/random = null
-shader_param/tile_size = null
-shader_param/start = null
-shader_param/condition = null
-shader_param/condition_mask = null
-_sections_unfolded = [ "shader_param" ]
-
-[node name="Details" type="Particles" index="0"]
-
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-emitting = true
+[node name="Details" type="GPUParticles3D"]
 amount = 100000
 lifetime = 600.0
-one_shot = false
-preprocess = 0.0
-speed_scale = 1.0
 explosiveness = 1.0
-randomness = 0.0
 fixed_fps = 0
-fract_delta = true
-visibility_aabb = AABB( 0, 0, 0, 1, 1, 1 )
+visibility_aabb = AABB(0, 0, 0, 1, 1, 1)
 local_coords = true
-draw_order = 0
-process_material = SubResource( 1 )
-draw_passes = 1
-draw_pass_1 = null
-script = ExtResource( 2 )
-_sections_unfolded = [ "Draw Passes", "Drawing", "Geometry", "LOD", "Process Material", "Time", "Transform" ]
-mesh = null
-spacing = 1.0
-random = 1.0
-distance = 50.0
+process_material = SubResource("1")
+script = ExtResource("2")
 condition = null
 condition_mask = null
-
-

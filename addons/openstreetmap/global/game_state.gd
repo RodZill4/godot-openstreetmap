@@ -22,7 +22,7 @@ func set_var(n, v):
 func read():
 	if not FileAccess.file_exists(variables_file_name):
 		return # Read-Error, no save file detected
-	
+
 	var file
 	if savegame_key == null:
 		file = FileAccess.open(variables_file_name, FileAccess.READ)
@@ -35,7 +35,7 @@ func read():
 func write():
 	if not FileAccess.file_exists(variables_file_name):
 		return # Write-Error, no save file detected
-	
+
 	var file
 	if savegame_key == null:
 		file = FileAccess.open(variables_file_name, FileAccess.WRITE)

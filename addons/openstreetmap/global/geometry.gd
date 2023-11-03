@@ -95,10 +95,10 @@ class PointList:
 	var p = null
 	var prev = null
 	var next = null
-	
+
 	func _init():
 		pass
-	
+
 	# add an element after self
 	func add(p):
 		var l = get_script().new()
@@ -108,7 +108,7 @@ class PointList:
 		self.next.prev = l
 		self.next = l
 		return l
-	
+
 	func remove():
 		var rv
 		if next == self:
@@ -133,7 +133,7 @@ static func pl_create(c, l):
 		else:
 			rv.prev.add(p)
 	return rv
-	
+
 static func add_face_point(location, point, update_location = true):
 	var new_point
 	if location.after:
@@ -214,7 +214,7 @@ static func create_straight_skeleton(polygon, canvas_item = null, epsilon = 0.01
 					min_t = t
 					split = { i = i, j1 = j1, j2 = j2 }
 		if min_t < 0:
-			if queue.empty():
+			if queue.is_empty():
 				break
 			else:
 				points = queue.back()
@@ -257,7 +257,7 @@ static func create_straight_skeleton(polygon, canvas_item = null, epsilon = 0.01
 				add_face_point(points[i].left_face, p1)
 				add_face_point(points[i2].right_face, p1)
 				points[i2].left_face = { point = points[i].left_face.point, after = points[i].left_face.after }
-				points.remove(i)
+				points.remove_at(i)
 		first_pass = false
 	for f in range(faces.size()):
 		var pl = faces[f]

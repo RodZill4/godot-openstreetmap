@@ -1,20 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bwn11q77t1244"]
 
-[ext_resource path="res://openstreetmap_demos/demo_interface.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://openstreetmap_demos/demo_interface.gd" id="1"]
 
 [node name="UserInterface" type="CanvasLayer"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="BackToMenu" type="Button" parent="."]
-margin_right = 12.0
-margin_bottom = 20.0
 text = "Back to menu"
 
 [node name="FPS" type="Label" parent="."]
-margin_left = 1.0
-margin_top = 22.0
-margin_right = 99.0
-margin_bottom = 36.0
 text = "xxxx FPS"
 
 [connection signal="pressed" from="BackToMenu" to="." method="_on_BackToMenu_pressed"]
