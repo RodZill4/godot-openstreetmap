@@ -9,7 +9,7 @@ extends MeshInstance3D
 @export var house_roof_material : Material
 
 func update_data(data):
-	var generated_mesh = Mesh.new()
+	var generated_mesh = ArrayMesh.new()
 	var house_model = null #preload("res://addons/openstreetmap/house.tscn")
 	var house_walls = meshes.Walls.new()
 	var flat_roofs = meshes.Polygons.new()

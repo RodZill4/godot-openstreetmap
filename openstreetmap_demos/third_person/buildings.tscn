@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://kwiejfkma0kj"]
 
-[ext_resource type="PackedScene" path="res://addons/openstreetmap/buildings.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dr6a37x6po0ff" path="res://addons/openstreetmap/buildings.tscn" id="1"]
 [ext_resource type="Material" uid="uid://dglnlsx318rwb" path="res://openstreetmap_demos/third_person/house_wall.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://bne7qv0kcv7uw" path="res://openstreetmap_demos/third_person/tiles.png" id="3"]
 

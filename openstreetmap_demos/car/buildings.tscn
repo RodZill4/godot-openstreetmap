@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bf78iekdcpriy"]
 
-[ext_resource type="PackedScene" path="res://addons/openstreetmap/buildings.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dr6a37x6po0ff" path="res://addons/openstreetmap/buildings.tscn" id="1"]
 [ext_resource type="Material" path="res://openstreetmap_demos/car/materials/mat_building_roof.tres" id="9"]
 [ext_resource type="Material" path="res://openstreetmap_demos/car/materials/mat_house_roof.tres" id="10"]
 
@@ -9,6 +9,5 @@
 [node name="Buildings" instance=ExtResource("1")]
 building_wall_material = SubResource("2")
 building_roof_material = ExtResource("9")
-house_roof_angle = 20.0
 house_wall_material = SubResource("2")
 house_roof_material = ExtResource("10")

@@ -2,7 +2,7 @@ extends Node
 
 static func fix_polygon(polygon):
 	if (polygon[0]-polygon[polygon.size()-1]).length() < 0.5:
-		polygon.remove(polygon.size()-1)
+		polygon.remove_at(polygon.size()-1)
 	return polygon
 
 static func polygon_has_problems(polygon):
