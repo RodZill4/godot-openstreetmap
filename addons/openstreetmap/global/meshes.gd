@@ -12,8 +12,15 @@ class BaseMesh:
 
 	func add_to_mesh(mesh, material):
 		if vertices.size() > 0:
-			var surface = [ vertices, normals, tangents, colors, uvs, uv2s, null, null, null ]
-			mesh.add_surface_from_arrays(primitive, surface)
+			var surface_array = []
+			surface_array.resize(Mesh.ARRAY_MAX)
+			surface_array[Mesh.ARRAY_VERTEX] = vertices
+			surface_array[Mesh.ARRAY_NORMAL] = normals
+			surface_array[Mesh.ARRAY_TANGENT] = tangents
+			surface_array[Mesh.ARRAY_COLOR] = colors
+			surface_array[Mesh.ARRAY_TEX_UV] = uvs
+			surface_array[Mesh.ARRAY_TEX_UV2] = uv2s
+			mesh.add_surface_from_arrays(primitive, surface_array)
 			mesh.surface_set_material(mesh.get_surface_count()-1, material)
 
 class Polygons:

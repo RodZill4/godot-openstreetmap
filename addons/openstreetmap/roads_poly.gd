@@ -38,9 +38,13 @@ func update_data(data):
 			if j == point_count-1:
 				roads_vertices.append(Vector3(a.x-n.x, road_height, a.y-n.y))
 				roads_normals.append(Vector3(0, 1, 0))
-	var surface = [ roads_vertices, roads_normals, null, null, null, null, null, null, null ]
-	print(surface)
-	generated_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLE_STRIP, surface)
+
+	var surface_array = []
+	surface_array.resize(Mesh.ARRAY_MAX)
+	surface_array[Mesh.ARRAY_VERTEX] = roads_vertices
+	surface_array[Mesh.ARRAY_NORMAL] = roads_normals
+
+	generated_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLE_STRIP, surface_array)
 	generated_mesh.surface_set_material(generated_mesh.get_surface_count()-1, material)
 	call_deferred("on_updated", generated_mesh)
 
