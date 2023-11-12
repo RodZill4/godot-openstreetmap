@@ -48,6 +48,11 @@ func _draw():
 					polygon.append(a1+n1)
 					polygon.append(a2+n2)
 					polygon.append(a2-n2)
+
+					if Geometry2D.triangulate_polygon(polygon).is_empty():
+						print("Polygon broken: ", polygon)
+					else:
+						draw_colored_polygon(polygon, Color(1, 0, 0), empty_vec2_array, null) # Careful: antialiasing
 					draw_colored_polygon(polygon, Color(1, 0, 0), empty_vec2_array, null) # Careful: antialiasing 
 				a2 = a1
 				n2 = n1

@@ -49,7 +49,6 @@ func set_tile(_x, _y):
 func update_tile(twm_file_name, osm_file_name):
 	var pos1x = osm.tile2pos(osm_x, osm_y)
 	var pos2x = osm.tile2pos(osm_x+OSM_SIZE, osm_y+OSM_SIZE)
-	print("http://api.openstreetmap.org/api/0.6/map?bbox="+str(pos1x.x)+","+str(pos2x.y)+","+str(pos2x.x)+","+str(pos1x.y))
 	if !FileAccess.file_exists(twm_file_name) && !osm.is_valid(osm_file_name):
 		var pos1 = osm.tile2pos(osm_x, osm_y)
 		var pos2 = osm.tile2pos(osm_x+OSM_SIZE, osm_y+OSM_SIZE)
@@ -64,7 +63,6 @@ func do_update_tile(data):
 	load_twm(data.twm_file_name, data.osm_file_name)
 
 func load_twm(twm_file_name, osm_file_name):
-	print(twm_file_name)
 	data = {}
 	var ground_painter
 	var file
@@ -83,8 +81,6 @@ func load_twm(twm_file_name, osm_file_name):
 	#
 	# Read buildings
 	#
-	print("reading file")
-	print(file)
 	data.buildings = []
 	var building_count = file.get_16()
 	for i in range(building_count):

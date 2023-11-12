@@ -12,7 +12,7 @@ func update_data(data):
 	# Create buildings
 	#
 	for b in data.buildings:
-		var height = b.height
+		var _height = b.height
 		var polygon = b.points
 		flat_roofs.add(polygon, building_height)
 		building_walls.add(polygon, null, building_height, 0.5, 0, 0.25)

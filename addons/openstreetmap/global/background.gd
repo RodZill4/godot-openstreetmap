@@ -16,7 +16,7 @@ func run(object, method, data):
 	queue.append({ object = object, method = method, data = data})
 	if !thread.is_active():
 		finished = false
-		thread.start(self, "execute")
+		thread.start(execute)
 	mutex.unlock()
 
 func execute(data):
@@ -31,4 +31,4 @@ func execute(data):
 		mutex.unlock()
 		#print("Running "+action.method+" on "+str(action.object))
 		action.object.call(action.method, action.data)
-	
+

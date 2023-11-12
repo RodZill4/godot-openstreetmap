@@ -22,7 +22,7 @@ func tile_order(t1, t2):
 	return tile_distance(t1) < tile_distance(t2)
 
 func set_center(p):
-	#print("Setting center to "+str(p))
+	print("Setting center to "+str(p))
 	var map_pos = reference_position + p/osm.TILE_SIZE
 	var _x = int(map_pos.x)
 	var _y = int(map_pos.y)

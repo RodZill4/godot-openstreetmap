@@ -68,7 +68,7 @@ func _physics_process(delta):
 	else:
 		var translate_x = 0
 		var translate_y = 0
-		var translate_z = 0
+		#var translate_z = 0
 		if Input.is_action_pressed("ui_left"):
 			translate_x -= 1
 		if Input.is_action_pressed("ui_right"):
@@ -79,8 +79,8 @@ func _physics_process(delta):
 			translate_y += 1
 		if translate_x != 0 || translate_y != 0:
 			var direction = 50*Vector2(translate_x, translate_y).rotated(rotate_y.get_rotation().y)
-			if Input.is_action_pressed("run"):
-				direction *= 3
+#			if Input.is_action_pressed("run"):
+#				direction *= 3
 			set_position(get_position()+delta*Vector3(direction.x, 0, direction.y))
 		else:
 			return

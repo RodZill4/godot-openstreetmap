@@ -13,7 +13,7 @@ var event_timestamp = 0
 func _ready():
 	teleport(48.7419, 9.1008)
 
-func _on_Ground_input_event(c, event, click_pos, click_normal, shape_idx):
+func _on_Ground_input_event(_c, event, click_pos, _click_normal, _shape_idx):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed():
@@ -28,7 +28,7 @@ func _on_Ground_input_event(c, event, click_pos, click_normal, shape_idx):
 func teleport(lat : float, lon : float):
 	if map != null:
 		var default_pos = osm.pos2tile(lon, lat)
-		var x = default_pos.x
-		var y = default_pos.y
+		x = default_pos.x
+		y = default_pos.y
 		map.reference_position = Vector2(x, y) # reference_position?
 		map.set_center(Vector2(0, 0))
