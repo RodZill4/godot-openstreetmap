@@ -53,7 +53,6 @@ func _draw():
 						print("Polygon broken: ", polygon)
 					else:
 						draw_colored_polygon(polygon, Color(1, 0, 0), empty_vec2_array, null) # Careful: antialiasing
-					draw_colored_polygon(polygon, Color(1, 0, 0), empty_vec2_array, null) # Careful: antialiasing 
 				a2 = a1
 				n2 = n1
 			draw_circle(r.points[0], width, Color(1, 0, 0))
