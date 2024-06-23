@@ -15,4 +15,4 @@ func set_ground_texture(t):
 			if mat is StandardMaterial3D:
 				mat.albedo_texture = t
 			elif mat is ShaderMaterial:
-				mat.set_shader_param("splatmap", t)
+				mat.set_shader_parameter("splatmap", t)
