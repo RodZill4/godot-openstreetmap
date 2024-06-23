@@ -1,7 +1,7 @@
-extends Spatial
+extends Node3D
 
-export(int, "Trees", "Traffic lights", "Postboxes", "Fountains") var object_type = 0
-export(Array) var scenes = []
+@export_enum("Trees", "Traffic lights", "Postboxes", "Fountains") var object_type: int = 0
+@export var scenes : Array = []
 
 var objects = []
 
@@ -15,15 +15,15 @@ func update_data(data):
 	var choice = scenes.size()
 	for c in get_children():
 		remove_child(c)
-	var object_count = PoolIntArray()
+	var object_count = PackedInt32Array()
 	for i in range(choice):
 		object_count.append(0)
 	for p in data[OBJECT_NAMES[object_type]]:
 		var object_index = int(p.x+p.y) % choice
 		if object_count[object_index] == objects[object_index].size():
-			objects[object_index].append(scenes[object_index].instance())
+			objects[object_index].append(scenes[object_index].instantiate()) #TODO
 		var object = objects[object_index][object_count[object_index]]
 		object_count[object_index] += 1
-		object.translation = Vector3(p.x, 0, p.y)
-		object.rotation = Vector3(0, (p.x+p.y)*6.28, 0)
+		object.translate(Vector3(p.x, 0, p.y))
+		object.rotate_y((p.x+p.y)*6.28)
 		add_child(object)

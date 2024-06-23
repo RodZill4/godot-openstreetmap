@@ -1,7 +1,8 @@
-tool
+@tool
 extends Polygon2D
 
-export(bool) var show_polygons = true setget set_show_polygons
+@export var show_polygons : bool = true :
+	set(b): set_show_polygons(b)
 
 func _ready():
 	pass
@@ -30,4 +31,4 @@ func _draw():
 
 func set_show_polygons(b):
 	show_polygons = b
-	update()
+	queue_redraw()

@@ -1,18 +1,18 @@
-extends StaticBody
+extends StaticBody3D
 
-export(bool) var ground = true
-export(bool) var walls = true
+@export var ground : bool = true
+@export var walls : bool = true
 
 func _ready():
 	if ground:
-		var ground_shape = BoxShape.new()
+		var ground_shape = BoxShape3D.new()
 		ground_shape.extents = Vector3(0.5*osm.TILE_SIZE, 1.0, 0.5*osm.TILE_SIZE)
 		$Ground.shape = ground_shape
-		$Ground.translation = Vector3(0.5*osm.TILE_SIZE, -1.0, 0.5*osm.TILE_SIZE)
+		$Ground.position = Vector3(0.5*osm.TILE_SIZE, -1.0, 0.5*osm.TILE_SIZE)
 
 func update_data(data):
 	if walls:
-		var faces = PoolVector3Array()
+		var faces = PackedVector3Array()
 		for b in data.buildings:
 			var polygon = b.points
 			var point_count = polygon.size()
@@ -25,6 +25,6 @@ func update_data(data):
 				faces.append(Vector3(p1.x, 10, p1.y))
 				faces.append(Vector3(p2.x, 10, p2.y))
 				faces.append(Vector3(p2.x, 0, p2.y))
-		var shape = ConcavePolygonShape.new()
+		var shape = ConcavePolygonShape3D.new()
 		shape.set_faces(faces)
 		$Walls.shape = shape

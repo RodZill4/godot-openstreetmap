@@ -2,7 +2,7 @@ extends Node
 
 static func fix_polygon(polygon):
 	if (polygon[0]-polygon[polygon.size()-1]).length() < 0.5:
-		polygon.remove(polygon.size()-1)
+		polygon.remove_at(polygon.size()-1)
 	return polygon
 
 static func polygon_has_problems(polygon):
@@ -12,7 +12,7 @@ static func polygon_has_problems(polygon):
 		for j in range(i+2, polygon.size()):
 			if (j+1) % s == i:
 				continue
-			var p = Geometry.segment_intersects_segment_2d(polygon[i], polygon[(i+1) % s], polygon[j], polygon[(j+1) % s])
+			var p = Geometry2D.segment_intersects_segment(polygon[i], polygon[(i+1) % s], polygon[j], polygon[(j+1) % s])
 			if p != null:
 				problems += 1
 				print(p)
@@ -58,10 +58,10 @@ static func triangles_area(vectices, indexes):
 	return area
 
 func triangulate_polygon(polygon):
-	var triangles = PoolIntArray()
+	var triangles = PackedInt32Array()
 	var s = polygon.size()
 	var expected_size = (s-2)*3
-	var vertices = PoolIntArray()
+	var vertices = PackedInt32Array()
 	for i in range(s):
 		vertices.append(i)
 	while vertices.size() > 2:
@@ -95,10 +95,10 @@ class PointList:
 	var p = null
 	var prev = null
 	var next = null
-	
+
 	func _init():
 		pass
-	
+
 	# add an element after self
 	func add(p):
 		var l = get_script().new()
@@ -108,7 +108,7 @@ class PointList:
 		self.next.prev = l
 		self.next = l
 		return l
-	
+
 	func remove():
 		var rv
 		if next == self:
@@ -133,7 +133,7 @@ static func pl_create(c, l):
 		else:
 			rv.prev.add(p)
 	return rv
-	
+
 static func add_face_point(location, point, update_location = true):
 	var new_point
 	if location.after:
@@ -214,7 +214,7 @@ static func create_straight_skeleton(polygon, canvas_item = null, epsilon = 0.01
 					min_t = t
 					split = { i = i, j1 = j1, j2 = j2 }
 		if min_t < 0:
-			if queue.empty():
+			if queue.is_empty():
 				break
 			else:
 				points = queue.back()
@@ -257,7 +257,7 @@ static func create_straight_skeleton(polygon, canvas_item = null, epsilon = 0.01
 				add_face_point(points[i].left_face, p1)
 				add_face_point(points[i2].right_face, p1)
 				points[i2].left_face = { point = points[i].left_face.point, after = points[i].left_face.after }
-				points.remove(i)
+				points.remove_at(i)
 		first_pass = false
 	for f in range(faces.size()):
 		var pl = faces[f]
@@ -285,7 +285,7 @@ static func clamp_polygon(polygon, rect):
 	var output = polygon
 	for l in [ { a=1, b=0, c=-rect.position.x }, { a=0, b=1, c=-rect.position.y }, { a=-1, b=0, c=rect.end.x }, { a=0, b=-1, c=rect.end.y } ]:
 		var input = output
-		output = PoolVector2Array()
+		output = PackedVector2Array()
 		var s = input[input.size()-1]
 		for e in input:
 			if is_inside_edge(e, l):

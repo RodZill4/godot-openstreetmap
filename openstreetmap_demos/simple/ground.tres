@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://djj0008dgdoeq"]
+
+[ext_resource type="Shader" path="res://openstreetmap_demos/simple/ground.gdshader" id="1_0utmu"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_0utmu")
+shader_parameter/albedo = Color(0.439216, 1, 0.345098, 1)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = null
+shader_parameter/roughness = 0.808
+shader_parameter/point_size = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/roughness_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = null
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = null

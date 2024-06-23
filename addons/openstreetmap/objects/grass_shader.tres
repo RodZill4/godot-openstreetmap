@@ -1,8 +1,8 @@
-[gd_resource type="MaterialShader" load_steps=1 format=2]
-
+[gd_resource type="MaterialShader" format=3 uid="uid://bmifmhxkgw4bo"]
 
 [resource]
-
+resource_local_to_scene = false
+resource_name = ""
 _code = {
 "fragment": "uniform texture diffuse_texture;
 

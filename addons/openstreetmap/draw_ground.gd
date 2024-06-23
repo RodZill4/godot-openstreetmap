@@ -1,17 +1,17 @@
-tool
+@tool
 extends Node2D
 
-var data = null setget set_data
+var data = null : set = set_data
 
 func _ready():
-	update()
+	queue_redraw()
 
 func set_data(d):
 	data = d
-	update()
+	queue_redraw()
 
 func _draw():
-	var empty_vec2_array = PoolVector2Array()
+	var empty_vec2_array = PackedVector2Array()
 	var viewport_size = get_parent().size
 	scale = Vector2(viewport_size.x/osm.TILE_SIZE, viewport_size.y/osm.TILE_SIZE)
 	draw_rect(Rect2(0, 0, osm.TILE_SIZE, osm.TILE_SIZE), Color(0, 0, 0))
@@ -19,18 +19,18 @@ func _draw():
 		return
 	if data.has("water"):
 		for w in data.water:
-			draw_colored_polygon(w, Color(0, 0, 1), empty_vec2_array, null, null, true)
+			draw_colored_polygon(w, Color(0, 0, 1), empty_vec2_array, null) # Careful: antialiasing 
 	if data.has("grass"):
 		for g in data.grass:
-			draw_colored_polygon(g, Color(0, 1, 0), empty_vec2_array, null, null, true)
+			draw_colored_polygon(g, Color(0, 1, 0), empty_vec2_array, null) # Careful: antialiasing 
 	if data.has("buildings"):
 		for g in data.buildings:
-			draw_colored_polygon(g.points, Color(0, 0, 0), empty_vec2_array, null, null, true)
+			draw_colored_polygon(g.points, Color(0, 0, 0), empty_vec2_array, null) # Careful: antialiasing 
 	if data.has("roads"):
 		for r in data.roads:
 			var width = max(1, r.width) * 0.5 + 1
 			var point_count = r.points.size()
-			var normals = PoolVector2Array()
+			var normals = PackedVector2Array()
 			for j in range(point_count):
 				normals.append(Vector2(0, 0))
 			for j in range(point_count-1):
@@ -40,7 +40,7 @@ func _draw():
 			var a2
 			var n2
 			for j in range(point_count):
-				var polygon = PoolVector2Array()
+				var polygon = PackedVector2Array()
 				var a1 = r.points[j]
 				var n1 = normals[j].normalized()*width
 				if j != 0:
@@ -48,7 +48,11 @@ func _draw():
 					polygon.append(a1+n1)
 					polygon.append(a2+n2)
 					polygon.append(a2-n2)
-					draw_colored_polygon(polygon, Color(1, 0, 0), empty_vec2_array, null, null, true)
+
+					if Geometry2D.triangulate_polygon(polygon).is_empty():
+						print("Polygon broken: ", polygon)
+					else:
+						draw_colored_polygon(polygon, Color(1, 0, 0), empty_vec2_array, null) # Careful: antialiasing
 				a2 = a1
 				n2 = n1
 			draw_circle(r.points[0], width, Color(1, 0, 0))

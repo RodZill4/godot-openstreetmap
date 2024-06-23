@@ -17,7 +17,7 @@ class TerrainMap:
 	
 	func _init():
 		var image_size = IMAGE_SIZE*(IMAGE_SIZE >> 3)
-		image = PoolIntArray()
+		image = PackedInt32Array()
 		image.resize(image_size)
 		for i in range(image_size):
 			image[i] = 0

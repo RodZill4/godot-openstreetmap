@@ -4,11 +4,11 @@ var queue = []
 var downloading = false
 
 func _ready():
-	connect("request_completed", self, "_on_HTTPRequest_completed")
+	request_completed.connect(_on_HTTPRequest_completed)
 
 func process_queue():
 	if !downloading:
-		while !queue.empty():
+		while !queue.is_empty():
 			var request = queue.front()
 			set_download_file("user://http_download")
 			if request(request.url) == RESULT_SUCCESS:
@@ -39,8 +39,7 @@ func _on_HTTPRequest_completed(result, response_code, headers, body):
 	downloading = false
 	var request = queue.front()
 	if result == RESULT_SUCCESS:
-		var dir = Directory.new()
-		dir.rename("user://http_download", request.file)
+		DirAccess.rename_absolute("user://http_download", request.file)
 		print("Downloaded "+request.url)
 		for a in request.actions:
 			a.object.callv(a.method, a.args)

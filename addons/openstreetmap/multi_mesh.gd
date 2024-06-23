@@ -1,7 +1,7 @@
-extends MultiMeshInstance
+extends MultiMeshInstance3D
 
-export(int, "Trees", "Traffic lights", "Postboxes", "Fountains") var object_type = 0
-export(Mesh) var mesh
+@export_enum("Trees", "Traffic lights", "Postboxes", "Fountains") var object_type: int = 0
+@export var mesh : Mesh
 
 const OBJECT_NAMES = [ "trees", "traffic_lights", "postboxes", "fountains" ]
 
@@ -15,5 +15,5 @@ func update_data(data):
 	multimesh.instance_count = positions.size()
 	for i in range(positions.size()):
 		var p = positions[i]
-		multimesh.set_instance_transform(i, Transform().translated(Vector3(p.x, 0, p.y)))
+		multimesh.set_instance_transform(i, Transform3D().translated(Vector3(p.x, 0, p.y)))
 

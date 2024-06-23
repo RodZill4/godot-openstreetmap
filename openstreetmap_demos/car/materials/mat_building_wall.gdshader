@@ -1,19 +1,19 @@
 shader_type spatial;
 render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_lambert_wrap,specular_schlick_ggx;
 
-uniform vec4 albedo : hint_color;
-uniform sampler2D texture_albedo : hint_albedo;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color;
 uniform float specular;
 uniform float metallic;
 uniform float roughness : hint_range(0,1);
 uniform float point_size : hint_range(0,128);
-uniform sampler2D texture_metallic : hint_white;
+uniform sampler2D texture_metallic : hint_default_white;
 uniform vec4 metallic_texture_channel;
-uniform sampler2D texture_roughness : hint_white;
+uniform sampler2D texture_roughness : hint_default_white;
 uniform vec4 roughness_texture_channel;
 uniform sampler2D texture_normal : hint_normal;
 uniform float normal_scale : hint_range(-16,16);
-uniform sampler2D texture_detail_albedo : hint_albedo;
+uniform sampler2D texture_detail_albedo : source_color;
 uniform sampler2D texture_detail_normal : hint_normal;
 uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
@@ -32,16 +32,16 @@ vec3 hsv_to_rgb(vec3 c) {
 vec2 interior_uv(vec2 uv, vec3 rand) {
 	//calculate wall locations
 	vec3 walls = step(vec3(0.0), oI);
-	
+
 	//how much of the ray is needed to get from the oE to each of the walls
 	vec3 noE = vec3(uv, 1.0);
 	vec3 rayFractions = (walls - noE) / oI;
-	
+
 	//texture-coordinates of intersections
 	vec2 intersectionXY = (noE + rayFractions.z * oI).xy;
 	vec2 intersectionXZ = (noE + rayFractions.y * oI).xz;
 	vec2 intersectionZY = (noE + rayFractions.x * oI).zy;
-	
+
 	vec2 floorUV = intersectionXZ+vec2(4.0, floor(rand.x*5.0));
 	vec2 ceilingUV = intersectionXZ+vec2(3.0, floor(rand.y*5.0));
 	vec2 verticalUV = mix(ceilingUV, floorUV, step(0.0, oI.y));
@@ -49,13 +49,13 @@ vec2 interior_uv(vec2 uv, vec3 rand) {
 	vec2 wall2UV = intersectionXY+vec2(1.0, mod(floor((rand.z+rand.x)*5.0), 5.0));
 	vec2 wall3UV = intersectionZY+vec2(2.0, floor(rand.z*5.0));
 	vec2 horizontalUV = mix(wall1UV, wall3UV, step(0.0, oI.x));
-	
+
 	// intersect walls
 	float xVSz = step(rayFractions.x, rayFractions.z);
 	vec2 iuv = mix(wall2UV, horizontalUV, xVSz);
 	float rayFraction_xVSz = mix(rayFractions.z, rayFractions.x, xVSz);
 	float xzVSy = step(rayFraction_xVSz, rayFractions.y);
-	
+
 	return mix(verticalUV, iuv, xzVSy)/5.0;
 }
 
@@ -85,13 +85,13 @@ void fragment() {
 	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
 	ROUGHNESS = roughness_tex * roughness;
 	SPECULAR = specular;
-	NORMALMAP = texture(texture_normal,base_uv).rgb;
-	NORMALMAP_DEPTH = normal_scale;
+	//NORMALMAP = texture(texture_normal,base_uv).rgb;
+	//NORMALMAP_DEPTH = normal_scale;
 	vec4 detail_tex = texture(texture_detail_albedo,base_uv2);
 	vec4 detail_norm_tex = texture(texture_detail_normal,base_uv2);
 	vec3 detail = mix(ALBEDO.rgb,detail_tex.rgb,detail_tex.a);
-	vec3 detail_norm = mix(NORMALMAP,detail_norm_tex.rgb,detail_tex.a);
-	NORMALMAP = mix(NORMALMAP,detail_norm,1.0-albedo_tex.a);
+	vec3 detail_norm = mix(NORMAL,detail_norm_tex.rgb,detail_tex.a); // using NORMAL instead
+	// NORMALMAP = mix(NORMAL,detail_norm,1.0-albedo_tex.a);
 	ALBEDO.rgb = mix(ALBEDO.rgb,detail,1.0-albedo_tex.a);
 	vec3 rand = rand3(floor(UV));
 	vec4 interior = texture(interior_tex, interior_uv(fract(base_uv), rand)).rgba;
